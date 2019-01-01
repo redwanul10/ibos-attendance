@@ -7,14 +7,17 @@ export const loginAction = (email, password, cb) => {
     axios.post(
         // `https://ibosapi.akij.net/domain/LogIn/GetLoginCheck?Email=${email}&Password=${password}`
         // `https://ibosapi.akij.net/sme/UserProfile/GetUserProfileByUserId?userid=${email}&password=${password}`
-        `https://ibosapi.akij.net/identity/TokenGenerate/IbosLogin`, { userName: email, password }
-    )
+        // `https://ibosapi.akij.net/identity/TokenGenerate/IbosLogin`, { userName: email, password }
+        `https://erp.ibos.io/identity/TokenGenerate/IbosLogin`, { userName: email, password }
+        )
         .then(res => {
+
+            alert("success")
 
             const token = res?.data?.token
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-            getUserInformation(email, cb)
+            getUserInformation(email, cb,token)
 
             // const selectedBusinessUnit = {
             //     values: res?.data?.branch[0]?.branch_Id,
@@ -26,6 +29,8 @@ export const loginAction = (email, password, cb) => {
             //     profileData: res.data,
             //     selectedBusinessUnit
             // })
+
+            console.log(JSON.stringify(res.data,null,2))
 
 
 
@@ -47,14 +52,16 @@ export const loginAction = (email, password, cb) => {
         })
 }
 
-const getUserInformation = async (email, cb) => {
+const getUserInformation = async (email, cb,token) => {
 
     try {
         const req = await axios.get(
-            `https://ibosapi.akij.net/domain/CreateUser/GetUserInformationByUserEmail?Email=${email}`
+            // `https://ibosapi.akij.net/domain/CreateUser/GetUserInformationByUserEmail?Email=${email}`
+            `https://erp.ibos.io/domain/CreateUser/GetUserInformationByUserEmail?Email=${email}`
         )
         // const res = req.data[0]
         const res = req.data
+        
 
         const selectedBusinessUnit = {
             values: res?.defaultBusinessUnit,
@@ -65,6 +72,7 @@ const getUserInformation = async (email, cb) => {
 
         await storeGlobalData({
             isAuthenticate: true,
+            token,
             profileData: res[0],
             selectedBusinessUnit
         })

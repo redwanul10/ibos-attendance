@@ -8,6 +8,8 @@ import * as Yup from 'yup'
 import { loginAction } from './helper';
 import loginBgImg from '../../../assets/images/loginBg.png';
 import logo from '../../../assets/images/pageLogo.png';
+import { getGlobalData } from '../../../common/functions/localStorage';
+import Axios from 'axios'
 
 const initValues = {
     email: 'alamin@akij.net',
@@ -28,6 +30,13 @@ const schemaValidation = Yup.object().shape({
 const Login = ({ navigation }) => {
 
 
+    const [globalData, setGlobalData] = useState({})
+
+    useEffect(() => {
+      getGlobalData(setGlobalData)
+  
+    }, [])
+
     useEffect(() => {
         StatusBar.setBackgroundColor("#66DBA8")
         StatusBar.setTranslucent(false)
@@ -35,6 +44,11 @@ const Login = ({ navigation }) => {
     }, [])
 
     const [rememberPass, setRememberPass] = useState(false)
+
+    // if(globalData?.isAuthenticate){
+    //     Axios.defaults.headers.common["Authorization"] = `Bearer ${globalData?.token}`;
+    //     navigation.navigate("Attendance Dashboard")
+    // }
 
     return (
 

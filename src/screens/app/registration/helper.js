@@ -7,12 +7,13 @@ export const getCustomerList = async (id, setter) => {
 
     try {
         const res = await axios.get(
-            `https://ibosapi.akij.net/partner/PManagementCommonDDL/GetCustomerListSalesForceDDL?EmployeeId=${id}`
+            `https://erp.ibos.io/partner/PManagementCommonDDL/GetCustomerListSalesForceDDL?EmployeeId=${id}`
         )
         setter(res?.data)
     } catch (err) {
+        console.log(err)
     //    console.log(err.response.data,null,2)
-       alert(err.response.data.message)
+    //    alert(err.response.data.message)
     }
 }
 
@@ -21,7 +22,7 @@ export const registerAttentance = async (payload) => {
 
     try {
         const res = await axios.post(
-            `https://ibosapi.akij.net/partner/PartnerLocationRegister/CreatPartnerLocationRegister`,payload
+            `https://erp.ibos.io/partner/PartnerLocationRegister/CreatPartnerLocationRegister`,payload
         )
 
         Toast.show({

@@ -22,7 +22,7 @@ const RootNavigation = () => {
         <>
             <NavigationContainer>
                 <Stack.Navigator
-                    initialRouteName="Dashboard"
+                    initialRouteName="Login"
                     screenOptions={{
                         headerMode: "screen",
                         ...TransitionPresets.SlideFromRightIOS,

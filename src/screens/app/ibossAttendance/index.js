@@ -15,7 +15,7 @@ import ICalender from './components/ICalender';
 import { Toast } from 'native-base'
 import { getGlobalData } from '../../../common/functions/localStorage';
 import { getCustomerList } from '../registration/helper';
-import { checkIn } from './helper';
+import { checkIn,checkOut } from './helper';
 
 
 
@@ -102,7 +102,7 @@ const IbosAttendance = () => {
         //     });
     }, [])
 
-    const saveHandler = () => {
+    const saveHandler = (status) => {
 
         if (!selectedCustomer) {
             Toast.show({
@@ -129,7 +129,12 @@ const IbosAttendance = () => {
 
         // alert("time to send req")
         console.log(JSON.stringify(payload,null,2))
-        checkIn(payload)
+        if(status === "checkIn"){
+            checkIn(payload)
+        }else{
+            checkOut(payload)
+        }
+        
 
         
 
@@ -143,7 +148,6 @@ const IbosAttendance = () => {
                     value={{}}
                     options={[]}
                 /> */}
-
 
 
                 <View style={{ flexDirection: "row", marginTop: 20 }}>
@@ -238,9 +242,17 @@ const IbosAttendance = () => {
                     <Button
                         block
                         style={{ backgroundColor: "#0080FF" }}
-                        onPress={e=> saveHandler()}
+                        onPress={e=> saveHandler("checkIn")}
                     >
                         <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
+                    </Button>
+
+                    <Button
+                        block
+                        style={{ marginTop:10,backgroundColor: "#0080FF" }}
+                        onPress={e=> saveHandler()}
+                    >
+                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
                     </Button>
                 </View>
 
