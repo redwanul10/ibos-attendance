@@ -50,7 +50,9 @@ const HomeNavigator = () => {
       swipeEnabled={false}
     >
       <Tab.Screen
+        tabBarVisibile={false}
         options={{
+          tabBarVisibile: false,
           showIcon: true,
           // tabBarButton: TabBarBtn,
           tabBarLabel: "Home",

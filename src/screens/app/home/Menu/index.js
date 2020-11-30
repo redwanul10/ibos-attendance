@@ -18,7 +18,8 @@ const MenuTab = () => {
             </View>
 
         </View>
-        // </ScrollView>
+
+
     );
 }
 

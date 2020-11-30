@@ -1,13 +1,17 @@
 import React from 'react'
+import { TouchableWithoutFeedback, View } from 'react-native'
+import { Container, Header, Content, Picker, Form, Text, Right, Left, Button, Icon, Body, Title } from "native-base";
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import SalesNavigation from './sales';
-import PurchaseNavigation from './purchase';
+import IHeader from '../../../../../common/components/IHeader';
+import PurchaseLandingScreen from './Landing';
+import Supplier from './supplier';
+import SupplierForm from './supplier/components/AddEditForm';
 
-const SearchTab = () => {
+const PurchaseNavigation = () => {
     const Stack = createStackNavigator();
     return (
         <Stack.Navigator
-            initialRouteName="Purchase"
+            initialRouteName="PurchaseLanding"
             screenOptions={{
                 headerMode: "screen",
                 // ...TransitionPresets.SlideFromRightIOS,
@@ -24,11 +28,12 @@ const SearchTab = () => {
 
             }}
         >
-            <Stack.Screen name="Sales" component={SalesNavigation} />
-            <Stack.Screen name="Purchase" component={PurchaseNavigation} />
+            <Stack.Screen name="PurchaseLanding" component={PurchaseLandingScreen} />
+            <Stack.Screen name="Supplier" component={Supplier} />
+            <Stack.Screen name="Create Supplier" component={SupplierForm} />
             {/* <Stack.Screen name="Homee" component={HomeNavigator} /> */}
         </Stack.Navigator>
     );
 }
 
-export default SearchTab;
+export default PurchaseNavigation;

@@ -3,13 +3,13 @@ import { View, Image, TouchableWithoutFeedback, Text, StyleSheet } from 'react-n
 import layout from '../../../../common/styles/layout';
 import fontsFamily from '../../../../common/theme/fonts';
 
-const SingleDepartment = ({ data }) => {
+const SingleDepartment = ({ data, onPress, imgStyle, titleStyle, contentContainerStyle }) => {
     console.log(data)
     return (
-        <TouchableWithoutFeedback>
-            <View style={[style.department, layout.hozCenter]}>
-                <Image style={style.image} source={data.image} />
-                <Text style={style.departmentname}>{data.name}</Text>
+        <TouchableWithoutFeedback onPress={e => onPress ? onPress() : false}>
+            <View style={[style.department, layout.hozCenter, contentContainerStyle || {}]}>
+                <Image style={[style.image, imgStyle || {}]} source={data.image} />
+                <Text style={[style.departmentname, titleStyle || {}]}>{data.name}</Text>
             </View>
         </TouchableWithoutFeedback>
     );

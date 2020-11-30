@@ -18,7 +18,6 @@ const FormInput = (props) => {
   const isError = formikProps.touched[name] && formikProps.errors[name] ? true : false
   return (
     <>
-      {console.log(formikProps.values[name])}
       <View style={style.inputWrapper}>
         <Text style={[style.label, { color: isError ? "red" : "#636363" }]}>{label}</Text>
         <TextInput
@@ -31,7 +30,8 @@ const FormInput = (props) => {
           }}
           value={formikProps.values[name]}
           secureTextEntry={secureTextEntry || false}
-          placeholder={placeholder}
+          placeholder={"Enter " + (placeholder || label)}
+          placeholderTextColor="black"
           {...props}
         />
       </View>
