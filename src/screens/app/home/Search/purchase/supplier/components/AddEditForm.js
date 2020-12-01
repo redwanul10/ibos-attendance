@@ -5,6 +5,7 @@ import IHeader from '../../../../../../../common/components/IHeader';
 import FormInput from '../../../../../../../common/components/TextInput';
 import { Formik } from 'formik'
 import IPicker from '../../../../../../../common/components/Ipicker';
+import ICustomPicker from '../../../../../../../common/components/ICustomPicker';
 
 
 const initValues = {
@@ -48,6 +49,13 @@ const SupplierForm = (props) => {
                                 label="Bank Name"
                                 formikProps={formikProps}
                             />
+
+                            <ICustomPicker
+                                name="supplierEmail"
+                                label="Test Name"
+                                formikProps={formikProps}
+                            />
+
                             <FormInput
                                 name="supplierEmail"
                                 label="Supplier Email"
