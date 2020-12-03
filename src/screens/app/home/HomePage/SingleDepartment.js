@@ -21,6 +21,8 @@ const style = StyleSheet.create({
     department: {
         marginHorizontal: 15,
         marginBottom: 10,
+        // width:"33.33%",
+        
     },
     departmentname: {
         fontFamily: fontsFamily.RUBIK_REGULAR,

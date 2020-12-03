@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, StatusBar, ScrollView } from 'react-native'
+import { View, StatusBar, SafeAreaView } from 'react-native'
 import { Container } from 'native-base';
 import ProfileInfo from '../../../../common/components/ProfileInfo';
 import DepartmentList from './DepartmentList';
@@ -16,12 +16,15 @@ const HomePage = () => {
         <>
 
             <Container >
+                <SafeAreaView>
                 <View style={{ paddingHorizontal: 20 }}>
                     <ProfileInfo />
                     <DepartmentList />
                 </View>
+                </SafeAreaView>
                 <TutorialSection />
                 {/* <FeedbackSection /> */}
+                
             </Container>
 
         </>

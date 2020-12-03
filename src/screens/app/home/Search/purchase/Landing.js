@@ -42,7 +42,9 @@ const PurchaseLandingScreen = ({ navigation }) => {
                     {Departments.map(item => (
                         <Col style={{ width: "50%", }}>
                             <SingleDepartment
-                                onPress={e => navigation.navigate(item.name)}
+                                onPress={e => {
+                                    navigation.navigate(item.name)
+                                }}
                                 contentContainerStyle={{ backgroundColor: "transparent", marginHorizontal: 5 }}
                                 imgStyle={style.photo}
                                 titleStyle={style.title}

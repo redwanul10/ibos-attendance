@@ -5,6 +5,7 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
 import HomeNavigator from './HomeNavigator';
+import Dashboard from '../screens/app/dashboard';
 
 const RootNavigation = () => {
 
@@ -26,6 +27,7 @@ const RootNavigation = () => {
                     <Stack.Screen name="Login" component={Login} />
                     <Stack.Screen name="Register" component={Register} />
                     <Stack.Screen name="Home" component={HomeNavigator} />
+                    <Stack.Screen name="Dashboard" component={Dashboard} />
                 </Stack.Navigator>
             </NavigationContainer>
         </>

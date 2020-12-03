@@ -22,7 +22,7 @@ const IHeader = ({ title, onAddIconPress }) => {
                 </Left>
 
                 <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                    <Title>{title || route.name}</Title>
+                    <Title style={{color:"white"}}>{title || route.name}</Title>
                 </View>
 
                 <Right style={{ flex: 1 }}>

@@ -58,7 +58,7 @@ const style = StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        fontFamily: fontsFamily.Regu,
+        fontFamily: fontsFamily.RUBIK_REGULAR,
         // color: colors.LGHT_GREY
     }
 })

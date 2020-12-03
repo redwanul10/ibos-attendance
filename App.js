@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, StatusBar } from 'react-native';
 import RootNavigation from './src/navigation/RootNavigation';
 import RNBootSplash from "react-native-bootsplash";
+import { Root } from 'native-base'
 
 
 export default function App() {
@@ -19,7 +20,9 @@ export default function App() {
 
   return (
     <>
-      <RootNavigation />
+      <Root>
+        <RootNavigation />
+      </Root>
     </>
   );
 }

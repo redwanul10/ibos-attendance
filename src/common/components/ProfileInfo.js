@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native'
-import { Content, List, ListItem, Left, Body, Thumbnail, Text } from 'native-base';
+import { Content, Right, List, ListItem, Left, Body, Thumbnail, Text } from 'native-base';
 import profilePhoto from '../../assets/images/profilePhoto.png';
 import fontsFamily from '../theme/fonts';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ showMenuIcon }) => {
     return (
         // <Content >
         <List style={style.border}>
@@ -19,6 +20,12 @@ const ProfileInfo = () => {
                     </View>
                     <Text note style={style.designation}>Software Engineer</Text>
                 </Body>
+
+                {showMenuIcon && (
+                    <Right style={style.thumWrapper}>
+                        <MaterialCommunityIcons name="sort-variant" size={35} color="black" />
+                    </Right>
+                )}
             </ListItem>
         </List>
         // </Content>

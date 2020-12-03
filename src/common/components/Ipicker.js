@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { Picker } from '@react-native-picker/picker';
+// import { Picker } from '@react-native-picker/picker';
 
 const IPicker = (props) => {
 
@@ -17,36 +17,27 @@ const IPicker = (props) => {
 
     return (
         <>
+        {console.log(formikProps.values)}
             <View style={[style.inputWrapper, { borderBottomWidth: 1, borderBottomColor: "grey" }]}>
                 <Text style={[style.label, { color: isError ? "red" : "#636363" }]}>{label}</Text>
-                {/* <TextInput
-                    style={[style.input,]}
-                    onChangeText={formikProps.handleChange(name)}
-                    onFocus={formikProps.onFocus}
-                    onBlur={e => {
-                        formikProps.setFieldTouched(name, true);
-                        // formikProps.handleBlur(name)
-                    }}
-                    value={formikProps.values[name]}
-                    secureTextEntry={secureTextEntry || false}
-                    placeholder={placeholder}
-                    {...props}
-                /> */}
-                <Picker
-                    //   selectedValue={this.state.language}
+                
+                {/* <Picker
+                      selectedValue={formikProps.values[name]}
                     itemStyle={{ fontSize: 12, color: "red" }}
                     style={{ height: 30, width: "100%", fontSize: 12 }}
-                //   onValueChange={(itemValue, itemIndex) =>
-                //     this.setState({language: itemValue})
-                //   }
+                  onValueChange={(itemValue, itemIndex) =>{
+                    console.log(itemValue)
+                   formikProps.setFieldValue(name,itemValue)}
+                  }
                 >
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
-                </Picker>
+                    <Picker.Item label="....." value="" />
+                    <Picker.Item label="Brack" value="Brack" />
+                    <Picker.Item label="DuchBangla" value="DuchBangla" />
+                    <Picker.Item label="Islami" value="Islami" />
+                </Picker> */}
             </View>
 
-            {/* <CheckBox checkboxTickColor="red" checked={checked} onPress={e => setChecked(!checked)} /> */}
-
+            
             {formikProps.touched[name] && formikProps.errors[name] && (
                 <Text style={style.error}>
                     {formikProps.errors[name]}

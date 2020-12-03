@@ -4,8 +4,11 @@ import { Container, Header, Content, Picker, Form, Text, Right, Left, Button, Ic
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import IHeader from '../../../../../common/components/IHeader';
 import PurchaseLandingScreen from './Landing';
-import Supplier from './supplier';
-import SupplierForm from './supplier/components/AddEditForm';
+// import Supplier from './supplier/landing/Landing';
+
+import SupplierDetails from './supplier/view/viewScreen';
+import SupplierForm from './supplier/addEditForm/AddEditForm';
+import SupplierLanding from './supplier/landing/Landing';
 
 const PurchaseNavigation = () => {
     const Stack = createStackNavigator();
@@ -29,9 +32,9 @@ const PurchaseNavigation = () => {
             }}
         >
             <Stack.Screen name="PurchaseLanding" component={PurchaseLandingScreen} />
-            <Stack.Screen name="Supplier" component={Supplier} />
+            <Stack.Screen name="Supplier" component={SupplierLanding} />
             <Stack.Screen name="Create Supplier" component={SupplierForm} />
-            {/* <Stack.Screen name="Homee" component={HomeNavigator} /> */}
+            <Stack.Screen name="Supplier Details" component={SupplierDetails} />
         </Stack.Navigator>
     );
 }
