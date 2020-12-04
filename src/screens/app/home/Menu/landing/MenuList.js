@@ -5,6 +5,7 @@ import fontsFamily from "../../../../../common/theme/fonts";
 import SingleDepartment from "../../HomePage/SingleDepartment";
 import { Row, Col } from 'native-base'
 import { useNavigation } from "@react-navigation/native"
+import globalStyle from "../../../../../common/styles/global";
 
 
 const MenuList = ({ list, sectionTitle }) => {
@@ -13,7 +14,7 @@ const MenuList = ({ list, sectionTitle }) => {
 
     return (
         <>
-            <Text style={style.title}>{sectionTitle}</Text>
+            <Text style={globalStyle.sectionTitle}>{sectionTitle}</Text>
             {/* contentContainerStyle */}
             <View style={style.row}>
                 {list.map(item => (
@@ -48,6 +49,7 @@ const style = StyleSheet.create({
     },
     menuTitle: {
         fontFamily: fontsFamily.RUBIK_REGULAR,
+        // fontSize:10,
         fontSize: 9,
         alignSelf: "center",
     },

@@ -22,7 +22,7 @@ const style = StyleSheet.create({
         // marginHorizontal: 15,
         marginBottom: 10,
         // width:"33.33%",
-        
+
     },
     menuName: {
         fontFamily: fontsFamily.RUBIK_REGULAR,

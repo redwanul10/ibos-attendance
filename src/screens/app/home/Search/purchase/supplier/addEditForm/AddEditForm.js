@@ -4,10 +4,12 @@ import { Row, Col, Grid } from 'native-base'
 import IHeader from '../../../../../../../common/components/IHeader';
 import FormInput from '../../../../../../../common/components/TextInput';
 import { Formik } from 'formik'
-import IPicker from '../../../../../../../common/components/Ipicker';
+// import IPicker from '../../../../../../../common/components/Ipicker';
 import { Button, Text, View } from 'native-base'
 import fontsFamily from '../../../../../../../common/theme/fonts';
 import ICustomPicker from '../../../../../../../common/components/ICustomPicker';
+import IDatePicker from '../../../../../../../common/components/IDatePicker';
+
 
 
 const initValues = {
@@ -51,6 +53,13 @@ const SupplierForm = (props) => {
                                     label="Supplier Name"
                                     formikProps={formikProps}
                                 />
+
+                                {/* <IDatePicker
+                                    name="date"
+                                    label="Date"
+                                    formikProps={formikProps}
+                                /> */}
+
                                 <FormInput
                                     name="supplierAddress"
                                     label="Address"
@@ -166,7 +175,7 @@ const style = StyleSheet.create({
         paddingHorizontal: 20,
         marginTop: 10,
         marginHorizontal: 10,
-        shadowOffset: { width: 3, height: 4},
+        shadowOffset: { width: 3, height: 4 },
         shadowColor: 'black',
         shadowOpacity: 0.2,
     },

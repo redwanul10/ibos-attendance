@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import colors from '../theme/colors';
 import fontsFamily from '../theme/fonts';
 
 const globalStyle = StyleSheet.create({
@@ -23,7 +24,12 @@ const globalStyle = StyleSheet.create({
         padding: 0,
         fontFamily: fontsFamily.RUBIK_MEDIUM
       },
-    
+      sectionTitle: {
+        fontFamily: fontsFamily.RUBIK_MEDIUM,
+        color: colors.GREY,
+        marginVertical: 10,
+        // fontSize:16
+    },
       
 })
 

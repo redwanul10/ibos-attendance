@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 const SingleSupplier = () => {
 
     const navigation = useNavigation()
-    console.log("single supplier")
+
     return (
         <TouchableOpacity onPress={e => navigation.navigate("Supplier Details")}>
             <View style={style.singleSupplier}>
@@ -30,9 +30,7 @@ const SingleSupplier = () => {
     );
 }
 
-export default React.memo(SingleSupplier, () => {
-    return true
-})
+export default SingleSupplier
 
 const style = StyleSheet.create({
 

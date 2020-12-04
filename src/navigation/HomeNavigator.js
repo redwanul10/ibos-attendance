@@ -13,10 +13,11 @@ import MenuTab from '../screens/app/home/Menu';
 import TabBarBtn from '../common/components/TabBarBtn';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import colors from '../common/theme/colors';
+import tabLogo from '../assets/images/dashboard/small.png';
 
 
 const HomeNavigator = () => {
-  const Tab = createMaterialTopTabNavigator();
+  const Tab = createBottomTabNavigator();
 
   return (
     <Tab.Navigator
@@ -24,7 +25,8 @@ const HomeNavigator = () => {
         showIcon: true,
 
         style: {
-          height: 60
+          height: 60,
+          backgroundColor: "#1A1A27"
         },
         labelStyle: {
           margin: 0,
@@ -63,10 +65,38 @@ const HomeNavigator = () => {
       <Tab.Screen
         options={{
           showIcon: true,
-          // tabBarButton: TabBarBtn,
-          tabBarIcon: ({ color, size }) => <EvilIcons name="search" size={20} color={color} />
+          // tabBarButton: () => <Text>hello</Text>,
+          // tabBarIcon: ({ color, size }) => <EvilIcons name="search" size={20} color={color} />
+          tabBarIcon: ({ color, size }) => <Image source={tabLogo} style={{ flex: 1, width: "100%", height: 50, }} />
         }}
         name="Search"
+        component={SearchTab}
+      />
+
+      <Tab.Screen
+        options={{
+          // showIcon: true,
+          // title: e => <View style={{
+          //   backgroundColor: "red",
+          //   // flex: 1,
+          //   // width: "100%",
+          //   // height: "100%"
+          // }} />,
+          labelStyle: {
+            margin: 10,
+            fontSize: 10
+          },
+          // tabBarButton: TabBarBtn,
+          tabBarButton: (props) => (
+            <TouchableWithoutFeedback onPress={props.onPress}>
+              <View style={{ flex: 1 }} >
+                <Image source={tabLogo} style={{ flex: 1, resizeMode: "cover", width: "100%", height: 50, bottom: 40, position: "absolute" }} />
+              </View>
+            </TouchableWithoutFeedback>
+          ),
+          // tabBarIcon: ({ color, size }) => <EvilIcons name="search" size={20} color={color} />
+        }}
+        name="check"
         component={SearchTab}
       />
 

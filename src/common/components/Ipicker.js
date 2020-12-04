@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-// import { Picker } from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 const IPicker = (props) => {
 
@@ -21,7 +21,7 @@ const IPicker = (props) => {
             <View style={[style.inputWrapper, { borderBottomWidth: 1, borderBottomColor: "grey" }]}>
                 <Text style={[style.label, { color: isError ? "red" : "#636363" }]}>{label}</Text>
                 
-                {/* <Picker
+                <Picker
                       selectedValue={formikProps.values[name]}
                     itemStyle={{ fontSize: 12, color: "red" }}
                     style={{ height: 30, width: "100%", fontSize: 12 }}
@@ -34,7 +34,7 @@ const IPicker = (props) => {
                     <Picker.Item label="Brack" value="Brack" />
                     <Picker.Item label="DuchBangla" value="DuchBangla" />
                     <Picker.Item label="Islami" value="Islami" />
-                </Picker> */}
+                </Picker>
             </View>
 
             

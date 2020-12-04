@@ -1,23 +1,24 @@
-import React,{useEffect} from 'react'
-import { View, SafeAreaView, StatusBar,ImageBackground, StyleSheet } from 'react-native'
-import imageFile from '../../../assets/images/dashboardBg.png'
+import React, { useEffect } from 'react'
+import { View, SafeAreaView, StatusBar, ImageBackground, StyleSheet } from 'react-native'
+import imageFile from '../../../assets/images/dshboardBg2.png'
 import ProfileInfo from '../../../common/components/ProfileInfo'
 import DashboardMenu from './components/DashboardMenus'
 
 function Dashboard() {
-    useEffect(()=>{
-        
+    useEffect(() => {
+
         StatusBar.setBarStyle("light-content")
-    },[])
+    }, [])
     return (
-        <SafeAreaView>
-            <ImageBackground source={imageFile} style={style.backgroundImg}>
+
+        <ImageBackground source={imageFile} style={style.backgroundImg}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <View style={style.container}>
-                    <ProfileInfo showMenuIcon/>
-                    <DashboardMenu/>
+                    <ProfileInfo showMenuIcon />
+                    <DashboardMenu />
                 </View>
-            </ImageBackground>
-        </SafeAreaView>
+            </SafeAreaView>
+        </ImageBackground>
     )
 }
 
