@@ -13,13 +13,14 @@ const PurchaseMenu = [
         image: require("../../../../assets/images/purchase/supplier.png"),
         name: "Supplier"
     },
-    {
-        image: require("../../../../assets/images/purchase/supplier.png"),
-        name: "Goods Receive"
-    },
+    
     {
         image: require("../../../../assets/images/purchase/supplier.png"),
         name: "Quick Purchase"
+    },
+    {
+        image: require("../../../../assets/images/purchase/supplier.png"),
+        name: "Goods Receive"
     },
     {
         image: require("../../../../assets/images/purchase/supplier.png"),
@@ -28,6 +29,14 @@ const PurchaseMenu = [
     {
         image: require("../../../../assets/images/purchase/supplier.png"),
         name: "Purchase Report"
+    },
+    {
+        image: require("../../../../assets/images/purchase/supplier.png"),
+        name: "Due Receive"
+    },
+    {
+        image: require("../../../../assets/images/purchase/supplier.png"),
+        name: "Customer"
     }
 ]
 

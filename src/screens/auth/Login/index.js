@@ -10,7 +10,7 @@ import loginBgImg from '../../../assets/images/loginBg.png';
 import logo from '../../../assets/images/pageLogo.png';
 
 const initValues = {
-    email: 'alamin@akij.net',
+    email: '01749508249',
     password: "12345678",
 }
 
@@ -73,7 +73,7 @@ const Login = ({ navigation }) => {
                             }
                             loginAction(email, password, customcb)
                         }}
-                        validationSchema={schemaValidation}
+                        // validationSchema={schemaValidation}
                     >
                         {(formikProps) => (
                             <View>

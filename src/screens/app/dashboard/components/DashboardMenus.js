@@ -41,7 +41,7 @@ const DashboardMenu = () => {
                 contentContainerStyle={[layout.row, { marginTop: 50 }]}
                 // numColumns={2}
                 renderItem={({ item }) =>
-
+                
                     <SingleMenu data={item} />
                 }
             />

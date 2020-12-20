@@ -3,8 +3,6 @@ import { Text, StyleSheet, View, FlatList, Image ,TouchableOpacity} from 'react-
 import editImg from '../../../../../../../assets/images/edit.png';
 import fontsFamily from '../../../../../../../common/theme/fonts';
 import {useNavigation} from '@react-navigation/native'
-import globalStyle from '../../../../../../../common/styles/global';
-
 
 
 
@@ -13,7 +11,7 @@ const SingleSupplier = ({data}) => {
     const navigation = useNavigation()
 
     return (
-        <TouchableOpacity onPress={e => navigation.navigate("Supplier Details",{data})}>
+        <TouchableOpacity onPress={e => navigation.navigate("Due Receive Details",{data})}>
             <View style={style.singleSupplier}>
                 <View>
                     <Text style={style.smallText}>{serial}</Text>
@@ -24,7 +22,7 @@ const SingleSupplier = ({data}) => {
                     <Text style={style.smallText}>Mobile Number</Text>
                     <Text style={style.supplierTxt}>{mobileNo}</Text>
                     <TouchableOpacity onPress={e => navigation.navigate("Edit Supplier",{data})}>
-                        <Image source={editImg} style={globalStyle.editIcon} />
+                        <Image source={editImg} style={style.editIcon} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -56,5 +54,11 @@ const style = StyleSheet.create({
         marginBottom: 5,
         fontFamily: fontsFamily.RUBIK_MEDIUM,
     },
+    editIcon: {
+        alignSelf: "flex-end",
+        width:30,
+        height:30
+        // width:
+    }
 
 })

@@ -7,8 +7,7 @@ import ISeperator from '../../../../../../../common/components/ISeperator';
 
 
 
-const SupplierDetails = ({route, navigation }) => {
-    const {partnerName, address, city, email, mobileNo, bankName, branchName, bankAccountTypeName, bankAccountNumber} = route.params.data.item;
+const DueReceiveDetails = ({route, navigation }) => {
 
     return (
         <>
@@ -19,76 +18,50 @@ const SupplierDetails = ({route, navigation }) => {
                     showsVerticalScrollIndicator={false}
                     bounces={false}
                 >
-
-
-                    <IDetails
-                        label="Supplier Name"
-                        value={partnerName}
-                        valueStyle={style.value}
-                    />
-
-                    <IDetails
-                        label="Adress"
-                        value={address}
-                        valueStyle={[style.value, { width: "60%" }]}
-                    />
-
-
-
-                    <View style={style.row}>
+                  <View style={style.row}>
                         <Col>
                             <IDetails
-                                label="City"
-                                value={city}
+                                label="Payment Type"
+                                value={"Cash"}
                                 valueStyle={style.value}
                             />
                         </Col>
                         <Col>
                             <IDetails
-                                label="Email"
-                                value={email}
+                                label="Date"
+                                value={"11//12/2020"}
                                 valueStyle={style.value}
                             />
                         </Col>
                     </View>
-
-                    <IDetails
-                        label="Moile"
-                        value={mobileNo}
-                        valueStyle={style.value}
-                    />
-
-                    <ISeperator />
-
                     <View style={style.row}>
                         <Col>
                             <IDetails
-                                label="Bank Name"
-                                value={bankName}
+                                label="Customer"
+                                value={"Golam Rabbani"}
                                 valueStyle={style.value}
                             />
                         </Col>
                         <Col>
                             <IDetails
-                                label="Branch Name"
-                                value={branchName}
+                                label="Amount"
+                                value={"100.00"}
                                 valueStyle={style.value}
                             />
                         </Col>
                     </View>
-
                     <View style={style.row}>
                         <Col>
                             <IDetails
-                                label="Bank Account Type"
-                                value={bankAccountTypeName}
+                                label="Bank Account"
+                                value={"Dhaka"}
                                 valueStyle={style.value}
                             />
                         </Col>
                         <Col>
                             <IDetails
-                                label="Bank Account Number"
-                                value={bankAccountNumber}
+                                label="Instrument No"
+                                value={"dg4w5533"}
                                 valueStyle={style.value}
                             />
                         </Col>
@@ -100,7 +73,7 @@ const SupplierDetails = ({route, navigation }) => {
     );
 }
 
-export default SupplierDetails
+export default DueReceiveDetails
 
 const style = StyleSheet.create({
 

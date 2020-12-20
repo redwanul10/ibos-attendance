@@ -10,16 +10,24 @@ const ICustomPicker = (props) => {
         name,
         label,
         // style,
+        value,
         secureTextEntry,
-        options
+        options,
+        onChange
     } = props
 
     const [modalActive, setModalActive] = useState(false)
-    const isError = formikProps.touched[name] && formikProps.errors[name] ? true : false
+    const isError = formikProps?.touched[name] && formikProps?.errors[name] ? true : false
 
     const handleSelect = (item) => {
-        formikProps.setFieldValue(name,item)
         setModalActive(false)
+        if(onChange){
+            onChange(item)
+        }else{
+            formikProps.setFieldValue(name,item)
+        }
+       
+        
     }
     return (
         <>
@@ -29,13 +37,13 @@ const ICustomPicker = (props) => {
                     <TextInput
                         editable={false}
                         style={[style.input]}
-                        onChangeText={formikProps.handleChange(name)}
-                        onFocus={formikProps.onFocus}
-                        onBlur={e => {
-                            formikProps.setFieldTouched(name, true);
-                            // formikProps.handleBlur(name)
-                        }}
-                        value={formikProps.values[name].label}
+                        // onChangeText={formikProps.handleChange(name)}
+                        // onFocus={formikProps.onFocus}
+                        // onBlur={e => {
+                        //     formikProps.setFieldTouched(name, true);
+                        //     // formikProps.handleBlur(name)
+                        // }}
+                        value={value || formikProps?.values[name].label}
                         secureTextEntry={secureTextEntry || false}
                         placeholder={"Select"}
                         placeholderTextColor="black"
@@ -44,7 +52,7 @@ const ICustomPicker = (props) => {
                 </TouchableOpacity>
             </View>
 
-            {/* <CheckBox checkboxTickColor="red" checked={checked} onPress={e => setChecked(!checked)} /> */}
+           
             <Modal
                 visible={modalActive}
                 transparent={true}
@@ -71,9 +79,10 @@ const ICustomPicker = (props) => {
                     </View>
                 </TouchableWithoutFeedback>
             </Modal>
-            {formikProps.touched[name] && formikProps.errors[name] && (
+
+            {formikProps && formikProps?.touched[name] && formikProps?.errors[name] && (
                 <Text style={style.error}>
-                    {formikProps.errors[name]}
+                    {formikProps?.errors[name]}
                 </Text>
             )}
 

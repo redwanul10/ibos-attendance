@@ -4,8 +4,7 @@ import editImg from '../../../../../../../assets/images/edit.png';
 import fontsFamily from '../../../../../../../common/theme/fonts';
 import {useNavigation} from '@react-navigation/native'
 import globalStyle from '../../../../../../../common/styles/global';
-
-
+globalStyle
 
 
 const SingleSupplier = ({data}) => {
@@ -13,7 +12,7 @@ const SingleSupplier = ({data}) => {
     const navigation = useNavigation()
 
     return (
-        <TouchableOpacity onPress={e => navigation.navigate("Supplier Details",{data})}>
+        <TouchableOpacity onPress={e => navigation.navigate("Customer Details",{data})}>
             <View style={style.singleSupplier}>
                 <View>
                     <Text style={style.smallText}>{serial}</Text>
@@ -23,7 +22,7 @@ const SingleSupplier = ({data}) => {
                 <View>
                     <Text style={style.smallText}>Mobile Number</Text>
                     <Text style={style.supplierTxt}>{mobileNo}</Text>
-                    <TouchableOpacity onPress={e => navigation.navigate("Edit Supplier",{data})}>
+                    <TouchableOpacity onPress={e => navigation.navigate("Edit Customer",{data})}>
                         <Image source={editImg} style={globalStyle.editIcon} />
                     </TouchableOpacity>
                 </View>
@@ -56,5 +55,6 @@ const style = StyleSheet.create({
         marginBottom: 5,
         fontFamily: fontsFamily.RUBIK_MEDIUM,
     },
+    
 
 })

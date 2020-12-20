@@ -21,7 +21,8 @@ const MenuList = ({ list, sectionTitle }) => {
                     <Col style={{ width: "25%", }}>
                         <SingleDepartment
                             data={item}
-                            onPress={e => navigation.navigate(item.name)}
+                            // onPress={e => navigation.navigate(item.name)}
+                            onPress={e => navigation.navigate("Quick Purchase Details")}
                             contentContainerStyle={{
                                 marginHorizontal: 0,
                                 // backgroundColor:"red"

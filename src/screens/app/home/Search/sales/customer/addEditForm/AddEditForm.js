@@ -1,8 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import IHeader from '../../../../../../../common/components/IHeader';
 import { getGlobalData } from '../../../../../../../common/functions/localStorage';
-import { createSupplier, editSupplier } from '../helper';
+import { createCustomer, editSupplier } from '../helper';
 import Form from './form';
+import {Text} from 'react-native'
 
 
 
@@ -18,7 +19,8 @@ let initValues = {
     bankAccountNumber: "",
 }
 
-const SupplierForm = ({route}) => {
+const CustomerForm = ({route}) => {
+
     const {params} = route;
     const [globalData, setGlobalData] = useState({})
     let singleData ={}
@@ -74,7 +76,7 @@ const SupplierForm = ({route}) => {
         branch_Id: selectedBusinessUnit.values, 
         branchName: selectedBusinessUnit.label,
         partnerType_Id: "string",
-        partnerTypeName: "Supplier",
+        partnerTypeName: "Customer",
 
         bankAccountNumber: bankAccountNumber,
         bankAccountTypeId: bankAccountType.id,
@@ -101,7 +103,7 @@ const SupplierForm = ({route}) => {
         //    alert("edit handelar")
        }else{
         // alert("create handelar")
-        createSupplier(newData,cb)
+        createCustomer(newData,cb)
        }
         
     }
@@ -117,5 +119,5 @@ const SupplierForm = ({route}) => {
     );
 }
 
-export default SupplierForm
+export default CustomerForm
 

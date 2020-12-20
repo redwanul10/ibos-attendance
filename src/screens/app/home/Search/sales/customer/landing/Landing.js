@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, FlatList} from 'react-native'
 import IHeader from '../../../../../../../common/components/IHeader';
 import fontsFamily from '../../../../../../../common/theme/fonts';
-import { getSupplierData } from '../helper';
+import { getCustomerData } from '../helper';
 import SingleSupplier from './SingleSupplier';
 
 
-const SupplierLanding = ({ navigation }) => {
+const CustomerLanding = ({ navigation }) => {
     const [supplierData, setSupplierData] = useState([])
 
     useEffect(() =>{
-        getSupplierData(accId='5fbe5312a742f7af381e484d', setSupplierData)
+        getCustomerData(accId='5fbe5312a742f7af381e484d', setSupplierData)
     }, [])
     
     return (
         <>
-            <IHeader onAddIconPress={e => navigation.navigate("Create Supplier")} />
+            <IHeader onAddIconPress={e => navigation.navigate("Create Customer")} />
             <View style={style.container}>
 
                 <FlatList
@@ -32,7 +32,7 @@ const SupplierLanding = ({ navigation }) => {
     );
 }
 
-export default SupplierLanding
+export default CustomerLanding
 
 const style = StyleSheet.create({
     container: {

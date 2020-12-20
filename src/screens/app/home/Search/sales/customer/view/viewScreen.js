@@ -7,7 +7,7 @@ import ISeperator from '../../../../../../../common/components/ISeperator';
 
 
 
-const SupplierDetails = ({route, navigation }) => {
+const CustomerDetails = ({route, navigation }) => {
     const {partnerName, address, city, email, mobileNo, bankName, branchName, bankAccountTypeName, bankAccountNumber} = route.params.data.item;
 
     return (
@@ -100,7 +100,7 @@ const SupplierDetails = ({route, navigation }) => {
     );
 }
 
-export default SupplierDetails
+export default CustomerDetails
 
 const style = StyleSheet.create({
 

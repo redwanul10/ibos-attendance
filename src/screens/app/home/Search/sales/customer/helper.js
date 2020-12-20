@@ -2,10 +2,11 @@ import axios from "axios";
 import { Toast } from "native-base";
 
 //Suppler Data
-export const getSupplierData = (accId, setter) =>{
-    axios.get(`https://ibosapi.akij.net/sme/Partner/GetPartnerByAccount/${accId}?$filter=partnerTypeName%20eq%20%27Supplier%27`)
+export const getCustomerData = (accId, setter) =>{
+    axios.get(`https://ibosapi.akij.net/sme/Partner/GetPartnerByAccount/${accId}?$filter=partnerTypeName eq 'Customer'`)
     .then(res => {
         const {status, data} = res;
+        console.log(JSON.stringify(data,null,2))
         if(status === 200 && data){
             setter(data.value);
         }
@@ -70,7 +71,7 @@ export const getBankAccTypeDDl = (setter) =>{
 }
 
 // supplier create
-export const createSupplier = (createData,cb) => {
+export const createCustomer = (createData,cb) => {
     axios.post('https://ibosapi.akij.net/sme/Partner/CreatePartner', createData)
     .then(res => {
         
@@ -86,11 +87,12 @@ export const createSupplier = (createData,cb) => {
         console.log(err);
     })
 }
+
 // supplier Edit
 export const editSupplier = (id,payload) =>{
     axios.put(`https://ibosapi.akij.net/sme/Partner/UpdatePartner?id=${id}`,payload)
     .then(res => {
-        console.log(JSON.stringify(res, null, 2));
+        
         Toast.show({
             text: "Edit Successfull",
             buttonText: "close",

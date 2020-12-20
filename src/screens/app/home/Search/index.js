@@ -1,7 +1,9 @@
 import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import SalesNavigation from './sales';
+// import SalesNavigation from './sales';
+
 import PurchaseNavigation from './purchase';
+import SalesNavigation from './sales';
 
 const SearchTab = () => {
     const Stack = createStackNavigator();

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Toast } from "native-base";
 
-//Suppler Data
+//getDueReceiveLanding
 export const getSupplierData = (accId, setter) =>{
     axios.get(`https://ibosapi.akij.net/sme/Partner/GetPartnerByAccount/${accId}?$filter=partnerTypeName%20eq%20%27Supplier%27`)
     .then(res => {
@@ -14,6 +14,23 @@ export const getSupplierData = (accId, setter) =>{
         console.log(err);
     })
 }
+
+// export const getDueReceiveLanding = async (branchId, setter) => {
+//     try {
+//       const res = await Axios.get(
+//         `https://ibosapi.akij.net/sme/Journal/GetJournalLanding/${branchId}?type=Sales%20Receive`
+//       );
+//       if (res?.status === 200) {
+//         console.log(JSON.stringify(res.data, null, 2));
+//         setter([...res?.data]);
+//       }
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+//   };
+
+
+
 
 //Bank DDl
 export const getBankNameDDL = (accId, setter) =>{
