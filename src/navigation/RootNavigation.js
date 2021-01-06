@@ -6,6 +6,8 @@ import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
 import HomeNavigator from './HomeNavigator';
 import Dashboard from '../screens/app/dashboard';
+import IbosAttendance from '../screens/app/ibossAttendance';
+
 
 const RootNavigation = () => {
 
@@ -15,7 +17,7 @@ const RootNavigation = () => {
         <>
             <NavigationContainer>
                 <Stack.Navigator
-                    initialRouteName="Home"
+                    initialRouteName="Attendance"
                     screenOptions={{
                         headerMode: "screen",
                         ...TransitionPresets.SlideFromRightIOS,
@@ -28,6 +30,7 @@ const RootNavigation = () => {
                     <Stack.Screen name="Register" component={Register} />
                     <Stack.Screen name="Home" component={HomeNavigator} />
                     <Stack.Screen name="Dashboard" component={Dashboard} />
+                    <Stack.Screen name="Attendance" component={IbosAttendance} />
                 </Stack.Navigator>
             </NavigationContainer>
         </>

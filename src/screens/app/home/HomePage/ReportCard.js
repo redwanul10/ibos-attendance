@@ -4,6 +4,7 @@ import { Col } from 'native-base';
 import background from '../../../../assets/images/dashboard/card2.png';
 import reportIcon from '../../../../assets/images/dashboard/reportIcon.png';
 import fontsFamily from '../../../../common/theme/fonts';
+import Counter from '../../../../common/components/counter'
 
 const ReportCard = ({ containerStyle }) => {
 
@@ -16,7 +17,10 @@ const ReportCard = ({ containerStyle }) => {
                         <Image style={style.icon} source={reportIcon} />
                         <View>
                             <Text style={style.text}>Cash</Text>
-                            <Text style={[style.text, style.bigText]}>5000 $</Text>
+                            <Text style={[style.text, style.bigText]}>
+                            {/* 5000 $ */}
+                            $<Counter start={5} end={1000} duration={1000}/>
+                            </Text>
                         </View>
                     </View>
                 </ImageBackground>
