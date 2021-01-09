@@ -36,7 +36,10 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.2/dayjs.min.js"></script>
     <script>
+
         //  var mymap = L.map('mapid').setView([51.505, -0.09], 13);
         //Init Overlays
         var overlays = {};
@@ -94,6 +97,18 @@
 
         var marker = L.marker([-29.0529434318608, 152.01910972595218]).addTo(map);
 
+        function onMapClick(e) {
+            marker = new L.marker(e.latlng, { draggable: 'true' });
+            marker.on('dragend', function (event) {
+                var marker = event.target;
+                var position = marker.getLatLng();
+                marker.setLatLng(new L.LatLng(position.lat, position.lng), { draggable: 'true' });
+                map.panTo(new L.LatLng(position.lat, position.lng))
+            });
+            map.addLayer(marker);
+        };
+
+        map.on('click', onMapClick);
         marker.bindPopup("<b>Hello</b> Redwan").openPopup();
         L.control.zoom({ position: 'topright' }).addTo(map);
     </script>

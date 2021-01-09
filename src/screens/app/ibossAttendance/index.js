@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
+import { AppState, StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
 import { Row, Col, Button } from 'native-base'
@@ -10,12 +10,36 @@ import Map from './components/Map';
 import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 // import imageFile from '../../../assets/images/fingerPring.png';
 import Geolocation from '@react-native-community/geolocation';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+import ICalender from './components/ICalender';
+import { Toast } from 'native-base'
+
+import Animated, {
+    useSharedValue,
+    withTiming,
+    useAnimatedStyle,
+    Easing,
+} from 'react-native-reanimated';
 
 const IbosAttendance = () => {
 
     const [location, setLocation] = useState({})
-    console.log(location)
+    const [appState, setAppState] = useState(1)
+    const [app, setApp] = useState(1)
+    const randomWidth = useSharedValue(10);
+
+    const handleAppStateChange = (nextAppState) => {
+        // if (appState && appState.match(/inactive|background/) && nextAppState === 'active') {
+        //     FingerprintScanner.release();
+        //     // this.detectFingerprintAvailable();
+        // }
+        // setAppState(nextAppState);
+    }
+
     useEffect(() => {
+
+        // AppState.addEventListener('change', handleAppStateChange);
+
         Geolocation.getCurrentPosition(pos => {
             // console.log(JSON.stringify(pos, null, 2))
             // "coords":
@@ -38,6 +62,10 @@ const IbosAttendance = () => {
                     { cancelable: true }
                 );
             }
+
+            // return () => {
+            //     AppState.removeEventListener('change', handleAppStateChange);
+            // }
 
         })
 
@@ -98,7 +126,36 @@ const IbosAttendance = () => {
                     </Col>
                 </View>
 
-                <TouchableOpacity style={[style.fingerPrint, { marginVertical: 50 }]}>
+                {/* <ICalender /> */}
+
+                <TouchableOpacity onPress={e => {
+                    FingerprintScanner
+                        .authenticate({ description: 'Scan your fingerprint to continue' })
+                        .then(() => {
+                            //  this.props.handlePopupDismissed();
+                            // alert('Authenticated successfully');
+                            Toast.show({
+                                text: "login Successfull",
+                                buttonText: "close",
+                                type: "success",
+                                duration: 3000
+                            })
+                            FingerprintScanner.release()
+                        })
+                        .catch((error) => {
+                            //  this.props.handlePopupDismissed();
+                            console.log(error)
+                            Toast.show({
+                                text: error.message,
+                                buttonText: "close",
+                                type: "danger",
+                                duration: 3000
+                            })
+                            // alert(error.message);
+                            FingerprintScanner.release()
+                        });
+                    // setTimeout(e => FingerprintScanner.release(), 2000)
+                }} style={[style.fingerPrint, { marginVertical: 50 }]}>
                     <Image
                         style={style.fingerPrint}
                         source={require('../../../assets/images/fingerPrint.png')}
