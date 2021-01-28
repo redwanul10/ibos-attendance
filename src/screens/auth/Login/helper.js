@@ -4,28 +4,30 @@ import { storeGlobalData, getGlobalData } from '../../../common/functions/localS
 
 
 export const loginAction = (email, password, cb) => {
-    axios(
+    axios.post(
         // `https://ibosapi.akij.net/domain/LogIn/GetLoginCheck?Email=${email}&Password=${password}`
-        `https://ibosapi.akij.net/sme/UserProfile/GetUserProfileByUserId?userid=${email}&password=${password}`
-        )
+        // `https://ibosapi.akij.net/sme/UserProfile/GetUserProfileByUserId?userid=${email}&password=${password}`
+        `https://ibosapi.akij.net/identity/TokenGenerate/IbosLogin`, { userName: email, password }
+    )
         .then(res => {
-            // console.log(res)
 
-           
-            // getUserInformation(email, cb)
+            const token = res?.data?.token
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-            const selectedBusinessUnit = {
-                values: res?.data?.branch[0]?.branch_Id,
-                label: res?.data?.branch[0]?.branchName
-            }
+            getUserInformation(email, cb)
 
-             storeGlobalData({
-                isAuthenticate: true,
-                profileData: res.data,
-                selectedBusinessUnit
-            })
+            // const selectedBusinessUnit = {
+            //     values: res?.data?.branch[0]?.branch_Id,
+            //     label: res?.data?.branch[0]?.branchName
+            // }
 
-             cb()
+            // storeGlobalData({
+            //     isAuthenticate: true,
+            //     profileData: res.data,
+            //     selectedBusinessUnit
+            // })
+
+
 
             Toast.show({
                 text: "login Successfull",
@@ -34,7 +36,8 @@ export const loginAction = (email, password, cb) => {
             })
         })
         .catch(err => {
-            console.log(err)
+            console.log(err, null, 2)
+            // alert("err")
             Toast.show({
                 text: err?.response?.data?.message,
                 buttonText: "close",
@@ -46,40 +49,29 @@ export const loginAction = (email, password, cb) => {
 const getUserInformation = async (email, cb) => {
 
     try {
-        const req = await axios(
+        const req = await axios.get(
             `https://ibosapi.akij.net/domain/CreateUser/GetUserInformationByUserEmail?Email=${email}`
-            )
-        const res = req.data[0]
-        console.log(res)
-        // const getPrevAuthData = await getGlobalData()
+        )
+        // const res = req.data[0]
+        const res = req.data
 
         const selectedBusinessUnit = {
             values: res?.defaultBusinessUnit,
             label: res?.businessUnitName
         }
 
+        // console.log(selectedBusinessUnit)
+
         await storeGlobalData({
             isAuthenticate: true,
-            profileData: res,
+            profileData: res[0],
             selectedBusinessUnit
         })
 
         cb()
     } catch (err) {
-        console.log(err)
+        // alert(err.response.data.message)
+        console.log(err.response.data, null, 2)
     }
 
-    // .then(res => {
-    //     console.log(JSON.stringify(res.data,null,2))
-    //     storeGlobalData({
-    //         isAuthenticate:true,
-    //         profileData: res?.data,
-    //         selectedBusinessUnit:{
-    //             values:"",
-    //             label:""
-    //         }
-    //     })
-    //     cb()
-    // })
-    // .catch(err => console.log(err))
 }

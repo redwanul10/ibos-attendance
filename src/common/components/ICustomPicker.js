@@ -9,11 +9,11 @@ const ICustomPicker = (props) => {
         formikProps,
         name,
         label,
-        // style,
+        wrapperStyle,
         value,
         secureTextEntry,
         options,
-        onChange
+        onChange,
     } = props
 
     const [modalActive, setModalActive] = useState(false)
@@ -31,7 +31,7 @@ const ICustomPicker = (props) => {
     }
     return (
         <>
-            <View style={[style.inputWrapper]}>
+            <View style={[style.inputWrapper, wrapperStyle || {}]}>
                 <TouchableOpacity onPress={e => setModalActive(true)}>
                     <Text style={[style.label, { color: isError ? "red" : "#636363" }]}>{label}</Text>
                     <TextInput
@@ -43,9 +43,9 @@ const ICustomPicker = (props) => {
                         //     formikProps.setFieldTouched(name, true);
                         //     // formikProps.handleBlur(name)
                         // }}
-                        value={value || formikProps?.values[name].label}
+                        value={value.label || formikProps?.values[name].label}
                         secureTextEntry={secureTextEntry || false}
-                        placeholder={"Select"}
+                        placeholder={value.label  || "Select"}
                         placeholderTextColor="black"
                         {...props}
                     />

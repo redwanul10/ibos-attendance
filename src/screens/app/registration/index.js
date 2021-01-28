@@ -7,18 +7,21 @@ import globalStyle from '../../../common/styles/global';
 import fontsFamily from '../../../common/theme/fonts';
 import colors from '../../../common/theme/colors';
 import Map from './components/Map';
-// import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
-// import imageFile from '../../../assets/images/fingerPring.png';
 import Geolocation from '@react-native-community/geolocation';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
-import ICalender from './components/ICalender';
 import { Toast } from 'native-base'
+import { getCustomerList, registerAttentance } from './helper'
+import { getGlobalData } from '../../../common/functions/localStorage';
 
 
-
-const IbosAttendance = () => {
+const RegistrationAttendance = () => {
 
     const [location, setLocation] = useState({})
+    const [customerListDDL, setCustomerListDDL] = useState([])
+    const [globalData, setGlobalData] = useState({})
+
+    const [selectedCustomer, setSelectedCustomer] = useState(null)
+
     const [appState, setAppState] = useState(1)
     const [app, setApp] = useState(1)
 
@@ -29,6 +32,19 @@ const IbosAttendance = () => {
         // }
         // setAppState(nextAppState);
     }
+
+    useEffect(() => {
+        getGlobalData(setGlobalData)
+    }, [])
+
+    useEffect(() => {
+        if (globalData?.profileData?.userId) {
+            getCustomerList(
+                globalData.profileData.userId,
+                setCustomerListDDL
+            )
+        }
+    }, [globalData])
 
     useEffect(() => {
 
@@ -91,21 +107,52 @@ const IbosAttendance = () => {
         //         // …
         //     });
     }, [])
+
+    const registerHandler = () => {
+        const payload = {
+            accountId: globalData?.profileData?.accountId,
+            businessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            businessPartnerId: selectedCustomer?.value || 0,
+            numLatitude: location?.latitude || 0,
+            numLongitude: location?.longitude || 0,
+            actionBy: globalData?.profileData?.userId || 0,
+            businessPartnerCode: selectedCustomer?.code || ""
+        }
+
+        if (!selectedCustomer) {
+            Toast.show({
+                text: "Select a Customer",
+                buttonText: "close",
+                type: "danger",
+                duration: 3000
+            })
+        } else {
+            registerAttentance(payload)
+        }
+    }
+
     return (
         <>
-            <IHeader title="Add Attendance" />
+            <IHeader title="Registration" />
             <View style={style.container}>
                 <ICustomPicker
-                    label="Job Station List"
-                    value={{}}
-                    options={[]}
+                    wrapperStyle={{ marginTop: 20 }}
+                    label="Customer List"
+                    value={selectedCustomer || {}}
+                    options={customerListDDL}
+                    onChange={item => {
+                        // alert(item.label)
+                        setSelectedCustomer(item)
+                    }}
                 />
 
-                <View style={{ flexDirection: "row" }}>
-                    <Col>
+                {/* <Text>{JSON.stringify(globalData)}</Text> */}
+
+                <View style={{ flexDirection: "row", marginVertical: "15%" }}>
+                    {/* <Col>
                         <Text style={style.boldText}>Today</Text>
                         <Text style={style.text}>{new Date().toDateString()}</Text>
-                    </Col>
+                    </Col> */}
                     <Col>
                         <View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
                             <Col style={[style.col, style.lattitude]}>
@@ -122,7 +169,7 @@ const IbosAttendance = () => {
 
                 {/* <ICalender /> */}
 
-                <TouchableOpacity onPress={e => {
+                {/* <TouchableOpacity onPress={e => {
                     FingerprintScanner
                         .authenticate({ description: 'Scan your fingerprint to continue' })
                         .then(() => {
@@ -154,17 +201,17 @@ const IbosAttendance = () => {
                         style={style.fingerPrint}
                         source={require('../../../assets/images/fingerPrint.png')}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <View>
                     <Text style={style.boldText}>My Location</Text>
-                    {/* <Map /> */}
                     <Map location={location} lat={location.latitude} long={location.longitude} />
                     <Button
                         block
                         style={{ backgroundColor: "#0080FF" }}
+                        onPress={e => registerHandler()}
                     >
-                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Save Attendance</Text>
+                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Submit</Text>
                     </Button>
                 </View>
 
@@ -174,7 +221,7 @@ const IbosAttendance = () => {
     );
 }
 
-export default IbosAttendance;
+export default RegistrationAttendance;
 
 const style = StyleSheet.create({
     container: {

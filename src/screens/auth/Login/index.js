@@ -10,7 +10,7 @@ import loginBgImg from '../../../assets/images/loginBg.png';
 import logo from '../../../assets/images/pageLogo.png';
 
 const initValues = {
-    email: '01749508249',
+    email: 'alamin@akij.net',
     password: "12345678",
 }
 
@@ -69,7 +69,8 @@ const Login = ({ navigation }) => {
                             const { email, password } = values
                             const customcb = () => {
                                 resetForm()
-                                navigation.navigate('Home')
+                                // navigation.navigate('Attendance')
+                                navigation.navigate("Registration")
                             }
                             loginAction(email, password, customcb)
                         }}
