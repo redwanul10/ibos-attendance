@@ -8,6 +8,7 @@ import HomeNavigator from './HomeNavigator';
 import Dashboard from '../screens/app/dashboard';
 import IbosAttendance from '../screens/app/ibossAttendance';
 import RegistrationAttendance from '../screens/app/registration';
+import AttendanceList from '../screens/app/attendanceList';
 
 
 
@@ -19,7 +20,7 @@ const RootNavigation = () => {
         <>
             <NavigationContainer>
                 <Stack.Navigator
-                    initialRouteName="Login"
+                    initialRouteName="AttendanceList"
                     screenOptions={{
                         headerMode: "screen",
                         ...TransitionPresets.SlideFromRightIOS,
@@ -34,6 +35,7 @@ const RootNavigation = () => {
                     <Stack.Screen name="Home" component={HomeNavigator} />
                     <Stack.Screen name="Dashboard" component={Dashboard} />
                     <Stack.Screen name="Attendance" component={IbosAttendance} />
+                    <Stack.Screen name="AttendanceList" component={AttendanceList} />
                 </Stack.Navigator>
             </NavigationContainer>
         </>

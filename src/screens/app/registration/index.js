@@ -38,7 +38,7 @@ const RegistrationAttendance = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData?.profileData?.userId) {
+        if (globalData ?.profileData ?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
@@ -110,13 +110,13 @@ const RegistrationAttendance = () => {
 
     const registerHandler = () => {
         const payload = {
-            accountId: globalData?.profileData?.accountId,
-            businessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
-            businessPartnerId: selectedCustomer?.value || 0,
-            numLatitude: location?.latitude || 0,
-            numLongitude: location?.longitude || 0,
-            actionBy: globalData?.profileData?.userId || 0,
-            businessPartnerCode: selectedCustomer?.code || ""
+            accountId: globalData ?.profileData ?.accountId,
+            businessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
+            businessPartnerId: selectedCustomer ?.value || 0,
+            numLatitude: location ?.latitude || 0,
+            numLongitude: location ?.longitude || 0,
+            actionBy: globalData ?.profileData ?.userId || 0,
+            businessPartnerCode: selectedCustomer ?.code || ""
         }
 
         if (!selectedCustomer) {
@@ -136,7 +136,7 @@ const RegistrationAttendance = () => {
             <IHeader title="Registration" />
             <View style={style.container}>
                 <ICustomPicker
-                    wrapperStyle={{ marginTop: 20 }}
+                    wrapperStyle={{ marginTop: 20, backgroundColor: "#0000000F", borderBottomColor: "transparent", padding: 5, paddingLeft: 20 }}
                     label="Customer List"
                     value={selectedCustomer || {}}
                     options={customerListDDL}
