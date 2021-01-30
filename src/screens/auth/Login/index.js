@@ -70,7 +70,7 @@ const Login = ({ navigation }) => {
                             const customcb = () => {
                                 resetForm()
                                 // navigation.navigate('Attendance')
-                                navigation.navigate("Registration")
+                                navigation.navigate("Attendance Dashboard")
                             }
                             loginAction(email, password, customcb)
                         }}

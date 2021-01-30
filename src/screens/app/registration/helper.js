@@ -11,8 +11,8 @@ export const getCustomerList = async (id, setter) => {
         )
         setter(res?.data)
     } catch (err) {
-       console.log(err.response.data,null,2)
-       alert("error")
+    //    console.log(err.response.data,null,2)
+       alert(err.response.data.message)
     }
 }
 

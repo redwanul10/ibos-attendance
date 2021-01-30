@@ -4,7 +4,7 @@ import { Header, Right, Left, Button, Icon, Title } from "native-base";
 import { useNavigation, useRoute } from '@react-navigation/native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const IHeader = ({ title, onAddIconPress }) => {
+const IHeader = ({ title, onAddIconPress,hideBackBtn}) => {
 
     const navigation = useNavigation()
     const route = useRoute()
@@ -15,7 +15,7 @@ const IHeader = ({ title, onAddIconPress }) => {
         <>
             <Header androidStatusBarColor="#1A1A27" style={{ backgroundColor: "#1A1A27" }}>
 
-                <Left style={{ flex: 1 }}>
+                <Left style={{ flex: 1 ,opacity: hideBackBtn ? 0 : 1}}>
                     <Button transparent onPress={e => navigation.goBack()}>
                         <AntDesign name="left" size={20} color="white" />
                     </Button>

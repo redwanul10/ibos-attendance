@@ -31,6 +31,7 @@ export const loginAction = (email, password, cb) => {
 
             Toast.show({
                 text: "login Successfull",
+                type: "success",
                 buttonText: "close",
                 duration: 3000
             })
@@ -70,8 +71,8 @@ const getUserInformation = async (email, cb) => {
 
         cb()
     } catch (err) {
-        // alert(err.response.data.message)
-        console.log(err.response.data, null, 2)
+        alert(err.response.data.message)
+        console.log(JSON.stringify(err.response.data, null, 2))
     }
 
 }

@@ -13,22 +13,32 @@ import Geolocation from '@react-native-community/geolocation';
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import ICalender from './components/ICalender';
 import { Toast } from 'native-base'
+import { getGlobalData } from '../../../common/functions/localStorage';
+import { getCustomerList } from '../registration/helper';
+import { checkIn } from './helper';
 
 
 
 const IbosAttendance = () => {
 
     const [location, setLocation] = useState({})
-    const [appState, setAppState] = useState(1)
-    const [app, setApp] = useState(1)
+    const [customerListDDL, setCustomerListDDL] = useState([])
+    const [selectedCustomer, setSelectedCustomer] = useState(null)
+    const [globalData, setGlobalData] = useState({})
 
-    const handleAppStateChange = (nextAppState) => {
-        // if (appState && appState.match(/inactive|background/) && nextAppState === 'active') {
-        //     FingerprintScanner.release();
-        //     // this.detectFingerprintAvailable();
-        // }
-        // setAppState(nextAppState);
-    }
+
+    useEffect(() => {
+        getGlobalData(setGlobalData)
+    }, [])
+
+    useEffect(() => {
+        if (globalData?.profileData?.userId) {
+            getCustomerList(
+                globalData.profileData.userId,
+                setCustomerListDDL
+            )
+        }
+    }, [globalData])
 
     useEffect(() => {
 
@@ -91,17 +101,52 @@ const IbosAttendance = () => {
         //         // …
         //     });
     }, [])
+
+    const saveHandler = () => {
+
+        if (!selectedCustomer) {
+            Toast.show({
+                text: "Select a Customer",
+                buttonText: "close",
+                type: "danger",
+                duration: 3000
+            })
+            return ;
+        } 
+
+        const payload = {
+            intAccountId: globalData?.profileData?.accountId,
+            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer?.value || 0,
+            strBusinessPartnerCode: selectedCustomer?.code || "",
+            numPartnerLatitude: selectedCustomer?.latitude  || 0,
+            numPartnerLongitude: selectedCustomer?.longitude || 0,
+            intEmployeeId: globalData.profileData.userId || 0,
+            numAttendanceLatitude: location.latitude || 0,
+            numAttendanceLongitude: location.longitude || 0,
+            intActionBy: globalData.profileData.userId,
+        }
+
+        // alert("time to send req")
+        console.log(JSON.stringify(payload,null,2))
+        checkIn(payload)
+
+        
+
+    }
     return (
         <>
-            <IHeader title="Add Attendance" />
+            <IHeader />
             <View style={style.container}>
-                <ICustomPicker
+                {/* <ICustomPicker
                     label="Job Station List"
                     value={{}}
                     options={[]}
-                />
+                /> */}
 
-                <View style={{ flexDirection: "row" }}>
+
+
+                <View style={{ flexDirection: "row", marginTop: 20 }}>
                     <Col>
                         <Text style={style.boldText}>Today</Text>
                         <Text style={style.text}>{new Date().toDateString()}</Text>
@@ -120,9 +165,39 @@ const IbosAttendance = () => {
                     </Col>
                 </View>
 
+                <ICustomPicker
+                    wrapperStyle={{ marginTop: 20, backgroundColor: "#0000000F", borderBottomColor: "transparent", padding: 5, paddingLeft: 20 }}
+                    label="Customer List"
+                    value={selectedCustomer || {}}
+                    options={customerListDDL}
+                    onChange={item => {
+                        // alert(item.label)
+                        setSelectedCustomer(item)
+                    }}
+                />
+
+
+                <View style={{ marginTop: 20, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
+                    <Col style={[style.col, style.lattitude, { borderColor: "transparent" }]}>
+                        <Text style={[style.boldText, style.smallTxt, { color: "#0080FF" }]}>Check In Time</Text>
+                        <Text style={[style.boldText, style.smallTxt]}>9.00 am</Text>
+                    </Col>
+                    <Col style={[style.col, style.longitude, { borderColor: "transparent", backgroundColor: "#FFD8D8" }]}>
+                        <Text style={[style.boldText, style.smallTxt, { color: "red" }]}>Check Out Time</Text>
+                        <Text style={[style.boldText, style.smallTxt]}>5.00 am</Text>
+                    </Col>
+                </View>
+
+                <View style={{ alignSelf: "center", width: "50%", marginTop: 20, marginBottom: 40, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
+                    <Col style={[style.col, style.lattitude, { borderColor: "transparent", backgroundColor: "#B3FFD6" }]}>
+                        <Text style={[style.boldText, style.smallTxt, { color: "#399162" }]}>Check In Time</Text>
+                        <Text style={[style.boldText, style.smallTxt]}>9.00 am</Text>
+                    </Col>
+                </View>
+
                 {/* <ICalender /> */}
 
-                <TouchableOpacity onPress={e => {
+                {/* <TouchableOpacity onPress={e => {
                     FingerprintScanner
                         .authenticate({ description: 'Scan your fingerprint to continue' })
                         .then(() => {
@@ -154,7 +229,7 @@ const IbosAttendance = () => {
                         style={style.fingerPrint}
                         source={require('../../../assets/images/fingerPrint.png')}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <View>
                     <Text style={style.boldText}>My Location</Text>
@@ -163,8 +238,9 @@ const IbosAttendance = () => {
                     <Button
                         block
                         style={{ backgroundColor: "#0080FF" }}
+                        onPress={e=> saveHandler()}
                     >
-                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Save Attendance</Text>
+                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
                     </Button>
                 </View>
 
