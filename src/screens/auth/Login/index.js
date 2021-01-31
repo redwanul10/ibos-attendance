@@ -31,10 +31,11 @@ const Login = ({ navigation }) => {
 
 
     const [globalData, setGlobalData] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-      getGlobalData(setGlobalData)
-  
+        getGlobalData(setGlobalData)
+
     }, [])
 
     useEffect(() => {
@@ -86,9 +87,9 @@ const Login = ({ navigation }) => {
                                 // navigation.navigate('Attendance')
                                 navigation.navigate("Attendance Dashboard")
                             }
-                            loginAction(email, password, customcb)
+                            loginAction(email, password, setIsLoading, customcb)
                         }}
-                        // validationSchema={schemaValidation}
+                    // validationSchema={schemaValidation}
                     >
                         {(formikProps) => (
                             <View>
@@ -120,14 +121,14 @@ const Login = ({ navigation }) => {
                                         height: 50,
                                         borderRadius: 50
                                     }}>
-                                    <Text style={{
-                                        color: "white",
-                                        fontSize: 16,
-                                        fontWeight: "bold"
-                                    }}>
+
+                                    <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
                                         Sign In
-                                </Text>
-                                    {/* <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} /> */}
+                                        </Text>
+
+                                    {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+
+
                                 </Button>
 
 
@@ -167,7 +168,7 @@ const style = StyleSheet.create({
         width: 234,
         height: 166
     },
-    
+
     removeBtnStyle: {
         backgroundColor: "transparent",
         elevation: 0,
@@ -201,16 +202,16 @@ const style = StyleSheet.create({
     },
     formHeader: {
         marginBottom: 23,
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center"
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     },
     container: {
         flex: 1,
         // backgroundColor: "#FFFFFF",
         paddingHorizontal: 24,
         // justifyContent: "center",
-        marginTop:"35%",
+        marginTop: "35%",
         position: "relative",
     },
     innerContent: {

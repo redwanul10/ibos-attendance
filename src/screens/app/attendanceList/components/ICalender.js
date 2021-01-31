@@ -21,6 +21,7 @@ const ICalender = () => {
         // }, 3000)
 
         const end = Number(value.endOf('month').format("D"))
+        console.log("End ", end)
         let AllDaysInMonth = []
 
         for (let i = 1; i <= end; i++) {
@@ -31,7 +32,8 @@ const ICalender = () => {
             }
         }
 
-        const start = Number(value.day()) - 1
+        const start = Number(value.startOf('month').format("d"))
+        // alert(start)
         let fakeDaysInMonth = []
 
         for (let i = 1; i <= start; i++) {

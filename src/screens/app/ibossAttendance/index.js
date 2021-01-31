@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { AppState, StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
+import { ScrollView, StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
-import { Row, Col, Button } from 'native-base'
+import { Row, Col, Button, Spinner } from 'native-base'
 import globalStyle from '../../../common/styles/global';
 import fontsFamily from '../../../common/theme/fonts';
 import colors from '../../../common/theme/colors';
@@ -15,7 +15,7 @@ import ICalender from './components/ICalender';
 import { Toast } from 'native-base'
 import { getGlobalData } from '../../../common/functions/localStorage';
 import { getCustomerList } from '../registration/helper';
-import { checkIn,checkOut } from './helper';
+import { checkIn, checkOut } from './helper';
 
 
 
@@ -24,6 +24,7 @@ const IbosAttendance = () => {
     const [location, setLocation] = useState({})
     const [customerListDDL, setCustomerListDDL] = useState([])
     const [selectedCustomer, setSelectedCustomer] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const [globalData, setGlobalData] = useState({})
 
 
@@ -32,7 +33,7 @@ const IbosAttendance = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData?.profileData?.userId) {
+        if (globalData ?.profileData ?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
@@ -44,6 +45,7 @@ const IbosAttendance = () => {
 
         // AppState.addEventListener('change', handleAppStateChange);
 
+        // setTimeout(e => {
         Geolocation.getCurrentPosition(pos => {
             // console.log(JSON.stringify(pos, null, 2))
             // "coords":
@@ -72,6 +74,7 @@ const IbosAttendance = () => {
             // }
 
         })
+        // }, 500)
 
         // check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
         //     .then((result) => {
@@ -111,16 +114,16 @@ const IbosAttendance = () => {
                 type: "danger",
                 duration: 3000
             })
-            return ;
-        } 
+            return;
+        }
 
         const payload = {
-            intAccountId: globalData?.profileData?.accountId,
-            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
-            intBusinessPartnerId: selectedCustomer?.value || 0,
-            strBusinessPartnerCode: selectedCustomer?.code || "",
-            numPartnerLatitude: selectedCustomer?.latitude  || 0,
-            numPartnerLongitude: selectedCustomer?.longitude || 0,
+            intAccountId: globalData ?.profileData ?.accountId,
+            intBusinessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer ?.value || 0,
+            strBusinessPartnerCode: selectedCustomer ?.code || "",
+            numPartnerLatitude: selectedCustomer ?.latitude || 0,
+            numPartnerLongitude: selectedCustomer ?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
             numAttendanceLatitude: location.latitude || 0,
             numAttendanceLongitude: location.longitude || 0,
@@ -128,21 +131,23 @@ const IbosAttendance = () => {
         }
 
         // alert("time to send req")
-        console.log(JSON.stringify(payload,null,2))
-        if(status === "checkIn"){
-            checkIn(payload)
-        }else{
-            checkOut(payload)
+        console.log(JSON.stringify(payload, null, 2))
+        if (status === "checkIn") {
+            checkIn(payload, setIsLoading)
+        } else {
+            checkOut(payload, setIsLoading)
         }
-        
 
-        
+
+
 
     }
     return (
         <>
             <IHeader />
-            <View style={style.container}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={style.container}>
                 {/* <ICustomPicker
                     label="Job Station List"
                     value={{}}
@@ -156,7 +161,7 @@ const IbosAttendance = () => {
                         <Text style={style.text}>{new Date().toDateString()}</Text>
                     </Col>
                     <Col>
-                        <View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
+                        {location.latitude && location.longitude && (<View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
                             <Col style={[style.col, style.lattitude]}>
                                 <Text style={[style.boldText, style.smallTxt]}>Lattitude</Text>
                                 <Text style={[style.boldText, style.smallTxt]}>{location.latitude || 0.0}</Text>
@@ -165,7 +170,7 @@ const IbosAttendance = () => {
                                 <Text style={[style.boldText, style.smallTxt]}>Longitude</Text>
                                 <Text style={[style.boldText, style.smallTxt]}>{location.longitude || 0.0}</Text>
                             </Col>
-                        </View>
+                        </View>)}
                     </Col>
                 </View>
 
@@ -235,28 +240,33 @@ const IbosAttendance = () => {
                     />
                 </TouchableOpacity> */}
 
-                <View>
-                    <Text style={style.boldText}>My Location</Text>
-                    {/* <Map /> */}
-                    <Map location={location} lat={location.latitude} long={location.longitude} />
-                    <Button
-                        block
-                        style={{ backgroundColor: "#0080FF" }}
-                        onPress={e=> saveHandler("checkIn")}
-                    >
-                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
-                    </Button>
+                {location.latitude && location.longitude && (
+                    <View>
+                        <Text style={style.boldText}>My Location</Text>
+                        {/* <Map /> */}
+                        <Map location={location} lat={location.latitude} long={location.longitude} />
+                        <Button
+                            block
+                            style={{ backgroundColor: "#0080FF" }}
+                            onPress={e => saveHandler("checkIn")}
+                        >
+                            <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
+                            {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                        </Button>
 
-                    <Button
-                        block
-                        style={{ marginTop:10,backgroundColor: "#0080FF" }}
-                        onPress={e=> saveHandler()}
-                    >
-                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
-                    </Button>
-                </View>
+                        <Button
+                            block
+                            style={{ marginTop: 10, backgroundColor: "red" }}
+                            onPress={e => saveHandler()}
+                        >
+                            <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
+                            {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                        </Button>
+                    </View>
+                )}
 
-            </View>
+            </ScrollView
+            >
 
         </>
     );

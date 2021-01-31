@@ -16,6 +16,7 @@ import AttendanceDashboard from '../screens/app/attendanceDashboard';
 
 const RootNavigation = () => {
 
+    alert("root")
     const Stack = createStackNavigator();
 
     return (
@@ -46,3 +47,10 @@ const RootNavigation = () => {
 }
 
 export default RootNavigation;
+
+
+// const IbosAttendance = React.lazy(() => import('../screens/app/ibossAttendance'));
+// const RegistrationAttendance = React.lazy(() => import('../screens/app/registration'));
+// const AttendanceList = React.lazy(() => import('../screens/app/attendanceList'));
+// const AttendanceDashboard = React.lazy(() => import('../screens/app/attendanceDashboard'));
+// const Login = React.lazy(() => import('../screens/auth/Login'));

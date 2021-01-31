@@ -18,13 +18,13 @@ export const getCustomerList = async (id, setter) => {
 }
 
 
-export const registerAttentance = async (payload) => {
-
+export const registerAttentance = async (payload,setIsLoading) => {
+    setIsLoading(true)
     try {
         const res = await axios.post(
             `https://erp.ibos.io/partner/PartnerLocationRegister/CreatPartnerLocationRegister`,payload
         )
-
+        setIsLoading(false)
         Toast.show({
             text: res.message || "Created Successfull",
             buttonText: "close",
@@ -34,6 +34,7 @@ export const registerAttentance = async (payload) => {
         
     } catch (err) {
         // alert(err.response.data.message)
+        setIsLoading(false)
         Toast.show({
             text: err.response.data.message,
             buttonText: "close",

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppState, StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
-import { Row, Col, Button } from 'native-base'
+import { Row, Col, Button, Spinner } from 'native-base'
 import globalStyle from '../../../common/styles/global';
 import fontsFamily from '../../../common/theme/fonts';
 import colors from '../../../common/theme/colors';
@@ -21,6 +21,7 @@ const RegistrationAttendance = () => {
     const [globalData, setGlobalData] = useState({})
 
     const [selectedCustomer, setSelectedCustomer] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     const [appState, setAppState] = useState(1)
     const [app, setApp] = useState(1)
@@ -127,7 +128,7 @@ const RegistrationAttendance = () => {
                 duration: 3000
             })
         } else {
-            registerAttentance(payload)
+            registerAttentance(payload, setIsLoading)
         }
     }
 
@@ -212,6 +213,7 @@ const RegistrationAttendance = () => {
                         onPress={e => registerHandler()}
                     >
                         <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Submit</Text>
+                        {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
                     </Button>
                 </View>
 
