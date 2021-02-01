@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native'
 import IHeader from '../../../common/components/IHeader';
 import ICalender from './components/ICalender';
-
+import ListCard from './components/listCard'
 
 const AttendanceList = () => {
     return (
@@ -10,7 +10,15 @@ const AttendanceList = () => {
             <IHeader />
             <View style={style.container}>
                 <ICalender />
+                <ListCard/>
+                <ListCard/>
+                <ListCard/>
+                <ListCard/>
+
+
+                
             </View>
+            
         </>
     );
 }
