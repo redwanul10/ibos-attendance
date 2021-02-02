@@ -15,7 +15,8 @@ import ICalender from './components/ICalender';
 import { Toast } from 'native-base'
 import { getGlobalData } from '../../../common/functions/localStorage';
 import { getCustomerList } from '../registration/helper';
-import { checkIn, checkOut } from './helper';
+import { checkIn, checkOut, getCheckInCheckOutTime } from './helper';
+import { _todayDate } from '../../../common/functions/_todayDate';
 
 
 
@@ -29,14 +30,23 @@ const IbosAttendance = () => {
 
 
     useEffect(() => {
+        // getCheckInCheckOutTime()
         getGlobalData(setGlobalData)
     }, [])
 
     useEffect(() => {
-        if (globalData ?.profileData ?.userId) {
+        if (globalData?.profileData?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
+            )
+        }
+
+        if (globalData?.profileData?.userId) {
+            const todayDate = _todayDate()
+            getCheckInCheckOutTime(
+                globalData.profileData.userId,
+                todayDate
             )
         }
     }, [globalData])
@@ -107,23 +117,23 @@ const IbosAttendance = () => {
 
     const saveHandler = (status) => {
 
-        if (!selectedCustomer) {
-            Toast.show({
-                text: "Select a Customer",
-                buttonText: "close",
-                type: "danger",
-                duration: 3000
-            })
-            return;
-        }
+        // if (!selectedCustomer) {
+        //     Toast.show({
+        //         text: "Select a Customer",
+        //         buttonText: "close",
+        //         type: "danger",
+        //         duration: 3000
+        //     })
+        //     return;
+        // }
 
         const payload = {
-            intAccountId: globalData ?.profileData ?.accountId,
-            intBusinessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
-            intBusinessPartnerId: selectedCustomer ?.value || 0,
-            strBusinessPartnerCode: selectedCustomer ?.code || "",
-            numPartnerLatitude: selectedCustomer ?.latitude || 0,
-            numPartnerLongitude: selectedCustomer ?.longitude || 0,
+            intAccountId: globalData?.profileData?.accountId,
+            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer?.value || 0,
+            strBusinessPartnerCode: selectedCustomer?.code || "",
+            // numPartnerLatitude: selectedCustomer?.latitude || 0,
+            // numPartnerLongitude: selectedCustomer?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
             numAttendanceLatitude: location.latitude || 0,
             numAttendanceLongitude: location.longitude || 0,
@@ -136,6 +146,10 @@ const IbosAttendance = () => {
             checkIn(payload, setIsLoading)
         } else {
             checkOut(payload, setIsLoading)
+            // getCheckInCheckOutTime(
+            //     globalData.profileData.userId,
+            //     todayDate
+            // )
         }
 
 

@@ -16,7 +16,6 @@ import AttendanceDashboard from '../screens/app/attendanceDashboard';
 
 const RootNavigation = () => {
 
-    alert("root")
     const Stack = createStackNavigator();
 
     return (
