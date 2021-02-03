@@ -13,11 +13,11 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 const AttendanceDashboard = ({ navigation }) => {
-    
+
     const isFocused = useIsFocused()
 
     useEffect(() => {
-        if(isFocused){
+        if (isFocused) {
             // alert("feftch data")
         }
     }, [isFocused])
@@ -26,44 +26,46 @@ const AttendanceDashboard = ({ navigation }) => {
     return (
         <>
             <IHeader hideBackBtn title="Dashboard" />
-            <View style={style.container}>
-                <View style={style.row}>
-                    <TouchableOpacity
-                        onPress={e => navigation.navigate("Check in/out")}
-                        style={style.col}>
-                        <View style={style.singleItem}>
-                            <Image style={style.image} source={require('../../../assets/images/attendance/attendance.png')} />
-                            <Text style={[globalStyle.sectionTitle, style.title]}>Attendance</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={e => navigation.navigate("Registration")}
-                        style={style.col}>
-                        <View style={style.singleItem}>
-                            <Image style={style.image} source={require('../../../assets/images/attendance/registration.png')} />
-                            <Text style={[globalStyle.sectionTitle, style.title]}>Registration</Text>
-                        </View>
-                    </TouchableOpacity>
+            <View style={[style.container]}>
+                <View>
+                    <View style={style.row}>
+                        <TouchableOpacity
+                            onPress={e => navigation.navigate("Check in/out")}
+                            style={style.col}>
+                            <View style={style.singleItem}>
+                                <Image style={style.image} source={require('../../../assets/images/attendance/attendance.png')} />
+                                <Text style={[globalStyle.sectionTitle, style.title]}>Attendance</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={e => navigation.navigate("Registration")}
+                            style={style.col}>
+                            <View style={style.singleItem}>
+                                <Image style={style.image} source={require('../../../assets/images/attendance/registration.png')} />
+                                <Text style={[globalStyle.sectionTitle, style.title]}>Registration</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
 
-                    <TouchableOpacity
-                        onPress={e => navigation.navigate("AttendanceList")}
-                        style={style.col}>
-                        <View style={style.singleItem}>
-                            <Image style={style.image} source={require('../../../assets/images/attendance/calender.png')} />
-                            <Text style={[globalStyle.sectionTitle, style.title]}>Attendance</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <View style={[style.row, { justifyContent: "center" }]}>
+                        <TouchableOpacity
+                            onPress={e => navigation.navigate("AttendanceList")}
+                            style={style.col}>
+                            <View style={style.singleItem}>
+                                <Image style={style.image} source={require('../../../assets/images/attendance/calender.png')} />
+                                <Text style={[globalStyle.sectionTitle, style.title]}>Attendance</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                {/* <FlatList
-                data={supplierData}
-                keyExtractor={(item,i) => i.toString()}
-                showsVerticalScrollIndicator={false}
-                bounces={false}
-                renderItem={item => (
-                    <SingleSupplier data={item}/>
-                )}
-                /> */}
+
+                <View style={style.ibosLogo}>
+                    <Image style={{alignSelf:"center"}}source={require('../../../assets/main2.png')} />
+                    <Text style={{marginTop:15}}>Develop By iBos Limited</Text>
+                </View>
             </View>
+
+
         </>
     );
 }
@@ -72,6 +74,9 @@ export default AttendanceDashboard
 
 const style = StyleSheet.create({
     container: {
+        display: "flex",
+        flexDirection: "column",
+        // justifyContent:"space-around",
         flex: 1,
         backgroundColor: "white",
         paddingHorizontal: 20,
@@ -114,7 +119,7 @@ const style = StyleSheet.create({
         },
         shadowOpacity: 0.20,
         shadowRadius: 1.41,
-        borderRadius:5,
+        borderRadius: 5,
         elevation: 2,
         // marginBottom:"2%",
         // shadowColor: "#000",
@@ -142,6 +147,11 @@ const style = StyleSheet.create({
     },
     title: {
         color: "black"
+    },
+    ibosLogo: {
+        flex: 1,
+        alignSelf: "center",
+        justifyContent: "center"
     }
 
 })

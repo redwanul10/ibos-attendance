@@ -16,7 +16,7 @@ import AttendanceDashboard from '../screens/app/attendanceDashboard';
 
 const RootNavigation = () => {
 
-    // alert("root")
+
     const Stack = createStackNavigator();
 
     return (
@@ -33,11 +33,13 @@ const RootNavigation = () => {
                     }}
                 >
                     <Stack.Screen name="Login" component={Login} />
-                    <Stack.Screen name="Register" component={Register} />
+                    {/* sign up page */}
+                    {/* <Stack.Screen name="Register" component={Register} /> */}
+                    {/* location registration */}
                     <Stack.Screen name="Registration" component={RegistrationAttendance} />
-                    <Stack.Screen name="Home" component={HomeNavigator} />
+                    {/* <Stack.Screen name="Home" component={HomeNavigator} /> */}
                     <Stack.Screen name="Attendance Dashboard" component={AttendanceDashboard} />
-                    <Stack.Screen name="Dashboard" component={Dashboard} />
+                    {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
                     <Stack.Screen name="Check in/out" component={IbosAttendance} />
                     <Stack.Screen name="AttendanceList" component={AttendanceList} />
                 </Stack.Navigator>
