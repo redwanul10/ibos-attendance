@@ -23,6 +23,10 @@ import { _todayDate } from '../../../common/functions/_todayDate';
 const IbosAttendance = () => {
 
     const [location, setLocation] = useState({})
+    const [checkInOutTime, setcheckInOutTime] = useState({
+        checkIn: "",
+        checkOut: ""
+    })
     const [customerListDDL, setCustomerListDDL] = useState([])
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -46,7 +50,8 @@ const IbosAttendance = () => {
             const todayDate = _todayDate()
             getCheckInCheckOutTime(
                 globalData.profileData.userId,
-                todayDate
+                todayDate,
+                setcheckInOutTime
             )
         }
     }, [globalData])
@@ -143,9 +148,21 @@ const IbosAttendance = () => {
         // alert("time to send req")
         console.log(JSON.stringify(payload, null, 2))
         if (status === "checkIn") {
-            checkIn(payload, setIsLoading)
+            checkIn(payload, setIsLoading, () => {
+                getCheckInCheckOutTime(
+                    globalData.profileData.userId,
+                    _todayDate(),
+                    setcheckInOutTime
+                )
+            })
         } else {
-            checkOut(payload, setIsLoading)
+            checkOut(payload, setIsLoading, () => {
+                getCheckInCheckOutTime(
+                    globalData.profileData.userId,
+                    _todayDate(),
+                    setcheckInOutTime
+                )
+            })
             // getCheckInCheckOutTime(
             //     globalData.profileData.userId,
             //     todayDate
@@ -203,11 +220,11 @@ const IbosAttendance = () => {
                 <View style={{ marginTop: 20, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
                     <Col style={[style.col, style.lattitude, { borderColor: "transparent" }]}>
                         <Text style={[style.boldText, style.smallTxt, { color: "#0080FF" }]}>Check In Time</Text>
-                        <Text style={[style.boldText, style.smallTxt]}>9.00 am</Text>
+                        <Text style={[style.boldText, style.smallTxt]}>{checkInOutTime.checkIn || "00.00"}</Text>
                     </Col>
                     <Col style={[style.col, style.longitude, { borderColor: "transparent", backgroundColor: "#FFD8D8" }]}>
                         <Text style={[style.boldText, style.smallTxt, { color: "red" }]}>Check Out Time</Text>
-                        <Text style={[style.boldText, style.smallTxt]}>5.00 am</Text>
+                        <Text style={[style.boldText, style.smallTxt]}>{checkInOutTime.checkOut || "00.00"}</Text>
                     </Col>
                 </View>
 
@@ -259,23 +276,30 @@ const IbosAttendance = () => {
                         <Text style={style.boldText}>My Location</Text>
                         {/* <Map /> */}
                         <Map location={location} lat={location.latitude} long={location.longitude} />
-                        <Button
-                            block
-                            style={{ backgroundColor: "#0080FF" }}
-                            onPress={e => saveHandler("checkIn")}
-                        >
-                            <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
-                            {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
-                        </Button>
 
-                        <Button
-                            block
-                            style={{ marginTop: 10, backgroundColor: "red" }}
-                            onPress={e => saveHandler()}
-                        >
-                            <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
-                            {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
-                        </Button>
+                        {!checkInOutTime?.checkOut && !checkInOutTime?.checkIn
+                            ? (
+                                <Button
+                                    block
+                                    style={{ backgroundColor: "#0080FF" }}
+                                    onPress={e => saveHandler("checkIn")}
+                                >
+                                    <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
+                                    {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                                </Button>
+                            ) : (
+                                <Button
+                                    block
+                                    style={{ marginTop: 10, backgroundColor: "red" }}
+                                    onPress={e => saveHandler()}
+                                >
+                                    <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
+                                    {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                                </Button>
+                            )}
+
+
+
                     </View>
                 )}
 

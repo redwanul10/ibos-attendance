@@ -14,7 +14,7 @@ function ListCard(props) {
               <Text style={styles.dateStyle}>01/07/2020</Text>
             </View>
   
-            <View style={{flexDirection:"row"}}>
+            <View style={{flexDirection:"row",justifyContent:"space-between"}}>
               <View style={styles.timeMargin}>
                 <Text style={styles.fontWeight}>In Time</Text>
                 <Text>09:00:34</Text>
@@ -34,6 +34,7 @@ function ListCard(props) {
                 <Text>Present</Text>
               </View>
             </View>
+            
           </View>
         </View>
       </>
@@ -60,10 +61,12 @@ function ListCard(props) {
     },
     attendanceInfo: {
       backgroundColor: "#B3FFD6",
-      padding: 5,
+      padding: 7,
       borderRadius: 4,
+      // alignSelf: 
+      // justifyContent:"flex-start"
       // marginTop: 10,
-      marginLeft: 12 + "%",
+      // marginLeft: 12 + "%",
       // height:30
       
     },
@@ -77,7 +80,7 @@ function ListCard(props) {
       marginBottom:10
     },
     timeMargin: {
-      marginRight: 14
+      // marginRight: 14
     }
   });
   

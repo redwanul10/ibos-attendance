@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Toast } from 'native-base'
 import { storeGlobalData, getGlobalData } from '../../../common/functions/localStorage'
 
-export const checkIn = async (payload, setLoading) => {
+export const checkIn = async (payload, setLoading,cb) => {
     setLoading(true)
 
     try {
@@ -19,6 +19,8 @@ export const checkIn = async (payload, setLoading) => {
             duration: 3000
         })
 
+        cb()
+
     } catch (err) {
         // alert(err.response.data.message)
         setLoading(false)
@@ -35,7 +37,7 @@ export const checkIn = async (payload, setLoading) => {
 }
 
 
-export const checkOut = async (payload, setLoading) => {
+export const checkOut = async (payload, setLoading,cb) => {
     setLoading(true)
     try {
         const res = await axios.post(
@@ -50,6 +52,8 @@ export const checkOut = async (payload, setLoading) => {
             buttonText: "close",
             duration: 3000
         })
+        
+        cb()
 
     } catch (err) {
         // alert(err.response.data.message)
@@ -66,18 +70,23 @@ export const checkOut = async (payload, setLoading) => {
 
 }
 let num = 0
-export const getCheckInCheckOutTime = async (empId, todayDate) => {
+export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
     // setLoading(true)
-    alert("fetching")
+    
     try {
         const res = await axios.get(
-            `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=11621&date=${todayDate}`
+            `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
             // `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
 
         )
 
         console.log(JSON.stringify(res.data, null, 2))
-        alert("success")
+        const data = res?.data
+        setTime({
+            checkIn: data[0]?.checkInTime,
+            checkOut: data[1]?.checkOutTime
+        })
+       
 
     } catch (err) {
 
