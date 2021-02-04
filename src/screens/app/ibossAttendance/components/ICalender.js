@@ -14,11 +14,7 @@ const ICalender = () => {
     const [nullDay, setNullDay] = useState([])
     const [allDay, setAllDay] = useState([])
     useEffect(() => {
-        // setTimeout(e => {
-        //     setValue(value.add(2, "month"))
-        //     console.log("month increased")
-        // }, 3000)
-
+        
         const end = Number(value.endOf('month').format("D"))
         let AllDaysInMonth = []
 

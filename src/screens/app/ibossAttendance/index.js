@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
+import { ScrollView, StyleSheet, View, Text, Linking, Alert } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import { Col, Button, Spinner } from 'native-base'
 import fontsFamily from '../../../common/theme/fonts';
@@ -7,7 +7,6 @@ import colors from '../../../common/theme/colors';
 import Map from './components/Map';
 import Geolocation from '@react-native-community/geolocation';
 import { getGlobalData } from '../../../common/functions/localStorage';
-import { getCustomerList } from '../registration/helper';
 import { checkIn, checkOut, getCheckInCheckOutTime } from './helper';
 import { _todayDate } from '../../../common/functions/_todayDate';
 
@@ -20,7 +19,7 @@ const IbosAttendance = () => {
         checkIn: "",
         checkOut: ""
     })
-    const [customerListDDL, setCustomerListDDL] = useState([])
+    
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [globalData, setGlobalData] = useState({})
@@ -48,7 +47,7 @@ const IbosAttendance = () => {
         Geolocation.getCurrentPosition(pos => {
             setLocation(pos.coords)
         }, err => {
-            console.log(err)
+           
             if (err.message === "Location permission was not granted.") {
                 Alert.alert(
                     'Location Permission Required',
@@ -57,7 +56,7 @@ const IbosAttendance = () => {
 
                         {
                             text: 'Cancel',
-                            onPress: () => console.log('Cancel Pressed'),
+                            onPress: () =>{},
                             style: 'cancel'
                         },
                         { text: 'OK', onPress: () => Linking.openSettings() }
@@ -89,8 +88,7 @@ const IbosAttendance = () => {
             intActionBy: globalData.profileData.userId,
         }
 
-        // alert("time to send req")
-        console.log(JSON.stringify(payload, null, 2))
+       
         if (status === "checkIn") {
             checkIn(payload, setIsLoading, () => {
                 getCheckInCheckOutTime(

@@ -17,7 +17,6 @@ const ICalender = () => {
     useEffect(() => {
         
         const end = Number(value.endOf('month').format("D"))
-        console.log("End ", end)
         let AllDaysInMonth = []
 
         for (let i = 1; i <= end; i++) {
@@ -60,7 +59,7 @@ const ICalender = () => {
                 {
                     weekDays.map((item, index) => {
                         return (
-                            <View style={[style.col, style.header]}>
+                            <View key={index} style={[style.col, style.header]}>
                                 <Text style={style.header}>{item}</Text>
                             </View>
                         )
@@ -71,7 +70,7 @@ const ICalender = () => {
                 {
                     nullDay.map((item, index) => {
                         return (
-                            <View style={style.col}><Text >
+                            <View key={index} style={style.col}><Text >
                                 {/* {index + 1} */}
                             </Text></View>
                         )
@@ -81,9 +80,9 @@ const ICalender = () => {
                 {
                     allDay.map((item, index) => {
                         return (
-                            <View style={style.col}>
+                            <View  key={index} style={style.col}>
                                 <View style={style.contentWrapper}>
-                                    <Text style={[style.txt, { color: dayColors[index] || "" }]}>{index + 1}</Text>
+                                    <Text style={[style.txt]}>{index + 1}</Text>
                                 </View>
 
                             </View>

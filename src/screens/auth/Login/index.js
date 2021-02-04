@@ -53,7 +53,7 @@ const Login = ({ navigation }) => {
                     {/* Form Header */}
                     <View style={style.formHeader}>
                         <View>
-                            <Text style={style.formTitle}>Welcomee</Text>
+                            <Text style={style.formTitle}>Welcome</Text>
                             <Text style={style.formSubTitle}>Please sign-in to continue</Text>
                         </View>
                         <Image source={logo} />

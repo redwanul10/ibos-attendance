@@ -30,8 +30,8 @@ export const checkIn = async (payload, setLoading,cb) => {
             buttonText: "close",
             duration: 3000
         })
-        // console.log(JSON.stringify(err?.response?.data, null, 2))
-        console.log(err)
+       
+      
     }
 
 }
@@ -64,8 +64,8 @@ export const checkOut = async (payload, setLoading,cb) => {
             buttonText: "close",
             duration: 3000
         })
-        // console.log(JSON.stringify(err?.response?.data, null, 2))
-        console.log(err)
+       
+      
     }
 
 }
@@ -80,7 +80,7 @@ export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
 
         )
 
-        console.log(JSON.stringify(res.data, null, 2))
+       
         const data = res?.data
         setTime({
             checkIn: data[0]?.checkInTime,
@@ -89,7 +89,7 @@ export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
        
 
     } catch (err) {
-        console.log("CHECKIN OUT ERROR", err)
+   
     }
 
 }

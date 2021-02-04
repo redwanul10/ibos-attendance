@@ -16,7 +16,7 @@ const IHeader = ({ title, onAddIconPress,hideBackBtn}) => {
             <Header androidStatusBarColor="#1A1A27" style={{ backgroundColor: "#1A1A27" }}>
 
                 <Left style={{ flex: 1 ,opacity: hideBackBtn ? 0 : 1}}>
-                    <Button transparent onPress={e => navigation.goBack()}>
+                    <Button transparent onPress={() =>{if(!hideBackBtn){ navigation.goBack()}}}>
                         <AntDesign name="left" size={20} color="white" />
                     </Button>
                 </Left>

@@ -7,13 +7,13 @@ import mapHtml from './MapContent';
 const Map = (props) => {
 
     const { lat, long, location, userName } = props
-    console.log(props)
+ 
     const mapRef = useRef()
-    // console.log(location)
+   
     useEffect(() => {
         if (location.latitude && location.latitude) {
             mapRef.current.postMessage(JSON.stringify({ latitude: location.latitude, longitude: location.longitude }));
-            // console.log({ lat, long })
+           
         }
 
     }, [lat, long])

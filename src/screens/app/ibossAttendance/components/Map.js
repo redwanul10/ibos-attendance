@@ -7,7 +7,6 @@ import mapHtml from './MapContent';
 const Map = (props) => {
 
     const { lat, long, location, userName } = props
-    console.log(props)
     const mapRef = useRef()
     // console.log(location)
     useEffect(() => {
