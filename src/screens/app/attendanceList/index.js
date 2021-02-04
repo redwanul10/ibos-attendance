@@ -44,14 +44,7 @@ const AttendanceList = () => {
                         renderItem={({ item }) => <ListCard data={item}/>}
                     />)
                 }
-
-                {/* <ListCard />
-                <ListCard />
-                <ListCard /> */}
-
-
-
-            </View>
+</View>
 
         </>
     );

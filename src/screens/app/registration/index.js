@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { AppState, StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from "react-native"
+import { StyleSheet, View, Text, Linking, Alert } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
-import { Row, Col, Button, Spinner } from 'native-base'
-import globalStyle from '../../../common/styles/global';
+import { Col, Button, Spinner } from 'native-base'
 import fontsFamily from '../../../common/theme/fonts';
 import colors from '../../../common/theme/colors';
 import Map from './components/Map';
 import Geolocation from '@react-native-community/geolocation';
-import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { Toast } from 'native-base'
 import { getCustomerList, registerAttentance } from './helper'
 import { getGlobalData } from '../../../common/functions/localStorage';
