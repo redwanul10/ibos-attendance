@@ -6,7 +6,7 @@ import mapHtml from './MapContent';
 
 const Map = (props) => {
 
-    const { lat, long, location } = props
+    const { lat, long, location, userName } = props
     console.log(props)
     const mapRef = useRef()
     // console.log(location)
@@ -25,7 +25,7 @@ const Map = (props) => {
                 originWhitelist={['*']}
                 source={{ html: mapHtml || "<h1>Hello</h1>" }}
                 style={{ height: "100%" }}
-                onLoad={() => mapRef.current.postMessage(JSON.stringify({ latitude: location.latitude, longitude: location.longitude }))}
+                onLoad={() => mapRef.current.postMessage(JSON.stringify({ userName, latitude: location.latitude, longitude: location.longitude }))}
                 // style={{ width: "100%", height: 50, backgroundColor: "red" }}
                 scalesPageToFit={true}
                 scrollEnabled={false}

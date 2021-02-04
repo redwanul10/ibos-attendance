@@ -39,14 +39,14 @@ const IbosAttendance = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData?.profileData?.userId) {
+        if (globalData ?.profileData ?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
             )
         }
 
-        if (globalData?.profileData?.userId) {
+        if (globalData ?.profileData ?.userId) {
             const todayDate = _todayDate()
             getCheckInCheckOutTime(
                 globalData.profileData.userId,
@@ -133,10 +133,10 @@ const IbosAttendance = () => {
         // }
 
         const payload = {
-            intAccountId: globalData?.profileData?.accountId,
-            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
-            intBusinessPartnerId: selectedCustomer?.value || 0,
-            strBusinessPartnerCode: selectedCustomer?.code || "",
+            intAccountId: globalData ?.profileData ?.accountId,
+            intBusinessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer ?.value || 0,
+            strBusinessPartnerCode: selectedCustomer ?.code || "",
             // numPartnerLatitude: selectedCustomer?.latitude || 0,
             // numPartnerLongitude: selectedCustomer?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
@@ -275,9 +275,14 @@ const IbosAttendance = () => {
                     <View>
                         <Text style={style.boldText}>My Location</Text>
                         {/* <Map /> */}
-                        <Map location={location} lat={location.latitude} long={location.longitude} />
+                        <Map
+                            location={location}
+                            lat={location.latitude}
+                            long={location.longitude}
+                            userName={globalData ?.profileData ?.userName || ""}
+                        />
 
-                        {!checkInOutTime?.checkOut && !checkInOutTime?.checkIn
+                        {!checkInOutTime ?.checkOut && !checkInOutTime ?.checkIn
                             ? (
                                 <Button
                                     block

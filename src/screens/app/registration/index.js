@@ -206,7 +206,12 @@ const RegistrationAttendance = () => {
 
                 <View>
                     <Text style={style.boldText}>My Location</Text>
-                    <Map location={location} lat={location.latitude} long={location.longitude} />
+                    <Map
+                        location={location}
+                        lat={location.latitude}
+                        long={location.longitude}
+                        userName={globalData ?.profileData ?.userName || ""}
+                    />
                     <Button
                         block
                         style={{ backgroundColor: "#0080FF" }}

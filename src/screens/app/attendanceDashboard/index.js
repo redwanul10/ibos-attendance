@@ -53,15 +53,15 @@ const AttendanceDashboard = ({ navigation }) => {
                             style={style.col}>
                             <View style={style.singleItem}>
                                 <Image style={style.image} source={require('../../../assets/images/attendance/calender.png')} />
-                                <Text style={[globalStyle.sectionTitle, style.title]}>Attendance</Text>
+                                <Text style={[globalStyle.sectionTitle, style.title,]}>Attendance</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                 </View>
 
                 <View style={style.ibosLogo}>
-                    <Image style={{alignSelf:"center"}}source={require('../../../assets/main2.png')} />
-                    <Text style={{marginTop:15}}>Develop By iBos Limited</Text>
+                    <Image style={{ alignSelf: "center" }} source={require('../../../assets/main2.png')} />
+                    <Text style={[{ marginTop: 20 }, globalStyle.sectionTitle,]}>Develop By iBos Limited</Text>
                 </View>
             </View>
 

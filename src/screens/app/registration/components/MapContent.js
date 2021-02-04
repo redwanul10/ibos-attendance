@@ -102,10 +102,10 @@ const mapHtml = `
         //     map.setView(new L.LatLng(-29.0529434318608, 152.01910972595218), 15);
         // },3000)
 
-        function showMarker({latitude, longitude}){
+        function showMarker({latitude, longitude,userName}){
                 var marker = L.marker([latitude, longitude]).addTo(map);
 
-            marker.bindPopup("<b>Hello</b> Redwan").openPopup();
+            marker.bindPopup("<b>Hello</b> "+ userName).openPopup();
                 map.setView(new L.LatLng(latitude, longitude), 15);
                 // alert("done")
         }
