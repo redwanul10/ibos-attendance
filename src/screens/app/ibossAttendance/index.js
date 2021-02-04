@@ -87,6 +87,7 @@ const IbosAttendance = () => {
             numAttendanceLongitude: location.longitude || 0,
             intActionBy: globalData.profileData.userId,
         }
+        // console.log(JSON.stringify(payload,null,2));
 
        
         if (status === "checkIn") {

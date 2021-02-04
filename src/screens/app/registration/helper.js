@@ -25,7 +25,7 @@ export const registerAttentance = async (payload,setIsLoading) => {
         setIsLoading(false)
         Toast.show({
             text: res.message || "Created Successfull",
-            buttonText: "close",
+           
             type: "success",
             duration: 3000
         })
@@ -35,7 +35,7 @@ export const registerAttentance = async (payload,setIsLoading) => {
         setIsLoading(false)
         Toast.show({
             text: err.response.data.message,
-            buttonText: "close",
+           
             type: "danger",
             duration: 3000
         })

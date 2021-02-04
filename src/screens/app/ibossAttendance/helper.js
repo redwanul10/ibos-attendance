@@ -15,7 +15,7 @@ export const checkIn = async (payload, setLoading,cb) => {
         Toast.show({
             text: res?.data?.message || "CheckIn Successfull",
             type: "success",
-            buttonText: "close",
+            
             duration: 3000
         })
 
@@ -27,7 +27,7 @@ export const checkIn = async (payload, setLoading,cb) => {
         Toast.show({
             text: err?.response?.data?.message,
             type: "danger",
-            buttonText: "close",
+            
             duration: 3000
         })
        
@@ -49,7 +49,7 @@ export const checkOut = async (payload, setLoading,cb) => {
         Toast.show({
             text: res?.data?.message || "CheckOut Successfull",
             type: "success",
-            buttonText: "close",
+            
             duration: 3000
         })
         
@@ -61,7 +61,7 @@ export const checkOut = async (payload, setLoading,cb) => {
         Toast.show({
             text: err?.response?.data?.message,
             type: "danger",
-            buttonText: "close",
+            
             duration: 3000
         })
        
