@@ -89,16 +89,6 @@ export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
        
 
     } catch (err) {
-
-        // alert("error")
-
-        Toast.show({
-            text: err?.response?.data?.message,
-            type: "danger",
-            buttonText: "close",
-            duration: 3000
-        })
-
         console.log("CHECKIN OUT ERROR", err)
     }
 

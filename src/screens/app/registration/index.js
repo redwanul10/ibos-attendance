@@ -23,16 +23,6 @@ const RegistrationAttendance = () => {
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
-    const [appState, setAppState] = useState(1)
-    const [app, setApp] = useState(1)
-
-    const handleAppStateChange = (nextAppState) => {
-        // if (appState && appState.match(/inactive|background/) && nextAppState === 'active') {
-        //     FingerprintScanner.release();
-        //     // this.detectFingerprintAvailable();
-        // }
-        // setAppState(nextAppState);
-    }
 
     useEffect(() => {
         getGlobalData(setGlobalData)
@@ -49,11 +39,8 @@ const RegistrationAttendance = () => {
 
     useEffect(() => {
 
-        // AppState.addEventListener('change', handleAppStateChange);
-
+        
         Geolocation.getCurrentPosition(pos => {
-            // console.log(JSON.stringify(pos, null, 2))
-            // "coords":
             setLocation(pos.coords)
         }, err => {
             console.log(err)
@@ -74,39 +61,9 @@ const RegistrationAttendance = () => {
                 );
             }
 
-            // return () => {
-            //     AppState.removeEventListener('change', handleAppStateChange);
-            // }
+         })
 
-        })
-
-        // check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
-        //     .then((result) => {
-        //         switch (result) {
-        //             case RESULTS.UNAVAILABLE:
-        //                 console.warn('This feature is not available (on this device / in this context)');
-        //                 break;
-        //             case RESULTS.DENIED:
-        //                 console.warn('The permission has not been requested / is denied but requestable');
-        //                 request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
-        //                     console.log(result)
-        //                 });
-        //                 break;
-        //             case RESULTS.LIMITED:
-        //                 console.warn('The permission is limited: some actions are possible');
-        //                 break;
-        //             case RESULTS.GRANTED:
-        //                 console.warn('The permission is granted');
-
-        //                 break;
-        //             case RESULTS.BLOCKED:
-        //                 console.warn('The permission is denied and not requestable anymore');
-        //                 break;
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         // …
-        //     });
+       
     }, [])
 
     const registerHandler = () => {
@@ -147,13 +104,10 @@ const RegistrationAttendance = () => {
                     }}
                 />
 
-                {/* <Text>{JSON.stringify(globalData)}</Text> */}
+                
 
                 <View style={{ flexDirection: "row", marginVertical: "15%" }}>
-                    {/* <Col>
-                        <Text style={style.boldText}>Today</Text>
-                        <Text style={style.text}>{new Date().toDateString()}</Text>
-                    </Col> */}
+                    
                     <Col>
                         <View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
                             <Col style={[style.col, style.lattitude]}>
@@ -168,41 +122,7 @@ const RegistrationAttendance = () => {
                     </Col>
                 </View>
 
-                {/* <ICalender /> */}
-
-                {/* <TouchableOpacity onPress={e => {
-                    FingerprintScanner
-                        .authenticate({ description: 'Scan your fingerprint to continue' })
-                        .then(() => {
-                            //  this.props.handlePopupDismissed();
-                            // alert('Authenticated successfully');
-                            Toast.show({
-                                text: "login Successfull",
-                                buttonText: "close",
-                                type: "success",
-                                duration: 3000
-                            })
-                            FingerprintScanner.release()
-                        })
-                        .catch((error) => {
-                            //  this.props.handlePopupDismissed();
-                            console.log(error)
-                            Toast.show({
-                                text: error.message,
-                                buttonText: "close",
-                                type: "danger",
-                                duration: 3000
-                            })
-                            // alert(error.message);
-                            FingerprintScanner.release()
-                        });
-                    // setTimeout(e => FingerprintScanner.release(), 2000)
-                }} style={[style.fingerPrint, { marginVertical: 50 }]}>
-                    <Image
-                        style={style.fingerPrint}
-                        source={require('../../../assets/images/fingerPrint.png')}
-                    />
-                </TouchableOpacity> */}
+                
 
                 <View>
                     <Text style={style.boldText}>My Location</Text>

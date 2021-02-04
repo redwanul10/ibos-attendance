@@ -1,7 +1,4 @@
 import axios from 'axios'
-import { Toast } from 'native-base'
-import { storeGlobalData, getGlobalData } from '../../../common/functions/localStorage'
-
 
 export const getAttendanceList = async (empId, month, year, setLoading, setter) => {
     setLoading(true)

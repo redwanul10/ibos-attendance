@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native'
-// import fontsFamily from '../../../../../../../common/theme/fonts';
-import { useIsFocused } from '@react-navigation/native'
-
-
 
 import fontsFamily from '../../../common/theme/fonts';
 import globalStyle from '../../../common/styles/global';
 import IHeader from '../../../common/components/IHeader';
-import imageFile from '../../../assets/images/imageFile';
-import { useFocusEffect } from '@react-navigation/native';
 
 
 const AttendanceDashboard = ({ navigation }) => {
-
-    const isFocused = useIsFocused()
-
-    useEffect(() => {
-        if (isFocused) {
-            // alert("feftch data")
-        }
-    }, [isFocused])
-
 
     return (
         <>
@@ -34,7 +19,7 @@ const AttendanceDashboard = ({ navigation }) => {
                             style={style.col}>
                             <View style={style.singleItem}>
                                 <Image style={style.image} source={require('../../../assets/images/attendance/attendance.png')} />
-                                <Text style={[globalStyle.sectionTitle, style.title]}>Attendance</Text>
+                                <Text style={[globalStyle.sectionTitle, style.title]}>Check In/Out</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -53,7 +38,7 @@ const AttendanceDashboard = ({ navigation }) => {
                             style={style.col}>
                             <View style={style.singleItem}>
                                 <Image style={style.image} source={require('../../../assets/images/attendance/calender.png')} />
-                                <Text style={[globalStyle.sectionTitle, style.title,]}>Attendance</Text>
+                                <Text style={[globalStyle.sectionTitle, style.title,]}>Attendance List</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -76,7 +61,6 @@ const style = StyleSheet.create({
     container: {
         display: "flex",
         flexDirection: "column",
-        // justifyContent:"space-around",
         flex: 1,
         backgroundColor: "white",
         paddingHorizontal: 20,
@@ -102,7 +86,6 @@ const style = StyleSheet.create({
     },
     editIcon: {
         alignSelf: "center"
-        // width:
     },
     image: {
         width: 45,
@@ -121,17 +104,6 @@ const style = StyleSheet.create({
         shadowRadius: 1.41,
         borderRadius: 5,
         elevation: 2,
-        // marginBottom:"2%",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 1,
-        // },
-        // shadowOpacity: 0.22,
-        // shadowRadius: 2.22,
-        // elevation: 3,
-        // paddingHorizontal:10
-        // marginHorizontal:10
     },
     singleItem: {
         justifyContent: "center",
@@ -139,10 +111,8 @@ const style = StyleSheet.create({
         paddingVertical: 15
     },
     row: {
-        // display:"flex",
         flexDirection: "row",
         flexWrap: "wrap",
-        // paddingHorizontal: -10
         marginHorizontal: -10
     },
     title: {

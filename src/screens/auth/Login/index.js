@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { StatusBar, Keyboard, Text, TouchableWithoutFeedback, ImageBackground, View, StyleSheet, TextInput, KeyboardAvoidingView, Image, SafeAreaView } from 'react-native'
-// import formStyle from '../../../common/styles/formStyle'
 import { Formik } from "formik";
 import { Button, Spinner } from "native-base";
 import FormInput from '../../../common/components/TextInput';
@@ -9,11 +8,11 @@ import { loginAction } from './helper';
 import loginBgImg from '../../../assets/images/loginBg.png';
 import logo from '../../../assets/images/pageLogo.png';
 import { getGlobalData } from '../../../common/functions/localStorage';
-import Axios from 'axios'
+
 
 const initValues = {
-    email: 'alamin@akij.net',
-    password: "12345678",
+    email: '',
+    password: "",
 }
 
 const schemaValidation = Yup.object().shape({
@@ -44,28 +43,13 @@ const Login = ({ navigation }) => {
 
     }, [])
 
-    const [rememberPass, setRememberPass] = useState(false)
-
-    // if(globalData?.isAuthenticate){
-    //     Axios.defaults.headers.common["Authorization"] = `Bearer ${globalData?.token}`;
-    //     navigation.navigate("Attendance Dashboard")
-    // }
-
     return (
 
-        // <KeyboardAvoidingView
-        //     behavior={Platform.OS === "ios" ? "padding" : null}
-        //     style={{ flex: 1 }}
-        // ></KeyboardAvoidingView>
         <ImageBackground source={loginBgImg} style={{ flex: 1 }}>
             <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
                 <View style={style.container}>
 
-                    {/* <Image
-                        style={style.logo}
-                        source={registerImage}
-                    /> */}
-
+                    
                     {/* Form Header */}
                     <View style={style.formHeader}>
                         <View>
@@ -79,7 +63,8 @@ const Login = ({ navigation }) => {
 
                     <Formik
                         enableReinitialize={true}
-                        initialValues={initValues}
+                        initialValues={{...initValues,email: globalData?.profileData?.emailAddress || ""}}
+                        validationSchema={schemaValidation}
                         onSubmit={(values, { resetForm }) => {
                             const { email, password } = values
                             const customcb = () => {
@@ -89,7 +74,6 @@ const Login = ({ navigation }) => {
                             }
                             loginAction(email, password, setIsLoading, customcb)
                         }}
-                    // validationSchema={schemaValidation}
                     >
                         {(formikProps) => (
                             <View>
@@ -131,27 +115,9 @@ const Login = ({ navigation }) => {
 
                                 </Button>
 
-
-
-
-
-                                <TouchableWithoutFeedback
-                                    onPress={e => {
-                                        navigation.navigate("Register")
-                                        formikProps.resetForm(initValues)
-                                    }}
-                                >
-                                    <View style={style.footer}>
-                                        <Text style={[style.footerText, { marginTop: 11, marginBottom: 13 }]}>
-                                            Dont have an account ?
-                                    </Text>
-                                        <Text style={{ marginLeft: 8, fontFamily: "Rubik-Bold", color: "black" }}>Sign Up</Text>
-                                    </View>
-                                </TouchableWithoutFeedback>
                             </View>
                         )}
                     </Formik>
-                    {/* </KeyboardAvoidingView> */}
                 </View >
             </TouchableWithoutFeedback>
         </ImageBackground>
@@ -194,7 +160,6 @@ const style = StyleSheet.create({
         fontFamily: "Rubik-Regular",
     },
     input: {
-        // backgroundColor:"red",
         borderBottomWidth: 1,
         borderBottomColor: "grey",
         padding: 0,
@@ -208,9 +173,7 @@ const style = StyleSheet.create({
     },
     container: {
         flex: 1,
-        // backgroundColor: "#FFFFFF",
         paddingHorizontal: 24,
-        // justifyContent: "center",
         marginTop: "35%",
         position: "relative",
     },
@@ -219,8 +182,6 @@ const style = StyleSheet.create({
     },
     formTitle: {
         fontSize: 30,
-        // fontWeight: "bold",
-        // marginTop: 145,
         fontFamily: "Rubik-Bold"
     },
     formSubTitle: {

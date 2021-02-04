@@ -15,11 +15,7 @@ const ICalender = () => {
     const [nullDay, setNullDay] = useState([])
     const [allDay, setAllDay] = useState([])
     useEffect(() => {
-        // setTimeout(e => {
-        //     setValue(value.add(2, "month"))
-        //     console.log("month increased")
-        // }, 3000)
-
+        
         const end = Number(value.endOf('month').format("D"))
         console.log("End ", end)
         let AllDaysInMonth = []
@@ -48,16 +44,16 @@ const ICalender = () => {
         setAllDay(AllDaysInMonth)
     }, [value])
     return (
-        <>
+        <View style={{paddingBottom:10}}>
 
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
-                <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
+                {/* <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
                     <Text>prev</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <Text style={[style.header, { textTransform: "uppercase" }]}>{value.format("MMMM")}- {value.year()}</Text>
-                <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
+                {/* <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
                     <Text>Next</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
             <View style={[style.row, { marginTop: 20 }]}>
@@ -98,7 +94,7 @@ const ICalender = () => {
             </View>
 
 
-        </>
+        </View>
     );
 }
 
@@ -113,9 +109,7 @@ const style = StyleSheet.create({
         width: `${100 / 7}%`,
         alignItems: "center",
         justifyContent: "center",
-        // backgroundColor: "red",
-        // margin: 1
-        // fontSize: 10
+        
     },
     header: {
         fontFamily: fontsFamily.RUBIK_BOLD
@@ -129,7 +123,6 @@ const style = StyleSheet.create({
     contentWrapper: {
         width: 20,
         height: 20,
-        // backgroundColor: "red",
         alignItems: "center",
         justifyContent: "center",
         marginVertical: 2,

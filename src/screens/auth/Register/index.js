@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
+import React, {  } from 'react';
 import {
   Text,
-  Platform,
   View,
   StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
   Image,
-  SafeAreaView,
   TouchableWithoutFeedback,
   ImageBackground,
-  StatusBar
 } from 'react-native';
-// import formStyle from '../../../common/styles/formStyle'
 import { Formik } from 'formik';
-// import FormInput from '../../../common/components/TextInput';
-import CustomBtn from '../../../common/components/customBtn';
 import { Button } from 'native-base';
-import registerImage from './register.png';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import FormInput from '../../../common/components/TextInput';
 import loginBgImg from '../../../assets/images/loginBg.png';

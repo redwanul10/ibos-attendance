@@ -41,7 +41,7 @@ const AttendanceList = () => {
                     <FlatList
                         data={attdList}
                         // keyExtractor={ item => ite}
-                        renderItem={({ item }) => <ListCard />}
+                        renderItem={({ item }) => <ListCard data={item}/>}
                     />)
                 }
 
