@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FlatList,View, StyleSheet, Text, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { FlatList, View, StyleSheet, Text, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 // import { Picker } from '@react-native-picker/picker';
 
 const ICustomPicker = (props) => {
@@ -11,48 +11,40 @@ const ICustomPicker = (props) => {
         label,
         wrapperStyle,
         value,
+        labelStyle,
         secureTextEntry,
         options,
         onChange,
     } = props
 
     const [modalActive, setModalActive] = useState(false)
-    const isError = formikProps?.touched[name] && formikProps?.errors[name] ? true : false
+    const isError = formikProps ?.touched[name] && formikProps ?.errors[name] ? true : false
 
     const handleSelect = (item) => {
         setModalActive(false)
-        if(onChange){
+        if (onChange) {
             onChange(item)
-        }else{
-            formikProps.setFieldValue(name,item)
+        } else {
+            formikProps.setFieldValue(name, item)
         }
-       
-        
+
+
     }
     return (
         <>
-            <View style={[style.inputWrapper, wrapperStyle || {}]}>
+            <View style={[style.inputWrapper]}>
+
+                <Text style={[style.label, { color: isError ? "red" : "#636363" }, labelStyle || {}]}>{label}</Text>
                 <TouchableOpacity onPress={e => setModalActive(true)}>
-                    <Text style={[style.label, { color: isError ? "red" : "#636363" }]}>{label}</Text>
-                    <TextInput
-                        editable={false}
-                        style={[style.input]}
-                        // onChangeText={formikProps.handleChange(name)}
-                        // onFocus={formikProps.onFocus}
-                        // onBlur={e => {
-                        //     formikProps.setFieldTouched(name, true);
-                        //     // formikProps.handleBlur(name)
-                        // }}
-                        value={value.label || formikProps?.values[name].label}
-                        secureTextEntry={secureTextEntry || false}
-                        placeholder={value.label  || "Select"}
-                        placeholderTextColor="black"
-                        {...props}
-                    />
+                    <View style={[style.box, wrapperStyle || {}]}>
+                        <Text style={[style.label, { color: isError ? "red" : "#636363" }]}>
+                            {value.label || formikProps ?.values[name].label || "Select"}
+                        </Text>
+                    </View>
                 </TouchableOpacity>
             </View>
 
-           
+
             <Modal
                 visible={modalActive}
                 transparent={true}
@@ -64,15 +56,15 @@ const ICustomPicker = (props) => {
                         <TouchableWithoutFeedback onPress={e => false}>
                             <View style={style.modalInner}>
                                 <FlatList
-                                data={options}
-                                keyExtractor={(item,i) => i.toString()}
-                                bounces={false}
-                                showsVerticalScrollIndicator={false}
-                                renderItem={({item}) => (
-                                    <TouchableWithoutFeedback onPress={e => handleSelect(item)}>
-                                        <Text style={style.item}>{item.label}</Text>
-                                    </TouchableWithoutFeedback>
-                                )}
+                                    data={options}
+                                    keyExtractor={(item, i) => i.toString()}
+                                    bounces={false}
+                                    showsVerticalScrollIndicator={false}
+                                    renderItem={({ item }) => (
+                                        <TouchableWithoutFeedback onPress={e => handleSelect(item)}>
+                                            <Text style={style.item}>{item.label}</Text>
+                                        </TouchableWithoutFeedback>
+                                    )}
                                 />
                             </View>
                         </TouchableWithoutFeedback>
@@ -80,9 +72,9 @@ const ICustomPicker = (props) => {
                 </TouchableWithoutFeedback>
             </Modal>
 
-            {formikProps && formikProps?.touched[name] && formikProps?.errors[name] && (
+            {formikProps && formikProps ?.touched[name] && formikProps ?.errors[name] && (
                 <Text style={style.error}>
-                    {formikProps?.errors[name]}
+                    {formikProps ?.errors[name]}
                 </Text>
             )}
 
@@ -105,9 +97,9 @@ const style = StyleSheet.create({
         marginBottom: 5
     },
     inputWrapper: {
-        marginBottom: 10,
-        borderBottomWidth: 0.5,
-        borderBottomColor: "#AEAEAE",
+        // marginBottom: 10,
+        // borderBottomWidth: 0.5,
+        // borderBottomColor: "#AEAEAE",
     },
 
     input: {
@@ -118,7 +110,7 @@ const style = StyleSheet.create({
         // borderBottomColor: "#AEAEAE",
         padding: 0,
         fontFamily: "Rubik-Medium",
-        color:"black"
+        color: "black"
         // height:30,
         // fontSize:14,
         // fontWeight: "bold"
@@ -129,11 +121,18 @@ const style = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    box: {
+        marginVertical: 5,
+        borderRadius: 10,
+        backgroundColor: "#0000000F",
+        padding: 9,
+        paddingLeft: 12
+    },
     modalInner: {
-        paddingHorizontal:15,
-        paddingVertical:20,
+        paddingHorizontal: 15,
+        paddingVertical: 20,
         width: "80%",
-        maxHeight:"40%",
+        maxHeight: "40%",
         // height: 300,
         backgroundColor: "white"
     },

@@ -217,7 +217,7 @@ const style = StyleSheet.create({
     },
     boldText: {
         fontFamily: fontsFamily.RUBIK_MEDIUM,
-        marginBottom: 5
+        marginBottom: 8
     },
     smallTxt: {
         fontSize: 10

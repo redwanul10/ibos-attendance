@@ -37,7 +37,7 @@ const RegistrationAttendance = () => {
 
     useEffect(() => {
 
-        
+
         Geolocation.getCurrentPosition(pos => {
             setLocation(pos.coords)
         }, err => {
@@ -59,9 +59,9 @@ const RegistrationAttendance = () => {
                 );
             }
 
-         })
+        })
 
-       
+
     }, [])
 
     const registerHandler = () => {
@@ -91,20 +91,21 @@ const RegistrationAttendance = () => {
         <>
             <IHeader title="Registration" />
             <View style={style.container}>
-                <ICustomPicker
-                    wrapperStyle={{ marginTop: 20, backgroundColor: "#0000000F", borderBottomColor: "transparent", padding: 5, paddingLeft: 20 }}
-                    label="Customer List"
-                    value={selectedCustomer || {}}
-                    options={customerListDDL}
-                    onChange={item => {
-                        // alert(item.label)
-                        setSelectedCustomer(item)
-                    }}
-                />
+                <View style={{ marginVertical: 20 }}>
+                    <ICustomPicker
+                        label="Attendance Point"
+                        labelStyle={[style.boldText, { marginBottom: 0, color: "black" }]}
+                        value={selectedCustomer || {}}
+                        options={customerListDDL}
+                        onChange={item => {
+                            setSelectedCustomer(item)
+                        }}
+                    />
+                </View>
 
-                
 
-                <View style={{ flexDirection: "row", marginVertical: "15%" }}>
+
+                {/* <View style={{ flexDirection: "row", marginVertical: "15%" }}>
                     
                     <Col>
                         <View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
@@ -118,9 +119,9 @@ const RegistrationAttendance = () => {
                             </Col>
                         </View>
                     </Col>
-                </View>
+                </View> */}
 
-                
+
 
                 <View>
                     <Text style={style.boldText}>My Location</Text>
@@ -132,7 +133,7 @@ const RegistrationAttendance = () => {
                     />
                     <Button
                         block
-                        style={{ backgroundColor: "#0080FF" }}
+                        style={{ backgroundColor: "#0080FF", borderRadius: 20 }}
                         onPress={e => registerHandler()}
                     >
                         <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Submit</Text>
@@ -156,7 +157,7 @@ const style = StyleSheet.create({
     },
     boldText: {
         fontFamily: fontsFamily.RUBIK_MEDIUM,
-        marginBottom: 5
+        marginBottom: 8
     },
     smallTxt: {
         fontSize: 10
