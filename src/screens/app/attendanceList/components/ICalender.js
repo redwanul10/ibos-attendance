@@ -43,7 +43,7 @@ const ICalender = () => {
         setAllDay(AllDaysInMonth)
     }, [value])
     return (
-        <View style={{paddingBottom:10}}>
+        <View style={{paddingBottom:10,backgroundColor:"white"}}>
 
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
                 {/* <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>

@@ -37,7 +37,7 @@ export const loginAction = (email, password, setLoading, cb) => {
             Toast.show({
                 text: "login Successfull",
                 type: "success",
-               
+
                 duration: 3000
             })
         })
@@ -47,7 +47,7 @@ export const loginAction = (email, password, setLoading, cb) => {
             // alert("err")
             Toast.show({
                 text: err ?.response ?.data ?.message,
-               
+                type: "danger",
                 duration: 3000
             })
         })

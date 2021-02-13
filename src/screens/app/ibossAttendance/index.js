@@ -19,7 +19,7 @@ const IbosAttendance = () => {
         checkIn: "",
         checkOut: ""
     })
-    
+
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [globalData, setGlobalData] = useState({})
@@ -31,7 +31,7 @@ const IbosAttendance = () => {
     }, [])
 
     useEffect(() => {
-        
+
         if (globalData ?.profileData ?.userId) {
             const todayDate = _todayDate()
             getCheckInCheckOutTime(
@@ -47,7 +47,7 @@ const IbosAttendance = () => {
         Geolocation.getCurrentPosition(pos => {
             setLocation(pos.coords)
         }, err => {
-           
+
             if (err.message === "Location permission was not granted.") {
                 Alert.alert(
                     'Location Permission Required',
@@ -56,7 +56,7 @@ const IbosAttendance = () => {
 
                         {
                             text: 'Cancel',
-                            onPress: () =>{},
+                            onPress: () => { },
                             style: 'cancel'
                         },
                         { text: 'OK', onPress: () => Linking.openSettings() }
@@ -65,11 +65,11 @@ const IbosAttendance = () => {
                 );
             }
 
-            
-        })
-       
 
-        
+        })
+
+
+
     }, [])
 
     const saveHandler = (status) => {
@@ -89,7 +89,7 @@ const IbosAttendance = () => {
         }
         // console.log(JSON.stringify(payload,null,2));
 
-       
+
         if (status === "checkIn") {
             checkIn(payload, setIsLoading, () => {
                 getCheckInCheckOutTime(
@@ -106,7 +106,7 @@ const IbosAttendance = () => {
                     setcheckInOutTime
                 )
             })
-            
+
         }
 
 
@@ -119,14 +119,14 @@ const IbosAttendance = () => {
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={style.container}>
-                
 
-                <View style={{ flexDirection: "row", marginTop: 20 }}>
-                    <Col>
+
+                <View style={{ marginVertical: 20, }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={style.boldText}>Today</Text>
                         <Text style={style.text}>{new Date().toDateString()}</Text>
-                    </Col>
-                    <Col>
+                    </View>
+                    {/* <Col>
                         {location.latitude && location.longitude && (<View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
                             <Col style={[style.col, style.lattitude]}>
                                 <Text style={[style.boldText, style.smallTxt]}>Lattitude</Text>
@@ -137,13 +137,13 @@ const IbosAttendance = () => {
                                 <Text style={[style.boldText, style.smallTxt]}>{location.longitude || 0.0}</Text>
                             </Col>
                         </View>)}
-                    </Col>
+                    </Col> */}
                 </View>
 
-            
 
 
-                <View style={{ marginTop: 20, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
+
+                {/* <View style={{ marginTop: 20, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
                     <Col style={[style.col, style.lattitude, { borderColor: "transparent" }]}>
                         <Text style={[style.boldText, style.smallTxt, { color: "#0080FF" }]}>Check In Time</Text>
                         <Text style={[style.boldText, style.smallTxt]}>{checkInOutTime.checkIn || "00.00"}</Text>
@@ -159,46 +159,46 @@ const IbosAttendance = () => {
                         <Text style={[style.boldText, style.smallTxt, { color: "#399162" }]}>Check In Time</Text>
                         <Text style={[style.boldText, style.smallTxt]}>9.00 am</Text>
                     </Col>
+                </View> */}
+
+
+
+
+                <View>
+                    <Text style={style.boldText}>My Location</Text>
+                    {/* <Map /> */}
+                    <Map
+                        location={location}
+                        lat={location.latitude}
+                        long={location.longitude}
+                        userName={globalData ?.profileData ?.userName || ""}
+                    />
+
+                    {!checkInOutTime ?.checkOut && !checkInOutTime ?.checkIn
+                        ? (
+                            <Button
+                                block
+                                style={{ backgroundColor: "#0080FF", borderRadius: 20 }}
+                                onPress={e => saveHandler("checkIn")}
+                            >
+                                <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
+                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                            </Button>
+                        ) : (
+                            <Button
+                                block
+                                style={{ marginTop: 10, backgroundColor: "red", borderRadius: 20 }}
+                                onPress={e => saveHandler()}
+                            >
+                                <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
+                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                            </Button>
+                        )}
+
+
+
                 </View>
 
-                
-
-                {location.latitude && location.longitude && (
-                    <View>
-                        <Text style={style.boldText}>My Location</Text>
-                        {/* <Map /> */}
-                        <Map
-                            location={location}
-                            lat={location.latitude}
-                            long={location.longitude}
-                            userName={globalData ?.profileData ?.userName || ""}
-                        />
-
-                        {!checkInOutTime ?.checkOut && !checkInOutTime ?.checkIn
-                            ? (
-                                <Button
-                                    block
-                                    style={{ backgroundColor: "#0080FF" }}
-                                    onPress={e => saveHandler("checkIn")}
-                                >
-                                    <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
-                                    {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
-                                </Button>
-                            ) : (
-                                <Button
-                                    block
-                                    style={{ marginTop: 10, backgroundColor: "red" }}
-                                    onPress={e => saveHandler()}
-                                >
-                                    <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
-                                    {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
-                                </Button>
-                            )}
-
-
-
-                    </View>
-                )}
 
             </ScrollView
             >
@@ -224,7 +224,7 @@ const style = StyleSheet.create({
     },
     text: {
         fontFamily: fontsFamily.RUBIK_REGULAR,
-        color: colors.GREY
+        color: "#59A3EE" || colors.GREY
     },
     col: {
         borderWidth: 2,

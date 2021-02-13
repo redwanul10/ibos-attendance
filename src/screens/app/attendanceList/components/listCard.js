@@ -6,7 +6,7 @@ import { _dateFormatter } from "../../../../common/functions/_dateFormatter";
 function ListCard({ data }) {
 
   const renderDayStatus = (item) => {
-    if (item.ysnPresent) {
+    if (item ?.ysnPresent) {
       return (
         <View style={[styles.attendanceInfo]}>
           <Text style={styles.presentText}>Present</Text>
@@ -14,23 +14,23 @@ function ListCard({ data }) {
       )
     }
 
-    if (item.ysnAbsent) {
+    if (item ?.ysnAbsent) {
       return (
-        <View style={[styles.attendanceInfo,styles.absent]}>
+        <View style={[styles.attendanceInfo, styles.absent]}>
           <Text style={styles.absentText}>Absent</Text>
         </View>
       )
     }
 
-    if (item.ysnLeave) {
+    if (item ?.ysnLeave) {
       return (
-        <View style={[styles.attendanceInfo,styles.late]}>
+        <View style={[styles.attendanceInfo, styles.late]}>
           <Text style={styles.lateText}>Leave</Text>
         </View>
       )
     }
 
-    if (item.ysnPresent) {
+    if (item ?.ysnPresent) {
       return (
         <View style={styles.attendanceInfo}>
           <Text>Present</Text>
@@ -43,23 +43,23 @@ function ListCard({ data }) {
     <>
       <View style={styles.card}>
         <View style={{ alignItems: "flex-end", marginTop: 10, marginRight: 10 }}>
-         {data.ysnEaryLeave && <Text>Early Leave</Text>}
+          {data ?.ysnEaryLeave && <Text>Early Leave</Text>}
         </View>
         <View style={styles.cardContent}>
           {/* {props.children} */}
           <View>
-            <Text style={styles.dateStyle}>{_dateFormatter(data.dteAttendanceDate)}</Text>
+            <Text style={styles.dateStyle}>{_dateFormatter(data ?.dteAttendanceDate)}</Text>
           </View>
 
           <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
             <View style={styles.timeMargin}>
               <Text style={styles.fontWeight}>In Time</Text>
-              <Text>{data.checkInTime.split('.')[0] || "00.00"}</Text>
+              <Text>{data ?.checkInTime ?.split('.')[0] || "00.00"}</Text>
             </View>
 
             <View style={styles.timeMargin}>
               <Text style={styles.fontWeight}>Out Time</Text>
-              <Text>{data.checkOutTime.split('.')[0] || "00.00"}</Text>
+              <Text>{data ?.checkOutTime ?.split('.')[0] || "00.00"}</Text>
             </View>
 
             <View style={styles.timeMargin}>
@@ -120,23 +120,23 @@ const styles = StyleSheet.create({
   timeMargin: {
     // marginRight: 14
   },
-  absent:{
-    backgroundColor:"#FFD4D2"
+  absent: {
+    backgroundColor: "#FFD4D2"
   },
-  absentText:{
-    color:"#E93F39"
+  absentText: {
+    color: "#E93F39"
   },
-  late:{
-    backgroundColor:"#FFF2D1"
+  late: {
+    backgroundColor: "#FFF2D1"
   },
-  lateText:{
-    color:"#FEB802"
+  lateText: {
+    color: "#FEB802"
   },
-  present:{
-    backgroundColor:"#00BB7D"
+  present: {
+    backgroundColor: "#00BB7D"
   },
-  presentText:{
-    color:"#00BB7D"
+  presentText: {
+    color: "#00BB7D"
   }
 });
 

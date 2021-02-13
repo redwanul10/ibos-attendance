@@ -10,7 +10,9 @@ const AttendanceDashboard = ({ navigation }) => {
 
     return (
         <>
-            <IHeader hideBackBtn title="Dashboard" />
+            <IHeader
+                // hideBackBtn 
+                title="Dashboard" />
             <View style={[style.container]}>
                 <View>
                     <View style={style.row}>
@@ -18,21 +20,32 @@ const AttendanceDashboard = ({ navigation }) => {
                             onPress={e => navigation.navigate("Check in/out")}
                             style={style.col}>
                             <View style={style.singleItem}>
-                                <Image style={style.image} source={require('../../../assets/images/attendance/attendance.png')} />
+                                <Image style={style.image} source={require('../../../assets/images/attendance/checkIn.png')} />
                                 <Text style={[globalStyle.sectionTitle, style.title]}>Check In/Out</Text>
                             </View>
                         </TouchableOpacity>
+
                         <TouchableOpacity
                             onPress={e => navigation.navigate("Registration")}
                             style={style.col}>
                             <View style={style.singleItem}>
-                                <Image style={style.image} source={require('../../../assets/images/attendance/registration.png')} />
+                                <Image style={style.image} source={require('../../../assets/images/attendance/registration2.png')} />
                                 <Text style={[globalStyle.sectionTitle, style.title]}>Registration</Text>
                             </View>
                         </TouchableOpacity>
+
+                        <TouchableOpacity
+                            onPress={e => navigation.navigate("AttendanceList")}
+                            style={style.col}>
+                            <View style={style.singleItem}>
+                                <Image style={style.image} source={require('../../../assets/images/attendance/calender2.png')} />
+                                <Text style={[globalStyle.sectionTitle, style.title,]}>Attendance List</Text>
+                            </View>
+                        </TouchableOpacity>
+
                     </View>
 
-                    <View style={[style.row, { justifyContent: "center" }]}>
+                    {/* <View style={[style.row, { justifyContent: "center" }]}>
                         <TouchableOpacity
                             onPress={e => navigation.navigate("AttendanceList")}
                             style={style.col}>
@@ -41,13 +54,13 @@ const AttendanceDashboard = ({ navigation }) => {
                                 <Text style={[globalStyle.sectionTitle, style.title,]}>Attendance List</Text>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
 
-                <View style={style.ibosLogo}>
+                {/* <View style={style.ibosLogo}>
                     <Image style={{ alignSelf: "center" }} source={require('../../../assets/main2.png')} />
                     <Text style={[{ marginTop: 20 }, globalStyle.sectionTitle,]}>Develop By iBos Limited</Text>
-                </View>
+                </View> */}
             </View>
 
 
@@ -88,22 +101,24 @@ const style = StyleSheet.create({
         alignSelf: "center"
     },
     image: {
-        width: 45,
-        height: 50
+        // width: 45,
+        // height: 50
+        width: 90,
+        height: 80
     },
     col: {
         width: "46%",
         backgroundColor: "white",
         margin: "2%",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.20,
-        shadowRadius: 1.41,
-        borderRadius: 5,
-        elevation: 2,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 1,
+        // },
+        // shadowOpacity: 0.20,
+        // shadowRadius: 1.41,
+        // borderRadius: 5,
+        // elevation: 2,
     },
     singleItem: {
         justifyContent: "center",
@@ -116,7 +131,8 @@ const style = StyleSheet.create({
         marginHorizontal: -10
     },
     title: {
-        color: "black"
+        // color: "black",
+        fontSize: 14
     },
     ibosLogo: {
         flex: 1,

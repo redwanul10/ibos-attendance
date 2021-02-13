@@ -137,7 +137,7 @@ android {
 
     defaultConfig {
         // targetSdkVersion 29
-        applicationId "com.ibos"
+        applicationId "com.iboss"
         minSdkVersion rootProject.ext.minSdkVersion
         multiDexEnabled true
         targetSdkVersion rootProject.ext.targetSdkVersion

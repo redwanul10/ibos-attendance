@@ -15,6 +15,9 @@ const AttendanceList = () => {
 
     useEffect(() => {
         getGlobalData(setGlobalData)
+        return () => {
+            setGlobalData({})
+        }
     }, [])
 
     useEffect(() => {
@@ -27,24 +30,29 @@ const AttendanceList = () => {
                 setAttdList
             )
         }
+        return () => {
+            setAttdList([])
+        }
 
-    }, [globalData])
+    }, [globalData.profileData])
+
     return (
         <>
             <IHeader />
+            <ICalender />
             <View style={style.container}>
-                <ICalender />
+
 
                 {isLoading && <Spinner color='black' style={{}} />}
 
                 {attdList.length > 0 && (
                     <FlatList
                         data={attdList}
-                        keyExtractor={ item => item.dteAttendanceDate}
-                        renderItem={({ item }) => <ListCard data={item}/>}
+                        keyExtractor={item => item.dteAttendanceDate}
+                        renderItem={({ item }) => <ListCard data={item} />}
                     />)
                 }
-</View>
+            </View>
 
         </>
     );

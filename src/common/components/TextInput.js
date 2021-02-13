@@ -46,8 +46,8 @@ const FormInput = (props) => {
 };
 
 const style = StyleSheet.create({
-  
-  
+
+
   label: {
     fontSize: 14,
     fontFamily: "Rubik-Regular"
@@ -61,19 +61,23 @@ const style = StyleSheet.create({
   inputWrapper: {
     marginBottom: 10
   },
-  
+
   input: {
     // borderBottomWidth: 1,
     // borderBottomColor: "grey",
-    borderBottomWidth: 0.5,
-        borderBottomColor: "#AEAEAE",
-    padding: 0,
+    // borderBottomWidth: 0.5,
+    // borderBottomColor: "#AEAEAE",
+    backgroundColor: "#F0F2F2",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    marginTop: 5,
     fontFamily: "Rubik-Medium"
   },
   formHeader: {
     marginBottom: 23
   },
-  
+
 })
 
 export default FormInput;
