@@ -6,6 +6,7 @@ import ICalender from './components/ICalender';
 import ListCard from './components/listCard'
 import { getAttendanceList } from './helper';
 import { Spinner } from 'native-base';
+import ColorDefine from './components/ColorDefine';
 
 const AttendanceList = () => {
 
@@ -40,7 +41,9 @@ const AttendanceList = () => {
         <>
             <IHeader />
             <ICalender />
-            <View style={style.container}>
+            <ColorDefine/>
+            <ListCard/>
+            {/* <View style={style.container}>
 
 
                 {isLoading && <Spinner color='black' style={{}} />}
@@ -52,7 +55,7 @@ const AttendanceList = () => {
                         renderItem={({ item }) => <ListCard data={item} />}
                     />)
                 }
-            </View>
+            </View> */}
 
         </>
     );
