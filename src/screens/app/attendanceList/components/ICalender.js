@@ -68,11 +68,11 @@ const ICalender = () => {
 
 
 
-                <View style={[style.row, { margin: 20 }]}>
+                <View style={[style.row, { margin: 20}]}>
                     {
                         weekDays.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col, style.header, {backgroundColor:'red',padding:5,borderRadius:5,borderWidth:1}]}>
+                                <View key={index} style={[style.col, style.header, {backgroundColor:'#F0F2F2',padding:5,borderRadius:5,borderWidth:1,width:"12%", margin:"1%" }]}>
                                     <Text style={[style.header,]}>{item}</Text>
                                 </View>
                             )
@@ -93,7 +93,7 @@ const ICalender = () => {
                     {
                         allDay.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col,{backgroundColor:'red',padding:4,borderRadius:5,borderWidth:1}]}>
+                                <View key={index} style={[style.col,{backgroundColor:'#F0F2F2',padding:4,borderRadius:5,borderWidth:1,width:"12%", margin:"1%"}]}>
                                     <View style={[style.contentWrapper]}>
                                         <Text style={style.txt}>{index + 1}</Text>
                                     </View>

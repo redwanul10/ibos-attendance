@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     def:{
         
         backgroundColor:'#ffffff',
-        justifyContent:'space-around',
+        // justifyContent:'space-around',
         flexDirection:'row',
         flexWrap:'wrap',
         margin:10        
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
       backgroundColor:'#33D449',
       
       borderRadius:8,
-      padding:10,
+      paddingHorizontal:"5%",
+      paddingVertical:8,
       alignItems:'center',
       margin:3
       

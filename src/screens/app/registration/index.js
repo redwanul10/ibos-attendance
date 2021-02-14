@@ -76,12 +76,15 @@ const RegistrationAttendance = () => {
         }
 
         if (!selectedCustomer) {
-            Toast.show({
-                text: "Select a Customer",
-                buttonText: "close",
-                type: "danger",
-                duration: 3000
-            })
+            // Toast.show({
+            //     text: "Select a Customer",
+            //     buttonText: "close",
+            //     type: "danger",
+            //     duration: 3000
+            // })
+            Alert.alert(
+                'Location Permission Required',
+            );
         } else {
             registerAttentance(payload, setIsLoading)
         }
