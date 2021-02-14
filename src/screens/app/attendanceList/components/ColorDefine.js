@@ -48,10 +48,10 @@ const styles = StyleSheet.create({
     defStyle:{
       backgroundColor:'#33D449',
       
-      borderRadius:10,
+      borderRadius:8,
       padding:10,
       alignItems:'center',
-      margin:5
+      margin:3
       
       
 

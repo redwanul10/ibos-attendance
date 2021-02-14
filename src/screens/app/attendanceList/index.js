@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native'
+import { View, StyleSheet, FlatList,Text} from 'react-native'
 import IHeader from '../../../common/components/IHeader';
 import { getGlobalData } from '../../../common/functions/localStorage';
 import ICalender from './components/ICalender';
@@ -38,10 +38,11 @@ const AttendanceList = () => {
     }, [globalData.profileData])
 
     return (
-        <>
+        <View style={{flex:1,backgroundColor:'white'}}>
             <IHeader />
             <ICalender />
             <ColorDefine/>
+            <Text style={{margin:6}}>Attendance Details</Text>
             <ListCard/>
             {/* <View style={style.container}>
 
@@ -57,14 +58,14 @@ const AttendanceList = () => {
                 }
             </View> */}
 
-        </>
+        </View>
     );
 }
 
 export default AttendanceList;
 
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",

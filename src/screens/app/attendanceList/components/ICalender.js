@@ -10,12 +10,12 @@ const dayColors = ["green", "blue", "red", "purple", "green", "blue", "green", "
 const ICalender = () => {
 
     const [value, setValue] = useState(dayjs())
-    const weekDays = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'Sa'];
 
     const [nullDay, setNullDay] = useState([])
     const [allDay, setAllDay] = useState([])
     useEffect(() => {
-        
+
         const end = Number(value.endOf('month').format("D"))
         let AllDaysInMonth = []
 
@@ -43,8 +43,7 @@ const ICalender = () => {
         setAllDay(AllDaysInMonth)
     }, [value])
     return (
-        <View style={{paddingBottom:10,backgroundColor:"white"}}>
-
+        <>
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
                 {/* <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
                     <Text>prev</Text>
@@ -54,46 +53,61 @@ const ICalender = () => {
                     <Text>Next</Text>
                 </TouchableOpacity> */}
             </View>
+            <View style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.00,
 
-            <View style={[style.row, { marginTop: 20 }]}>
-                {
-                    weekDays.map((item, index) => {
-                        return (
-                            <View key={index} style={[style.col, style.header]}>
-                                <Text style={style.header}>{item}</Text>
-                            </View>
-                        )
-                    })
-                }
+                elevation: 24,
+                margin: 10, backgroundColor: 'white', borderRadius: 9
+            }}>
 
-                {/* <View style={style.row}> */}
-                {
-                    nullDay.map((item, index) => {
-                        return (
-                            <View key={index} style={style.col}><Text >
-                                {/* {index + 1} */}
-                            </Text></View>
-                        )
-                    })
-                }
 
-                {
-                    allDay.map((item, index) => {
-                        return (
-                            <View  key={index} style={style.col}>
-                                <View style={style.contentWrapper}>
-                                    <Text style={[style.txt]}>{index + 1}</Text>
+
+                <View style={[style.row, { marginTop: 20 }]}>
+                    {
+                        weekDays.map((item, index) => {
+                            return (
+                                <View key={index} style={[style.col, style.header]}>
+                                    <Text style={[style.header,{backgroundColor:'red'}]}>{item}</Text>
                                 </View>
+                            )
+                        })
+                    }
 
-                            </View>
-                        )
-                    })
-                }
-                {/* </View> */}
+                    {/* <View style={style.row}> */}
+                    {
+                        nullDay.map((item, index) => {
+                            return (
+                                <View key={index} style={style.col}><Text >
+                                    {/* {index + 1} */}
+                                </Text></View>
+                            )
+                        })
+                    }
+
+                    {
+                        allDay.map((item, index) => {
+                            return (
+                                <View key={index} style={style.col}>
+                                    <View style={style.contentWrapper}>
+                                        <Text style={[style.txt]}>{index + 1}</Text>
+                                    </View>
+
+                                </View>
+                            )
+                        })
+                    }
+                    {/* </View> */}
+                </View>
+
+
             </View>
-
-
-        </View>
+        </>
     );
 }
 
@@ -108,7 +122,7 @@ const style = StyleSheet.create({
         width: `${100 / 7}%`,
         alignItems: "center",
         justifyContent: "center",
-        
+
     },
     header: {
         fontFamily: fontsFamily.RUBIK_BOLD

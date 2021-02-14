@@ -2,11 +2,20 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { _dateFormatter } from "../../../../common/functions/_dateFormatter";
 
+const getBackgroundColor = () => {
+  let color;
+  if (1) {
+    color = 'red';
+  } else if (2) {
+    color = '#808080';
+  }
+  return color;
+};
 
 function ListCard({ data }) {
 
   const renderDayStatus = (item) => {
-    if (item ?.ysnPresent) {
+    if (item?.ysnPresent) {
       return (
         <View style={[styles.attendanceInfo]}>
           <Text style={styles.presentText}>Present</Text>
@@ -14,7 +23,7 @@ function ListCard({ data }) {
       )
     }
 
-    if (item ?.ysnAbsent) {
+    if (item?.ysnAbsent) {
       return (
         <View style={[styles.attendanceInfo, styles.absent]}>
           <Text style={styles.absentText}>Absent</Text>
@@ -22,7 +31,7 @@ function ListCard({ data }) {
       )
     }
 
-    if (item ?.ysnLeave) {
+    if (item?.ysnLeave) {
       return (
         <View style={[styles.attendanceInfo, styles.late]}>
           <Text style={styles.lateText}>Leave</Text>
@@ -30,7 +39,7 @@ function ListCard({ data }) {
       )
     }
 
-    if (item ?.ysnPresent) {
+    if (item?.ysnPresent) {
       return (
         <View style={styles.attendanceInfo}>
           <Text>Present</Text>
@@ -39,27 +48,42 @@ function ListCard({ data }) {
     }
 
   }
+
   return (
     <>
+
       <View style={styles.card}>
-        <View style={{ alignItems: "flex-end", marginTop: 10, marginRight: 10 }}>
-          {data ?.ysnEaryLeave && <Text>Early Leave</Text>}
+        <View style={{ justifyContent: "flex-end", alignItems: 'center', marginTop: 10, marginRight: 10, flexDirection: 'row' }}>
+          <View style={[styles.attendanceInfo]}>
+            <Text style={styles.presentText}>Present</Text>
+          </View>
+          {/* {renderDayStatus(data)} */}
+          {/* {data ?.ysnEaryLeave && <Text>Early Leave</Text>} */}
+          <Text style={{ marginLeft: 8 }}>Early Leave</Text>
         </View>
         <View style={styles.cardContent}>
           {/* {props.children} */}
-          <View>
-            <Text style={styles.dateStyle}>{_dateFormatter(data ?.dteAttendanceDate)}</Text>
+          <View style={{ backgroundColor: 'green', marginTop: -30, borderRadius: 5, flexDirection: 'row' }} >
+            {/* have to use after dynamically done */}
+            {/* <Text >{_dateFormatter(data?.dteAttendanceDate)}</Text> */}
+            {/* for design purpose */}
+            <View style={{ padding:10, alignItems:'center'}}>
+              <Text style={styles.fontWeight}>10</Text>
+              <Text style={styles.fontWeight}>Thurs</Text>
+
+            </View>
+
           </View>
 
-          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between', marginLeft: 8, paddingHorizontal: 5 }}>
             <View style={styles.timeMargin}>
               <Text style={styles.fontWeight}>In Time</Text>
-              <Text>{data ?.checkInTime ?.split('.')[0] || "00.00"}</Text>
+              <Text>{data?.checkInTime?.split('.')[0] || "00.00"}</Text>
             </View>
 
             <View style={styles.timeMargin}>
               <Text style={styles.fontWeight}>Out Time</Text>
-              <Text>{data ?.checkOutTime ?.split('.')[0] || "00.00"}</Text>
+              <Text>{data?.checkOutTime?.split('.')[0] || "00.00"}</Text>
             </View>
 
             <View style={styles.timeMargin}>
@@ -70,7 +94,9 @@ function ListCard({ data }) {
             {/* <View style={styles.attendanceInfo}>
               <Text>Present</Text>
             </View> */}
-            {renderDayStatus(data)}
+
+
+
           </View>
 
         </View>
@@ -83,7 +109,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 6,
     elevation: 6,
-    backgroundColor: "#fff",
+    backgroundColor: getBackgroundColor(),
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
@@ -93,14 +119,16 @@ const styles = StyleSheet.create({
     // height:100
   },
   cardContent: {
-    marginHorizontal: 18,
+    flexDirection: 'row',
+    marginHorizontal: 12,
     marginVertical: 10,
+
 
   },
   attendanceInfo: {
     backgroundColor: "#B3FFD6",
-    padding: 7,
-    borderRadius: 4,
+    paddingHorizontal: 8,
+    borderRadius: 8,
     // alignSelf: 
     // justifyContent:"flex-start"
     // marginTop: 10,
@@ -124,19 +152,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFD4D2"
   },
   absentText: {
-    color: "#E93F39"
+    color: "#ffffff"
   },
   late: {
     backgroundColor: "#FFF2D1"
   },
   lateText: {
-    color: "#FEB802"
+    color: "#ffffff"
   },
   present: {
     backgroundColor: "#00BB7D"
   },
   presentText: {
-    color: "#00BB7D"
+    color: "#ffffff"
   }
 });
 
