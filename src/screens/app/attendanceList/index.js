@@ -42,7 +42,7 @@ const AttendanceList = () => {
             <IHeader />
             <ICalender />
             <ColorDefine/>
-            <Text style={{margin:6}}>Attendance Details</Text>
+            <Text style={{margin:14}}>Attendance Details</Text>
             <ListCard/>
             {/* <View style={style.container}>
 
