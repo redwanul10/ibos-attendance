@@ -17,7 +17,7 @@ const initValues = {
 
 const schemaValidation = Yup.object().shape({
     password: Yup.string()
-        .min(8, "Must be 8 Charecter").
+        .min(8, "Must be 8 Character").
         required("Password is Required"),
 
     email: Yup.string()

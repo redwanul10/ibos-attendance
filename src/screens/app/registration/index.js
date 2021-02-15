@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Linking, Alert } from "react-native"
+import { StyleSheet, View, Text, Linking, Alert, Modal, TouchableOpacity,Image } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
 import { Col, Button, Spinner } from 'native-base'
@@ -10,7 +10,8 @@ import Geolocation from '@react-native-community/geolocation';
 import { Toast } from 'native-base'
 import { getCustomerList, registerAttentance } from './helper'
 import { getGlobalData } from '../../../common/functions/localStorage';
-
+// import { TouchableOpacity } from 'react-native-gesture-handler';
+import modalSuccess from '../../../assets/images/modalSuccess.png'
 
 const RegistrationAttendance = () => {
 
@@ -20,6 +21,7 @@ const RegistrationAttendance = () => {
 
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [showModal, setModal] = useState(false)
 
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const RegistrationAttendance = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData ?.profileData ?.userId) {
+        if (globalData?.profileData?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
@@ -64,15 +66,17 @@ const RegistrationAttendance = () => {
 
     }, [])
 
+
+
     const registerHandler = () => {
         const payload = {
-            accountId: globalData ?.profileData ?.accountId,
-            businessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
-            businessPartnerId: selectedCustomer ?.value || 0,
-            numLatitude: location ?.latitude || 0,
-            numLongitude: location ?.longitude || 0,
-            actionBy: globalData ?.profileData ?.userId || 0,
-            businessPartnerCode: selectedCustomer ?.code || ""
+            accountId: globalData?.profileData?.accountId,
+            businessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            businessPartnerId: selectedCustomer?.value || 0,
+            numLatitude: location?.latitude || 0,
+            numLongitude: location?.longitude || 0,
+            actionBy: globalData?.profileData?.userId || 0,
+            businessPartnerCode: selectedCustomer?.code || ""
         }
 
         if (!selectedCustomer) {
@@ -82,9 +86,11 @@ const RegistrationAttendance = () => {
             //     type: "danger",
             //     duration: 3000
             // })
-            Alert.alert(
-                'Location Permission Required',
-            );
+            // Alert.alert(
+            //     'Select a Customer',
+            // );
+            setModal(true)
+
         } else {
             registerAttentance(payload, setIsLoading)
         }
@@ -92,6 +98,39 @@ const RegistrationAttendance = () => {
 
     return (
         <>
+            <Modal visible={showModal}
+                transparent
+                animationType='fade'
+                onRequestClose={() => setModal(false)}     >
+
+
+
+                <View style={style.centeredView}>
+                    <TouchableOpacity onPress={() => setModal(false)} >
+                        <View style={style.modalStyle}>
+                           
+                            <Image style={{ width: "100%", height: "100%" }} source={modalSuccess} resizeMode="stretch" />
+                            {/* <TouchableOpacity onPress={() => setModal(false)}
+                                style={{
+                                    flex: 1,
+                                    alignItems: 'flex-end',
+                                    justifyContent: 'flex-end',
+                                    margin: 5
+                                }}>
+                                <Text>OK</Text>
+                            </TouchableOpacity> */}
+
+                        </View>
+
+                    </TouchableOpacity>
+
+                </View>
+
+
+
+
+            </Modal>
+
             <IHeader title="Registration" />
             <View style={style.container}>
                 <View style={{ marginVertical: 20 }}>
@@ -132,7 +171,7 @@ const RegistrationAttendance = () => {
                         location={location}
                         lat={location.latitude}
                         long={location.longitude}
-                        userName={globalData ?.profileData ?.userName || ""}
+                        userName={globalData?.profileData?.userName || ""}
                     />
                     <Button
                         block
@@ -187,6 +226,23 @@ const style = StyleSheet.create({
         width: 130,
         height: 130,
         alignSelf: "center",
+
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#121E4499',
+
+
+    },
+    modalStyle: {
+        width: 340,
+        height: 183,
+        backgroundColor: '#fff',
+       
+        borderRadius: 15,
+
 
     }
 })
