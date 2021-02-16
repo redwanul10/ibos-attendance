@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Linking, Alert, Modal, TouchableOpacity,Image } from "react-native"
+import { StyleSheet, View, Text, Linking, Alert, Modal, TouchableWithoutFeedback, TouchableOpacity, Image } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
 import { Col, Button, Spinner } from 'native-base'
@@ -12,6 +12,7 @@ import { getCustomerList, registerAttentance } from './helper'
 import { getGlobalData } from '../../../common/functions/localStorage';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import modalSuccess from '../../../assets/images/modalSuccess.png'
+import SuccessModal from './components/successModal';
 
 const RegistrationAttendance = () => {
 
@@ -29,7 +30,7 @@ const RegistrationAttendance = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData?.profileData?.userId) {
+        if (globalData ?.profileData ?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
@@ -70,13 +71,13 @@ const RegistrationAttendance = () => {
 
     const registerHandler = () => {
         const payload = {
-            accountId: globalData?.profileData?.accountId,
-            businessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
-            businessPartnerId: selectedCustomer?.value || 0,
-            numLatitude: location?.latitude || 0,
-            numLongitude: location?.longitude || 0,
-            actionBy: globalData?.profileData?.userId || 0,
-            businessPartnerCode: selectedCustomer?.code || ""
+            accountId: globalData ?.profileData ?.accountId,
+            businessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
+            businessPartnerId: selectedCustomer ?.value || 0,
+            numLatitude: location ?.latitude || 0,
+            numLongitude: location ?.longitude || 0,
+            actionBy: globalData ?.profileData ?.userId || 0,
+            businessPartnerCode: selectedCustomer ?.code || ""
         }
 
         if (!selectedCustomer) {
@@ -98,38 +99,10 @@ const RegistrationAttendance = () => {
 
     return (
         <>
-            <Modal visible={showModal}
-                transparent
-                animationType='fade'
-                onRequestClose={() => setModal(false)}     >
-
-
-
-                <TouchableOpacity  onPress={() => setModal(false)} style={style.centeredView}>
-                    <TouchableOpacity onPress={() => setModal(false)} >
-                        <View style={style.modalStyle}>
-                           
-                            <Image style={{ width: "100%", height: "100%" }} source={modalSuccess} resizeMode="stretch" />
-                            {/* <TouchableOpacity onPress={() => setModal(false)}
-                                style={{
-                                    flex: 1,
-                                    alignItems: 'flex-end',
-                                    justifyContent: 'flex-end',
-                                    margin: 5
-                                }}>
-                                <Text>OK</Text>
-                            </TouchableOpacity> */}
-
-                        </View>
-
-                    </TouchableOpacity>
-
-                </TouchableOpacity>
-
-
-
-
-            </Modal>
+            <SuccessModal
+                visible={showModal}
+                onClose={e => setModal(false)}
+            />
 
             <IHeader title="Registration" />
             <View style={style.container}>
@@ -171,7 +144,7 @@ const RegistrationAttendance = () => {
                         location={location}
                         lat={location.latitude}
                         long={location.longitude}
-                        userName={globalData?.profileData?.userName || ""}
+                        userName={globalData ?.profileData ?.userName || ""}
                     />
                     <Button
                         block
@@ -240,7 +213,7 @@ const style = StyleSheet.create({
         width: 340,
         height: 183,
         backgroundColor: '#fff',
-       
+
         borderRadius: 15,
 
 
