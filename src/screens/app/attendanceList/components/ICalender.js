@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity,ScrollView } from 'react-native'
 import dayjs from 'dayjs'
 import fontsFamily from '../../../../common/theme/fonts';
 import colors from '../../../../common/theme/colors';
@@ -45,34 +45,34 @@ const ICalender = () => {
     return (
         <>
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
-                {/* <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
+                <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
                     <Text>prev</Text>
-                </TouchableOpacity> */}
-                <Text style={[style.header, { textTransform: "uppercase" }]}>{value.format("MMMM")}- {value.year()}</Text>
-                {/* <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
+                </TouchableOpacity>
+                <Text style={[style.header, { textTransform: "capitalize" ,color:'#6EC3F3'}]}>{value.format("MMMM")}- {value.year()}</Text>
+                <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
                     <Text>Next</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
             <View style={{
                 shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
-                    height: 12,
+                    height: 3,
                 },
-                shadowOpacity: 0.58,
-                shadowRadius: 16.00,
+                shadowOpacity: 0.12,
+                shadowRadius: 5.00,
 
-                elevation: 24,
-                margin: 10, backgroundColor: 'white', borderRadius: 9
+                elevation: 5,
+                margin: 10, backgroundColor: '#FAFAFA', borderRadius: 9
             }}>
 
 
 
-                <View style={[style.row, { margin: 20}]}>
+                <View style={[style.row, { margin: 10,marginRight:4,marginBottom:4}]}>
                     {
                         weekDays.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col, style.header, {backgroundColor:'#F0F2F2',padding:5,borderRadius:5,borderWidth:1,width:"12%", margin:"1%" }]}>
+                                <View key={index} style={[style.col, style.header,style.calendar ]}>
                                     <Text style={[style.header,]}>{item}</Text>
                                 </View>
                             )
@@ -83,7 +83,7 @@ const ICalender = () => {
                     {
                         nullDay.map((item, index) => {
                             return (
-                                <View key={index} style={style.col}><Text >
+                                <View key={index} style={[style.col, style.header,style.calendar ]}><Text >
                                     {/* {index + 1} */}
                                 </Text></View>
                             )
@@ -93,7 +93,7 @@ const ICalender = () => {
                     {
                         allDay.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col,{backgroundColor:'#F0F2F2',padding:4,borderRadius:5,borderWidth:1,width:"12%", margin:"1%"}]}>
+                                <View key={index} style={[style.col,style.calendar]}>
                                     <View style={[style.contentWrapper]}>
                                         <Text style={style.txt}>{index + 1}</Text>
                                     </View>
@@ -140,5 +140,14 @@ const style = StyleSheet.create({
         justifyContent: "center",
         marginVertical: 2,
         borderRadius: 10
+    },
+    calendar:{
+        backgroundColor:'#F0F2F2',
+        padding:5,
+        borderRadius:5,
+        borderWidth:0.0,
+        width:"12%", 
+        height:30, 
+        margin:"1%" 
     }
 })

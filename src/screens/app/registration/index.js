@@ -105,7 +105,7 @@ const RegistrationAttendance = () => {
 
 
 
-                <View style={style.centeredView}>
+                <TouchableOpacity  onPress={() => setModal(false)} style={style.centeredView}>
                     <TouchableOpacity onPress={() => setModal(false)} >
                         <View style={style.modalStyle}>
                            
@@ -124,7 +124,7 @@ const RegistrationAttendance = () => {
 
                     </TouchableOpacity>
 
-                </View>
+                </TouchableOpacity>
 
 
 

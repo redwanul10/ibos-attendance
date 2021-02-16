@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList,Text} from 'react-native'
+import { View, StyleSheet, FlatList,Text,ScrollView} from 'react-native'
 import IHeader from '../../../common/components/IHeader';
 import { getGlobalData } from '../../../common/functions/localStorage';
 import ICalender from './components/ICalender';
@@ -7,6 +7,7 @@ import ListCard from './components/listCard'
 import { getAttendanceList } from './helper';
 import { Spinner } from 'native-base';
 import ColorDefine from './components/ColorDefine';
+
 
 const AttendanceList = () => {
 
@@ -38,11 +39,13 @@ const AttendanceList = () => {
     }, [globalData.profileData])
 
     return (
-        <View style={{flex:1,backgroundColor:'white'}}>
-            <IHeader />
+        <ScrollView style={{flex:1,backgroundColor:'white'}}>
+            <IHeader/>
             <ICalender />
             <ColorDefine/>
-            <Text style={{margin:14}}>Attendance Details</Text>
+            <Text style={{margin:14,color:'#989898'}}>Attendance Details</Text>
+            <ListCard/>
+            <ListCard/>
             <ListCard/>
             {/* <View style={style.container}>
 
@@ -58,7 +61,7 @@ const AttendanceList = () => {
                 }
             </View> */}
 
-        </View>
+        </ScrollView>
     );
 }
 
