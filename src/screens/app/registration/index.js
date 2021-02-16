@@ -178,7 +178,7 @@ const RegistrationAttendance = () => {
                         style={{ backgroundColor: "#0080FF", borderRadius: 20 }}
                         onPress={e => registerHandler()}
                     >
-                        <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Submit</Text>
+                        <Text style={{ textTransform: "capitalize", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Submit</Text>
                         {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
                     </Button>
                 </View>
