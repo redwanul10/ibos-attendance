@@ -46,14 +46,14 @@ const Login = ({ navigation }) => {
     return (
 
         // <ImageBackground source={loginBgImg} style={{ flex: 1 }}>
-        <ScrollView style={{ backgroundColor: "white", flex: 1 }}>
+        <View style={{ backgroundColor: "white", flex: 1 ,justifyContent:"center",paddingHorizontal:24}}>
             <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
                 <>
-                    <View style={{ marginVertical: "15%", alignItems: "center" }}>
+                    <View style={{ marginBottom: "15%", alignItems: "center" }}>
                         <Image style={{ width: "80%", height: 200 }} source={logo} resizeMode="stretch" />
                     </View>
 
-                    <View style={style.container}>
+                    <View >
 
 
                         {/* Form Header */}
@@ -107,14 +107,14 @@ const Login = ({ navigation }) => {
                                             formikProps.handleSubmit()
                                         }}
                                         style={{
-                                            backgroundColor: "#66DBA8",
+                                            backgroundColor: "#0080FF",
                                             marginTop: 20,
                                             height: 50,
                                             borderRadius: 50
                                         }}>
 
                                         <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-                                            Sign In
+                                            Log In
                                         </Text>
 
                                         {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
@@ -129,7 +129,7 @@ const Login = ({ navigation }) => {
                 </>
             </TouchableWithoutFeedback>
 
-        </ScrollView>
+        </View>
     );
 }
 
