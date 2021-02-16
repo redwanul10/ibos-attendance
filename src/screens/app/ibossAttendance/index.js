@@ -32,7 +32,7 @@ const IbosAttendance = () => {
 
     useEffect(() => {
 
-        if (globalData ?.profileData ?.userId) {
+        if (globalData?.profileData?.userId) {
             const todayDate = _todayDate()
             getCheckInCheckOutTime(
                 globalData.profileData.userId,
@@ -76,10 +76,10 @@ const IbosAttendance = () => {
 
 
         const payload = {
-            intAccountId: globalData ?.profileData ?.accountId,
-            intBusinessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
-            intBusinessPartnerId: selectedCustomer ?.value || 0,
-            strBusinessPartnerCode: selectedCustomer ?.code || "",
+            intAccountId: globalData?.profileData?.accountId,
+            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer?.value || 0,
+            strBusinessPartnerCode: selectedCustomer?.code || "",
             // numPartnerLatitude: selectedCustomer?.latitude || 0,
             // numPartnerLongitude: selectedCustomer?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
@@ -171,14 +171,14 @@ const IbosAttendance = () => {
                         location={location}
                         lat={location.latitude}
                         long={location.longitude}
-                        userName={globalData ?.profileData ?.userName || ""}
+                        userName={globalData?.profileData?.userName || ""}
                     />
 
-                    {!checkInOutTime ?.checkOut && !checkInOutTime ?.checkIn
+                    {!checkInOutTime?.checkOut && !checkInOutTime?.checkIn
                         ? (
                             <Button
                                 block
-                                style={{ backgroundColor: "#0080FF", borderRadius: 20 }}
+                                style={{ backgroundColor: "#5DD44B", borderRadius: 20 }}
                                 onPress={e => saveHandler("checkIn")}
                             >
                                 <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
@@ -187,15 +187,29 @@ const IbosAttendance = () => {
                         ) : (
                             <Button
                                 block
-                                style={{ marginTop: 10, backgroundColor: "red", borderRadius: 20 }}
+                                style={{ marginTop: 10, backgroundColor: "#F75A5A", borderRadius: 20 }}
                                 onPress={e => saveHandler()}
                             >
                                 <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
                                 {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                            
                             </Button>
                         )}
 
+                    <View style={[style.spaceBetween,{ marginTop: 20 }]}>
+                        <Text style={[style.boldText,{color:"#5DD44B"}]}>Check In</Text>
+                        <Text style={[style.boldText,{color:"#F75A5A"}]}>Check Out</Text>
+                    </View>
 
+                    <View style={[style.spaceBetween, {padding:5,backgroundColor:"#FAFAFA", marginTop: 0 }]}>
+                        <Text style={style.greyColor}>12.30 pm</Text>
+                        <Text style={style.greyColor}>10.00 am</Text>
+                    </View>
+
+                    {/* <View style={[style.spaceBetween, { marginTop: 5 }]}>
+                        <Text>10.00</Text>
+                        <Text>12.30</Text>
+                    </View> */}
 
                 </View>
 
@@ -245,5 +259,13 @@ const style = StyleSheet.create({
         height: 130,
         alignSelf: "center",
 
-    }
+    },
+    spaceBetween: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10
+    },
+    greyColor:{
+        color:"#989898"
+        }
 })
