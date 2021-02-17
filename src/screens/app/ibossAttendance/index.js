@@ -15,10 +15,7 @@ import { _todayDate } from '../../../common/functions/_todayDate';
 const IbosAttendance = () => {
 
     const [location, setLocation] = useState({})
-    const [checkInOutTime, setcheckInOutTime] = useState({
-        checkIn: "",
-        checkOut: ""
-    })
+    const [checkInOutTime, setcheckInOutTime] = useState({})
 
     const [selectedCustomer, setSelectedCustomer] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -32,7 +29,7 @@ const IbosAttendance = () => {
 
     useEffect(() => {
 
-        if (globalData?.profileData?.userId) {
+        if (globalData ?.profileData ?.userId) {
             const todayDate = _todayDate()
             getCheckInCheckOutTime(
                 globalData.profileData.userId,
@@ -76,10 +73,10 @@ const IbosAttendance = () => {
 
 
         const payload = {
-            intAccountId: globalData?.profileData?.accountId,
-            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
-            intBusinessPartnerId: selectedCustomer?.value || 0,
-            strBusinessPartnerCode: selectedCustomer?.code || "",
+            intAccountId: globalData ?.profileData ?.accountId,
+            intBusinessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer ?.value || 0,
+            strBusinessPartnerCode: selectedCustomer ?.code || "",
             // numPartnerLatitude: selectedCustomer?.latitude || 0,
             // numPartnerLongitude: selectedCustomer?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
@@ -126,40 +123,11 @@ const IbosAttendance = () => {
                         <Text style={style.boldText}>Today</Text>
                         <Text style={style.text}>{new Date().toDateString()}</Text>
                     </View>
-                    {/* <Col>
-                        {location.latitude && location.longitude && (<View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
-                            <Col style={[style.col, style.lattitude]}>
-                                <Text style={[style.boldText, style.smallTxt]}>Lattitude</Text>
-                                <Text style={[style.boldText, style.smallTxt]}>{location.latitude || 0.0}</Text>
-                            </Col>
-                            <Col style={[style.col, style.longitude]}>
-                                <Text style={[style.boldText, style.smallTxt]}>Longitude</Text>
-                                <Text style={[style.boldText, style.smallTxt]}>{location.longitude || 0.0}</Text>
-                            </Col>
-                        </View>)}
-                    </Col> */}
                 </View>
 
 
 
 
-                {/* <View style={{ marginTop: 20, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
-                    <Col style={[style.col, style.lattitude, { borderColor: "transparent" }]}>
-                        <Text style={[style.boldText, style.smallTxt, { color: "#0080FF" }]}>Check In Time</Text>
-                        <Text style={[style.boldText, style.smallTxt]}>{checkInOutTime.checkIn || "00.00"}</Text>
-                    </Col>
-                    <Col style={[style.col, style.longitude, { borderColor: "transparent", backgroundColor: "#FFD8D8" }]}>
-                        <Text style={[style.boldText, style.smallTxt, { color: "red" }]}>Check Out Time</Text>
-                        <Text style={[style.boldText, style.smallTxt]}>{checkInOutTime.checkOut || "00.00"}</Text>
-                    </Col>
-                </View>
-
-                <View style={{ alignSelf: "center", width: "50%", marginTop: 20, marginBottom: 40, flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
-                    <Col style={[style.col, style.lattitude, { borderColor: "transparent", backgroundColor: "#B3FFD6" }]}>
-                        <Text style={[style.boldText, style.smallTxt, { color: "#399162" }]}>Check In Time</Text>
-                        <Text style={[style.boldText, style.smallTxt]}>9.00 am</Text>
-                    </Col>
-                </View> */}
 
 
 
@@ -171,11 +139,23 @@ const IbosAttendance = () => {
                         location={location}
                         lat={location.latitude}
                         long={location.longitude}
-                        userName={globalData?.profileData?.userName || ""}
+                        userName={globalData ?.profileData ?.userName || ""}
                     />
 
-                    {!checkInOutTime?.checkOut && !checkInOutTime?.checkIn
+                    {checkInOutTime && checkInOutTime ?.checkInTime ?.length !== checkInOutTime ?.checkOutTime ?.length
                         ? (
+                            <Button
+                                block
+                                style={{ backgroundColor: "#F75A5A", borderRadius: 20 }}
+                                onPress={e => saveHandler()}
+                            >
+                                <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
+                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+
+                            </Button>
+                        ) : (
+
+
                             <Button
                                 block
                                 style={{ backgroundColor: "#5DD44B", borderRadius: 20 }}
@@ -184,26 +164,33 @@ const IbosAttendance = () => {
                                 <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
                                 {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
                             </Button>
-                        ) : (
-                            <Button
-                                block
-                                style={{ marginTop: 10, backgroundColor: "#F75A5A", borderRadius: 20 }}
-                                onPress={e => saveHandler()}
-                            >
-                                <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
-                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
-                            
-                            </Button>
                         )}
 
-                    <View style={[style.spaceBetween,{ marginTop: 20 }]}>
-                        <Text style={[style.boldText,{color:"#5DD44B"}]}>Check In</Text>
-                        <Text style={[style.boldText,{color:"#F75A5A"}]}>Check Out</Text>
+                    <View style={[style.spaceBetween, { marginTop: 20 }]}>
+                        <Text style={[style.boldText, { color: "#5DD44B" }]}>Check In</Text>
+                        <Text style={[style.boldText, { color: "#F75A5A" }]}>Check Out</Text>
                     </View>
 
-                    <View style={[style.spaceBetween, {padding:5,backgroundColor:"#FAFAFA", marginTop: 0 }]}>
-                        <Text style={style.greyColor}>12.30 pm</Text>
-                        <Text style={style.greyColor}>10.00 am</Text>
+                    <View style={[style.spaceBetween]}>
+                        <View style={{ flex: 1 }}>
+                            {checkInOutTime ?.checkInTime ?.map(item => (
+                                <Text style={[style.greyColor, { padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>{item ?.checkInTime}</Text>
+                            ))}
+                        </View>
+
+                        <View style={{ flex: 1 }}>
+                            {checkInOutTime && checkInOutTime ?.checkInTime ?.length !== checkInOutTime ?.checkOutTime ?.length && (
+                                <View style={[{ alignItems: "flex-end", width: "100%", padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
+                                    <Text style={[style.greyColor,]}>*********</Text>
+                                </View>
+                            )}
+                            {checkInOutTime ?.checkOutTime ?.map(item => (
+                                <View style={[{ alignItems: "flex-end", width: "100%", padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
+                                    <Text style={[style.greyColor,]}>{item ?.checkOutTime}</Text>
+                                </View>
+
+                            ))}
+                        </View>
                     </View>
 
                     {/* <View style={[style.spaceBetween, { marginTop: 5 }]}>
@@ -265,7 +252,7 @@ const style = StyleSheet.create({
         justifyContent: "space-between",
         marginTop: 10
     },
-    greyColor:{
-        color:"#989898"
-        }
+    greyColor: {
+        color: "#989898"
+    }
 })

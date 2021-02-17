@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Toast } from 'native-base'
 import { storeGlobalData, getGlobalData } from '../../../common/functions/localStorage'
 
-export const checkIn = async (payload, setLoading,cb) => {
+export const checkIn = async (payload, setLoading, cb) => {
     setLoading(true)
 
     try {
@@ -13,9 +13,9 @@ export const checkIn = async (payload, setLoading,cb) => {
         setLoading(false)
 
         Toast.show({
-            text: res?.data?.message || "CheckIn Successfull",
+            text: res ?.data ?.message || "CheckIn Successfull",
             type: "success",
-            
+
             duration: 3000
         })
 
@@ -25,19 +25,19 @@ export const checkIn = async (payload, setLoading,cb) => {
         // alert(err.response.data.message)
         setLoading(false)
         Toast.show({
-            text: err?.response?.data?.message,
+            text: err ?.response ?.data ?.message,
             type: "danger",
-            
+
             duration: 3000
         })
-       
-      
+
+
     }
 
 }
 
 
-export const checkOut = async (payload, setLoading,cb) => {
+export const checkOut = async (payload, setLoading, cb) => {
     setLoading(true)
     try {
         const res = await axios.post(
@@ -47,32 +47,32 @@ export const checkOut = async (payload, setLoading,cb) => {
         setLoading(false)
 
         Toast.show({
-            text: res?.data?.message || "CheckOut Successfull",
+            text: res ?.data ?.message || "CheckOut Successfull",
             type: "success",
-            
+
             duration: 3000
         })
-        
+
         cb()
 
     } catch (err) {
         // alert(err.response.data.message)
         setLoading(false)
         Toast.show({
-            text: err?.response?.data?.message,
+            text: err ?.response ?.data ?.message,
             type: "danger",
-            
+
             duration: 3000
         })
-       
-      
+
+
     }
 
 }
 let num = 0
 export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
     // setLoading(true)
-    
+
     try {
         const res = await axios.get(
             `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
@@ -80,16 +80,15 @@ export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
 
         )
 
-       
-        const data = res?.data
-        setTime({
-            checkIn: data[0]?.checkInTime,
-            checkOut: data[1]?.checkOutTime
-        })
-       
+
+        const data = res ?.data
+        setTime(res ?.data[0])
+
+        console.log(JSON.stringify(res ?.data, null, 2))
+
 
     } catch (err) {
-   
+
     }
 
 }

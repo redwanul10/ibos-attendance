@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList,Text,ScrollView} from 'react-native'
+import { View, StyleSheet, FlatList, Text, ScrollView } from 'react-native'
 import IHeader from '../../../common/components/IHeader';
 import { getGlobalData } from '../../../common/functions/localStorage';
 import ICalender from './components/ICalender';
@@ -39,29 +39,36 @@ const AttendanceList = () => {
     }, [globalData.profileData])
 
     return (
-        <ScrollView style={{flex:1,backgroundColor:'white'}}>
-            <IHeader/>
-            <ICalender />
-            <ColorDefine/>
-            <Text style={{margin:14,color:'#989898'}}>Attendance Details</Text>
-            <ListCard/>
-            <ListCard/>
-            <ListCard/>
-            {/* <View style={style.container}>
+        <>
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <IHeader />
+                <ICalender />
+                {/* <ListCard />
+            <ListCard />
+            <ListCard /> */}
+                {/* <View style={style.container}> */}
 
 
-                {isLoading && <Spinner color='black' style={{}} />}
 
-                {attdList.length > 0 && (
-                    <FlatList
-                        data={attdList}
-                        keyExtractor={item => item.dteAttendanceDate}
-                        renderItem={({ item }) => <ListCard data={item} />}
-                    />)
-                }
-            </View> */}
 
-        </ScrollView>
+                {/* {attdList.length > 0 && ( */}
+                <FlatList
+                    ListHeaderComponent={() => (
+                        <>
+                            <ColorDefine />
+                            <Text style={{ margin: 14, color: '#989898' }}>Attendance Details</Text>
+                            {isLoading && <Spinner color='black' style={{}} />}
+                        </>
+                    )}
+                    data={attdList}
+                    keyExtractor={item => item.dteAttendanceDate}
+                    renderItem={({ item }) => <ListCard data={item} />}
+                />
+                {/* } */}
+                {/* </View> */}
+
+            </View>
+        </>
     );
 }
 

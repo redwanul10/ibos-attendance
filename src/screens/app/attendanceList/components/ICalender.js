@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity,ScrollView } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native'
 import dayjs from 'dayjs'
 import fontsFamily from '../../../../common/theme/fonts';
 import colors from '../../../../common/theme/colors';
@@ -46,11 +46,11 @@ const ICalender = () => {
         <>
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
                 <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
-                    <Text>prev</Text>
+                    <Text>{value.subtract(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
-                <Text style={[style.header, { textTransform: "capitalize" ,color:'#6EC3F3'}]}>{value.format("MMMM")}- {value.year()}</Text>
+                <Text style={[style.header, { textTransform: "capitalize", color: '#6EC3F3' }]}>{value.format("MMMM")}- {value.year()}</Text>
                 <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
-                    <Text>Next</Text>
+                    <Text>{value.add(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
             </View>
             <View style={{
@@ -68,11 +68,11 @@ const ICalender = () => {
 
 
 
-                <View style={[style.row, { margin: 10,marginRight:4,marginBottom:4}]}>
+                <View style={[style.row, { margin: 10, marginRight: 4, marginBottom: 4 }]}>
                     {
                         weekDays.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col, style.header,style.calendar ]}>
+                                <View key={index} style={[style.col, style.header, style.calendar]}>
                                     <Text style={[style.header,]}>{item}</Text>
                                 </View>
                             )
@@ -83,7 +83,7 @@ const ICalender = () => {
                     {
                         nullDay.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col, style.header,style.calendar ]}><Text >
+                                <View key={index} style={[style.col, style.header, style.calendar]}><Text >
                                     {/* {index + 1} */}
                                 </Text></View>
                             )
@@ -93,7 +93,7 @@ const ICalender = () => {
                     {
                         allDay.map((item, index) => {
                             return (
-                                <View key={index} style={[style.col,style.calendar]}>
+                                <View key={index} style={[style.col, style.calendar]}>
                                     <View style={[style.contentWrapper]}>
                                         <Text style={style.txt}>{index + 1}</Text>
                                     </View>
@@ -141,13 +141,13 @@ const style = StyleSheet.create({
         marginVertical: 2,
         borderRadius: 10
     },
-    calendar:{
-        backgroundColor:'#F0F2F2',
-        padding:5,
-        borderRadius:5,
-        borderWidth:0.0,
-        width:"12%", 
-        height:30, 
-        margin:"1%" 
+    calendar: {
+        backgroundColor: '#F0F2F2',
+        padding: 5,
+        borderRadius: 5,
+        borderWidth: 0.0,
+        width: "12%",
+        height: 30,
+        margin: "1%"
     }
 })

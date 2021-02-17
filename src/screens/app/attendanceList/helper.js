@@ -8,6 +8,7 @@ export const getAttendanceList = async (empId, month, year, setLoading, setter) 
         )
         setter(res ?.data)
         setLoading(false)
+        console.log(JSON.stringify(res ?.data, null, 2))
     } catch (err) {
         setLoading(false)
         //    alert(err.response.data.message)

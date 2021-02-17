@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Linking, Alert, Modal, TouchableWithoutFeedback, TouchableOpacity, Image } from "react-native"
+import { StyleSheet, View, Text, Linking, Alert } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import ICustomPicker from '../../../common/components/ICustomPicker';
-import { Col, Button, Spinner } from 'native-base'
+import { Button, Spinner } from 'native-base'
 import fontsFamily from '../../../common/theme/fonts';
 import colors from '../../../common/theme/colors';
 import Map from './components/Map';
@@ -10,8 +10,6 @@ import Geolocation from '@react-native-community/geolocation';
 import { Toast } from 'native-base'
 import { getCustomerList, registerAttentance } from './helper'
 import { getGlobalData } from '../../../common/functions/localStorage';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
-import modalSuccess from '../../../assets/images/modalSuccess.png'
 import SuccessModal from './components/successModal';
 
 const RegistrationAttendance = () => {
@@ -81,19 +79,13 @@ const RegistrationAttendance = () => {
         }
 
         if (!selectedCustomer) {
-            // Toast.show({
-            //     text: "Select a Customer",
-            //     buttonText: "close",
-            //     type: "danger",
-            //     duration: 3000
-            // })
-            // Alert.alert(
-            //     'Select a Customer',
-            // );
-            setModal(true)
-
+            Toast.show({
+                text: "Select Attendance Point",
+                type: "danger",
+                duration: 3000
+            })
         } else {
-            registerAttentance(payload, setIsLoading)
+            registerAttentance(payload, setIsLoading, setModal)
         }
     }
 
@@ -105,6 +97,7 @@ const RegistrationAttendance = () => {
             />
 
             <IHeader title="Registration" />
+
             <View style={style.container}>
                 <View style={{ marginVertical: 20 }}>
                     <ICustomPicker
@@ -117,26 +110,6 @@ const RegistrationAttendance = () => {
                         }}
                     />
                 </View>
-
-
-
-                {/* <View style={{ flexDirection: "row", marginVertical: "15%" }}>
-                    
-                    <Col>
-                        <View style={{ flexDirection: "row", backgroundColor: "transparent", marginHorizontal: -4 }}>
-                            <Col style={[style.col, style.lattitude]}>
-                                <Text style={[style.boldText, style.smallTxt]}>Lattitude</Text>
-                                <Text style={[style.boldText, style.smallTxt]}>{location.latitude || 0.0}</Text>
-                            </Col>
-                            <Col style={[style.col, style.longitude]}>
-                                <Text style={[style.boldText, style.smallTxt]}>Longitude</Text>
-                                <Text style={[style.boldText, style.smallTxt]}>{location.longitude || 0.0}</Text>
-                            </Col>
-                        </View>
-                    </Col>
-                </View> */}
-
-
 
                 <View>
                     <Text style={style.boldText}>My Location</Text>
