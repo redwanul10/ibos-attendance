@@ -82,11 +82,11 @@ function ListCard({ data }) {
 
         <View style={styles.cardContent}>
           {/* {props.children} */}
-          <View style={{ backgroundColor: '#FFFFFF', borderRadius: 5, flexDirection: 'row' }} >
+          <View style={{ width: 50, justifyContent: "center", alignItems: "center", backgroundColor: '#FFFFFF', borderRadius: 5, flexDirection: 'row' }} >
             {/* have to use after dynamically done */}
             {/* <Text >{_dateFormatter(data?.dteAttendanceDate)}</Text> */}
             {/* for design purpose */}
-            <View style={{ padding: 10, alignItems: 'center' }}>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
               <Text style={[styles.fontWeight, { color: '#121E44' }]}>
                 {dayjs(_dateFormatter(data ?.dteAttendanceDate)).format("DD")}
               </Text>

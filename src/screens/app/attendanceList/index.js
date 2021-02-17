@@ -42,7 +42,7 @@ const AttendanceList = () => {
         <>
             <View style={{ flex: 1, backgroundColor: 'white' }}>
                 <IHeader />
-                <ICalender />
+                <ICalender daysList={attdList} />
                 {/* <ListCard />
             <ListCard />
             <ListCard /> */}

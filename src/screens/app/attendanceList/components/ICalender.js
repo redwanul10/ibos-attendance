@@ -7,7 +7,78 @@ import colors from '../../../../common/theme/colors';
 
 const dayColors = ["green", "blue", "red", "purple", "green", "blue", "green", "blue"]
 
-const ICalender = () => {
+const renderDayStatus = (item, index) => {
+    if (item ?.ysnPresent) {
+        return (
+            <View key={index} style={[style.col, style.calendar, { backgroundColor: '#33D449' }]}>
+                <View style={[style.contentWrapper]}>
+                    <Text style={[style.txt, { color: "white" }]}>{index + 1}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    if (item ?.ysnAbsent) {
+        return (
+            <View key={index} style={[style.col, style.calendar, { backgroundColor: '#F75A5A' }]}>
+                <View style={[style.contentWrapper]}>
+                    <Text style={[style.txt, { color: "white" }]}>{index + 1}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    if (item ?.ysnLeave) {
+        return (
+            <View key={index} style={[style.col, style.calendar, { backgroundColor: '#AC88D5' }]}>
+                <View style={[style.contentWrapper]}>
+                    <Text style={[style.txt, { color: "white" }]}>{index + 1}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    if (item ?.ysnLate) {
+        return (
+            <View key={index} style={[style.col, style.calendar, { backgroundColor: '#F5A328' }]}>
+                <View style={[style.contentWrapper]}>
+                    <Text style={[style.txt, { color: "white" }]}>{index + 1}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    if (item ?.ysnOffday) {
+        return (
+            <View key={index} style={[style.col, style.calendar, { backgroundColor: '#DCDCDC' }]}>
+                <View style={[style.contentWrapper]}>
+                    <Text style={[style.txt, { color: "white" }]}>{index + 1}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    if (item ?.ysnHoliday) {
+        return (
+            <View key={index} style={[style.col, style.calendar, { backgroundColor: '#6EC3F3' }]}>
+                <View style={[style.contentWrapper]}>
+                    <Text style={[style.txt, { color: "white" }]}>{index + 1}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    return (
+        <View key={index} style={[style.col, style.calendar]}>
+            <View style={[style.contentWrapper]}>
+                <Text style={style.txt}>{index + 1}</Text>
+            </View>
+        </View>
+    )
+
+}
+
+const ICalender = ({ daysList }) => {
 
     const [value, setValue] = useState(dayjs())
     const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'Sa'];
@@ -48,7 +119,9 @@ const ICalender = () => {
                 <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
                     <Text>{value.subtract(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
+
                 <Text style={[style.header, { textTransform: "capitalize", color: '#6EC3F3' }]}>{value.format("MMMM")}- {value.year()}</Text>
+
                 <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
                     <Text>{value.add(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
@@ -92,14 +165,8 @@ const ICalender = () => {
 
                     {
                         allDay.map((item, index) => {
-                            return (
-                                <View key={index} style={[style.col, style.calendar]}>
-                                    <View style={[style.contentWrapper]}>
-                                        <Text style={style.txt}>{index + 1}</Text>
-                                    </View>
+                            return renderDayStatus(daysList[index], index)
 
-                                </View>
-                            )
                         })
                     }
                     {/* </View> */}

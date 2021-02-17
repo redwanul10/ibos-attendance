@@ -11,6 +11,7 @@ import { Toast } from 'native-base'
 import { getCustomerList, registerAttentance } from './helper'
 import { getGlobalData } from '../../../common/functions/localStorage';
 import SuccessModal from './components/successModal';
+import Dropdown from 'react-native-dropdown-picker'
 
 const RegistrationAttendance = () => {
 
@@ -100,7 +101,20 @@ const RegistrationAttendance = () => {
 
             <View style={style.container}>
                 <View style={{ marginVertical: 20 }}>
-                    <ICustomPicker
+                    <Text style={[style.boldText, { marginBottom: 0, color: "black" }]}>Attendance Point</Text>
+                    <Dropdown
+                        // searchable={true}
+                        items={customerListDDL}
+                        placeholder="Select"
+                        containerStyle={[{ height: 50 }]}
+                        style={[style.box, { borderColor: "transparent" }]}
+                        dropDownStyle={{ elevation: 3, marginTop: 10 }}
+                        placeholderStyle={style.label}
+                        selectedLabelStyle={style.label}
+                        onChangeItem={item => setSelectedCustomer(item)}
+                        itemStyle={{ justifyContent: "flex-start", borderBottomColor: "#00000015", borderBottomWidth: 1 }}
+                    />
+                    {/* <ICustomPicker
                         label="Attendance Point"
                         labelStyle={[style.boldText, { marginBottom: 0, color: "black" }]}
                         value={selectedCustomer || {}}
@@ -108,7 +122,7 @@ const RegistrationAttendance = () => {
                         onChange={item => {
                             setSelectedCustomer(item)
                         }}
-                    />
+                    /> */}
                 </View>
 
                 <View>
@@ -190,5 +204,17 @@ const style = StyleSheet.create({
         borderRadius: 15,
 
 
+    },
+    box: {
+        marginVertical: 5,
+        borderRadius: 10,
+        backgroundColor: "#0000000F",
+        padding: 9,
+        paddingLeft: 12
+    },
+    label: {
+        fontSize: 14,
+        fontFamily: "Rubik-Regular",
+        color: "#636363"
     }
 })
