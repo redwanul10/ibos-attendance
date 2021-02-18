@@ -13,7 +13,7 @@ export const checkIn = async (payload, setLoading, cb) => {
         setLoading(false)
 
         Toast.show({
-            text: res ?.data ?.message || "CheckIn Successfull",
+            text: res ?.data ?.message || "Checked In Successfull",
             type: "success",
 
             duration: 3000
@@ -47,7 +47,7 @@ export const checkOut = async (payload, setLoading, cb) => {
         setLoading(false)
 
         Toast.show({
-            text: res ?.data ?.message || "CheckOut Successfull",
+            text: res ?.data ?.message || "Checked Out Successfull",
             type: "success",
 
             duration: 3000

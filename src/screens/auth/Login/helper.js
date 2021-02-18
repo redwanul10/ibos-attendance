@@ -35,7 +35,7 @@ export const loginAction = (email, password, setLoading, cb) => {
 
 
             Toast.show({
-                text: "login Successfull",
+                text: "Log in Successfull",
                 type: "success",
 
                 duration: 3000
