@@ -12,6 +12,7 @@ import ColorDefine from './components/ColorDefine';
 const AttendanceList = () => {
 
     const [globalData, setGlobalData] = useState({})
+    const [currentDate, setCurrentDate] = useState(false)
     const [attdList, setAttdList] = useState([])
     const [isLoading, setIsLoading] = useState([])
 
@@ -26,7 +27,7 @@ const AttendanceList = () => {
         if (globalData ?.profileData ?.userId) {
             getAttendanceList(
                 globalData ?.profileData ?.userId,
-                new Date().getMonth() + 1,
+                currentDate ? currentDate ?.month() + 1 : new Date().getMonth() + 1,
                 new Date().getFullYear(),
                 setIsLoading,
                 setAttdList
@@ -36,13 +37,18 @@ const AttendanceList = () => {
             setAttdList([])
         }
 
-    }, [globalData.profileData])
+    }, [globalData.profileData, currentDate])
 
     return (
         <>
             <View style={{ flex: 1, backgroundColor: 'white' }}>
                 <IHeader />
-                <ICalender daysList={attdList} />
+
+                <ICalender
+                    daysList={attdList}
+                    onMonthChange={date => setCurrentDate(date)}
+                />
+
                 {/* <ListCard />
             <ListCard />
             <ListCard /> */}

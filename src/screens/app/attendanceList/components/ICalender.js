@@ -77,8 +77,8 @@ const renderDayStatus = (item, index) => {
     )
 
 }
-
-const ICalender = ({ daysList }) => {
+let timeout = null
+const ICalender = ({ daysList, onMonthChange }) => {
 
     const [value, setValue] = useState(dayjs())
     const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'Sa'];
@@ -113,16 +113,52 @@ const ICalender = ({ daysList }) => {
         setNullDay(fakeDaysInMonth)
         setAllDay(AllDaysInMonth)
     }, [value])
+
+
     return (
         <>
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
-                <TouchableOpacity onPress={e => setValue(value.subtract(1, "month"))}>
+                <TouchableOpacity style={{ padding: 5 }}
+                    onPress={e => {
+                        if (timeout) {
+                            clearTimeout(timeout)
+                            timeout = setTimeout(() => {
+                                console.log("fetching req")
+                                onMonthChange(value.subtract(1, "month"))
+                            }, 1000)
+                        } else {
+                            timeout = setTimeout(() => {
+                                console.log("fetching req")
+                                onMonthChange(value.subtract(1, "month"))
+                            }, 1000)
+                        }
+                        // onMonthChange(value.subtract(1, "month"))
+                        setValue(value.subtract(1, "month"))
+
+                    }}>
                     <Text>{value.subtract(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
 
                 <Text style={[style.header, { textTransform: "capitalize", color: '#6EC3F3' }]}>{value.format("MMMM")}- {value.year()}</Text>
 
-                <TouchableOpacity style={{ marginRight: 20 }} onPress={e => setValue(value.add(1, "month"))}>
+                <TouchableOpacity style={{ padding: 5 }}
+                    onPress={e => {
+
+                        if (timeout) {
+                            clearTimeout(timeout)
+                            timeout = setTimeout(() => {
+                                console.log("fetching req")
+                                onMonthChange(value.add(1, "month"))
+                            }, 1000)
+                        } else {
+                            timeout = setTimeout(() => {
+                                console.log("fetching req")
+                                onMonthChange(value.add(1, "month"))
+                            }, 1000)
+                        }
+
+                        setValue(value.add(1, "month"))
+                    }}>
                     <Text>{value.add(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
             </View>
