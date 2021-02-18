@@ -12,7 +12,7 @@ import { getGlobalData } from '../../../common/functions/localStorage';
 
 const initValues = {
     email: 'alamin@akij.net',
-    password: "12345678",
+    password: "",
 }
 
 const schemaValidation = Yup.object().shape({

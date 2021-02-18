@@ -26,9 +26,7 @@ function ColorDefine({ data }) {
         <View style={[styles.defStyle,{backgroundColor:'#AC88D5'}]}>
             <Text>Leave</Text>
         </View>
-        <View style={[styles.defStyle,{backgroundColor:'#60F5C8'}]}>
-            <Text>Unprocessed</Text>
-        </View>
+        
         
       </View>
     </>
