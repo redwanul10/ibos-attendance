@@ -13,7 +13,7 @@ export const checkIn = async (payload, setLoading, cb) => {
         setLoading(false)
 
         Toast.show({
-            text: res ?.data ?.message || "Checked In Successfull",
+            text: res?.data?.message || "Checked In Successfull",
             type: "success",
 
             duration: 3000
@@ -25,7 +25,7 @@ export const checkIn = async (payload, setLoading, cb) => {
         // alert(err.response.data.message)
         setLoading(false)
         Toast.show({
-            text: err ?.response ?.data ?.message,
+            text: err?.response?.data?.message,
             type: "danger",
 
             duration: 3000
@@ -47,7 +47,7 @@ export const checkOut = async (payload, setLoading, cb) => {
         setLoading(false)
 
         Toast.show({
-            text: res ?.data ?.message || "Checked Out Successfull",
+            text: res?.data?.message || "Checked Out Successfull",
             type: "success",
 
             duration: 3000
@@ -59,7 +59,7 @@ export const checkOut = async (payload, setLoading, cb) => {
         // alert(err.response.data.message)
         setLoading(false)
         Toast.show({
-            text: err ?.response ?.data ?.message,
+            text: err?.response?.data?.message,
             type: "danger",
 
             duration: 3000
@@ -70,9 +70,9 @@ export const checkOut = async (payload, setLoading, cb) => {
 
 }
 let num = 0
-export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
+export const getCheckInCheckOutTime = async (empId, todayDate, setTime, setLoading) => {
     // setLoading(true)
-
+    if (setLoading) setLoading(true)
     try {
         const res = await axios.get(
             `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
@@ -81,14 +81,14 @@ export const getCheckInCheckOutTime = async (empId, todayDate, setTime) => {
         )
 
 
-        const data = res ?.data
-        setTime(res ?.data[0])
-
-        console.log(JSON.stringify(res ?.data, null, 2))
+        const data = res?.data
+        setTime(res?.data[0])
+        if (setLoading) setLoading(false)
+        console.log(JSON.stringify(res?.data, null, 2))
 
 
     } catch (err) {
-
+        if (setLoading) setLoading(false)
     }
 
 }

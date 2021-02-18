@@ -7,12 +7,15 @@ import ListCard from './components/listCard'
 import { getAttendanceList } from './helper';
 import { Spinner } from 'native-base';
 import ColorDefine from './components/ColorDefine';
+import Axios from 'axios'
+import dayjs from 'dayjs'
 
+let cancelToken;
 
 const AttendanceList = () => {
 
     const [globalData, setGlobalData] = useState({})
-    const [currentDate, setCurrentDate] = useState(false)
+    const [currentDate, setCurrentDate] = useState(dayjs())
     const [attdList, setAttdList] = useState([])
     const [isLoading, setIsLoading] = useState([])
 
@@ -24,18 +27,28 @@ const AttendanceList = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData ?.profileData ?.userId) {
+        if (globalData?.profileData?.userId) {
+
+            //Check if there are any previous pending requests
+            if (typeof cancelToken != typeof undefined) {
+                cancelToken.cancel("canceled request");
+            }
+
+            //Save the cancel token for the current request
+            cancelToken = Axios.CancelToken.source();
+
             getAttendanceList(
-                globalData ?.profileData ?.userId,
-                currentDate ? currentDate ?.month() + 1 : new Date().getMonth() + 1,
-                new Date().getFullYear(),
+                globalData?.profileData?.userId,
+                currentDate?.month() + 1,
+                currentDate?.year(),
                 setIsLoading,
-                setAttdList
+                setAttdList,
+                cancelToken
             )
         }
-        return () => {
-            setAttdList([])
-        }
+        // return () => {
+        //     setAttdList([])
+        // }
 
     }, [globalData.profileData, currentDate])
 
@@ -46,6 +59,8 @@ const AttendanceList = () => {
 
                 <ICalender
                     daysList={attdList}
+                    setAttdList={setAttdList}
+                    setIsLoading={setIsLoading}
                     onMonthChange={date => setCurrentDate(date)}
                 />
 
@@ -63,11 +78,11 @@ const AttendanceList = () => {
                         <>
                             <ColorDefine />
                             <Text style={{ margin: 14, color: '#989898' }}>Attendance Details</Text>
-                            {isLoading && <Spinner color='black' style={{}} />}
+                            {isLoading && <Spinner color='black' />}
                         </>
                     )}
                     data={attdList}
-                    keyExtractor={item => item.dteAttendanceDate}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => <ListCard data={item} />}
                 />
                 {/* } */}

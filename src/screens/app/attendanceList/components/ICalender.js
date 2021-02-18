@@ -78,7 +78,7 @@ const renderDayStatus = (item, index) => {
 
 }
 let timeout = null
-const ICalender = ({ daysList, onMonthChange }) => {
+const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
 
     const [value, setValue] = useState(dayjs())
     const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'Sa'];
@@ -120,6 +120,8 @@ const ICalender = ({ daysList, onMonthChange }) => {
             <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
                 <TouchableOpacity style={{ padding: 5 }}
                     onPress={e => {
+                        setIsLoading(false)
+                        if (daysList.length > 0) setAttdList([])
                         if (timeout) {
                             clearTimeout(timeout)
                             timeout = setTimeout(() => {
@@ -143,6 +145,8 @@ const ICalender = ({ daysList, onMonthChange }) => {
 
                 <TouchableOpacity style={{ padding: 5 }}
                     onPress={e => {
+                        setIsLoading(false)
+                        if (daysList.length > 0) setAttdList([])
 
                         if (timeout) {
                             clearTimeout(timeout)

@@ -18,6 +18,7 @@ const IbosAttendance = () => {
     const [checkInOutTime, setcheckInOutTime] = useState({})
 
     const [selectedCustomer, setSelectedCustomer] = useState(null)
+    const [initPageLoading, setInitPageLoading] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [globalData, setGlobalData] = useState({})
 
@@ -29,12 +30,13 @@ const IbosAttendance = () => {
 
     useEffect(() => {
 
-        if (globalData ?.profileData ?.userId) {
+        if (globalData?.profileData?.userId) {
             const todayDate = _todayDate()
             getCheckInCheckOutTime(
                 globalData.profileData.userId,
                 todayDate,
-                setcheckInOutTime
+                setcheckInOutTime,
+                setInitPageLoading
             )
         }
     }, [globalData])
@@ -73,10 +75,10 @@ const IbosAttendance = () => {
 
 
         const payload = {
-            intAccountId: globalData ?.profileData ?.accountId,
-            intBusinessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
-            intBusinessPartnerId: selectedCustomer ?.value || 0,
-            strBusinessPartnerCode: selectedCustomer ?.code || "",
+            intAccountId: globalData?.profileData?.accountId,
+            intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            intBusinessPartnerId: selectedCustomer?.value || 0,
+            strBusinessPartnerCode: selectedCustomer?.code || "",
             // numPartnerLatitude: selectedCustomer?.latitude || 0,
             // numPartnerLongitude: selectedCustomer?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
@@ -88,21 +90,31 @@ const IbosAttendance = () => {
 
 
         if (status === "checkIn") {
-            checkIn(payload, setIsLoading, () => {
-                getCheckInCheckOutTime(
-                    globalData.profileData.userId,
-                    _todayDate(),
-                    setcheckInOutTime
-                )
-            })
+            checkIn(
+                payload,
+                setIsLoading,
+                //success callback
+                () => {
+                    getCheckInCheckOutTime(
+                        globalData.profileData.userId,
+                        _todayDate(),
+                        setcheckInOutTime
+                    )
+                }
+            )
         } else {
-            checkOut(payload, setIsLoading, () => {
-                getCheckInCheckOutTime(
-                    globalData.profileData.userId,
-                    _todayDate(),
-                    setcheckInOutTime
-                )
-            })
+            checkOut(
+                payload,
+                setIsLoading,
+                //success callback
+                () => {
+                    getCheckInCheckOutTime(
+                        globalData.profileData.userId,
+                        _todayDate(),
+                        setcheckInOutTime
+                    )
+                }
+            )
 
         }
 
@@ -139,10 +151,10 @@ const IbosAttendance = () => {
                         location={location}
                         lat={location.latitude}
                         long={location.longitude}
-                        userName={globalData ?.profileData ?.userName || ""}
+                        userName={globalData?.profileData?.userName || ""}
                     />
 
-                    {checkInOutTime && checkInOutTime ?.checkInTime ?.length !== checkInOutTime ?.checkOutTime ?.length
+                    {checkInOutTime && checkInOutTime?.checkInTime?.length !== checkInOutTime?.checkOutTime?.length
                         ? (
                             <Button
                                 block
@@ -171,22 +183,24 @@ const IbosAttendance = () => {
                         <Text style={[style.boldText, { color: "#F75A5A" }]}>Check Out</Text>
                     </View>
 
+                    {initPageLoading && <Spinner color='black' />}
+
                     <View style={[style.spaceBetween]}>
                         <View style={{ flex: 1 }}>
-                            {checkInOutTime ?.checkInTime ?.map(item => (
-                                <Text style={[style.greyColor, { padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>{item ?.checkInTime}</Text>
+                            {checkInOutTime?.checkInTime?.map(item => (
+                                <Text style={[style.greyColor, { padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>{item?.checkInTime}</Text>
                             ))}
                         </View>
 
                         <View style={{ flex: 1 }}>
-                            {checkInOutTime && checkInOutTime ?.checkInTime ?.length !== checkInOutTime ?.checkOutTime ?.length && (
+                            {checkInOutTime && checkInOutTime?.checkInTime?.length !== checkInOutTime?.checkOutTime?.length && (
                                 <View style={[{ alignItems: "flex-end", width: "100%", padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
                                     <Text style={[style.greyColor,]}>*********</Text>
                                 </View>
                             )}
-                            {checkInOutTime ?.checkOutTime ?.map(item => (
+                            {checkInOutTime?.checkOutTime?.map(item => (
                                 <View style={[{ alignItems: "flex-end", width: "100%", padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
-                                    <Text style={[style.greyColor,]}>{item ?.checkOutTime}</Text>
+                                    <Text style={[style.greyColor,]}>{item?.checkOutTime}</Text>
                                 </View>
 
                             ))}

@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StatusBar } from 'react-native';
 import RootNavigation from './src/navigation/RootNavigation';
 import RNBootSplash from "react-native-bootsplash";
@@ -8,20 +8,20 @@ import { Root } from 'native-base'
 
 export default function App() {
 
-  RNBootSplash.hide()
+  // RNBootSplash.hide()
 
-  // useEffect(() => {
-  //   hideSplashScreen()
-  //   // StatusBar.setTranslucent(true)
-  //   // StatusBar.setBackgroundColor("red")
-  
+  useEffect(() => {
+    hideSplashScreen()
+    // StatusBar.setTranslucent(true)
+    // StatusBar.setBackgroundColor("red")
 
-  // }, [])
 
-  // const hideSplashScreen = async () => {
-     
-  //   // await RNBootSplash.hide({ fade: true });
-  // }
+  }, [])
+
+  const hideSplashScreen = async () => {
+
+    await RNBootSplash.hide({ fade: true });
+  }
 
   return (
     <>

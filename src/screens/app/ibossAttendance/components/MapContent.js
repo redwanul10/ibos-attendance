@@ -113,17 +113,11 @@ const mapHtml = `
         if(navigator.appVersion.includes('Android')){
             document.addEventListener("message", function (data) {
                 showMarker(JSON.parse(data.data))
-                // alert(JSON.stringify(data.data))
-                // setTimeout(()=> showMarker(),3000)
-               
             });
         }
         else {
             window.addEventListener("message", function (data) {
-               var marker = L.marker([-29.0529434318608, 152.01910972595218]).addTo(map);
-        
-               marker.bindPopup("<b>Hello</b> Redwan").openPopup();
-                   map.setView(new L.LatLng(-29.0529434318608, 152.01910972595218), 15);              
+                showMarker(JSON.parse(data.data))
              });
         }
 
