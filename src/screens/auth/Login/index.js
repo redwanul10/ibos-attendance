@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        StatusBar.setBackgroundColor("#66DBA8")
+        StatusBar.setBackgroundColor("#0080FF")
         StatusBar.setTranslucent(false)
 
     }, [])
@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
     return (
 
         // <ImageBackground source={loginBgImg} style={{ flex: 1 }}>
-        <View style={{ backgroundColor: "white", flex: 1 ,justifyContent:"center",paddingHorizontal:24}}>
+        <View style={{ backgroundColor: "white", flex: 1, justifyContent: "center", paddingHorizontal: 24 }}>
             <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
                 <>
                     <View style={{ marginBottom: "15%", alignItems: "center" }}>
@@ -70,7 +70,7 @@ const Login = ({ navigation }) => {
 
                         <Formik
                             enableReinitialize={true}
-                            initialValues={{ ...initValues, email: globalData ?.profileData ?.emailAddress || ""}}
+                            initialValues={{ ...initValues, email: globalData?.profileData?.emailAddress || "" }}
                             validationSchema={schemaValidation}
                             onSubmit={(values, { resetForm }) => {
                                 const { email, password } = values
