@@ -29,7 +29,7 @@ const RegistrationAttendance = () => {
     }, [])
 
     useEffect(() => {
-        if (globalData ?.profileData ?.userId) {
+        if (globalData?.profileData?.userId) {
             getCustomerList(
                 globalData.profileData.userId,
                 setCustomerListDDL
@@ -70,13 +70,13 @@ const RegistrationAttendance = () => {
 
     const registerHandler = () => {
         const payload = {
-            accountId: globalData ?.profileData ?.accountId,
-            businessUnitId: globalData ?.profileData ?.defaultBusinessUnit || 0,
-            businessPartnerId: selectedCustomer ?.value || 0,
-            numLatitude: location ?.latitude || 0,
-            numLongitude: location ?.longitude || 0,
-            actionBy: globalData ?.profileData ?.userId || 0,
-            businessPartnerCode: selectedCustomer ?.code || ""
+            accountId: globalData?.profileData?.accountId,
+            businessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
+            businessPartnerId: selectedCustomer?.value || 0,
+            numLatitude: location?.latitude || 0,
+            numLongitude: location?.longitude || 0,
+            actionBy: globalData?.profileData?.userId || 0,
+            businessPartnerCode: selectedCustomer?.code || ""
         }
 
         if (!selectedCustomer) {
@@ -103,7 +103,6 @@ const RegistrationAttendance = () => {
                 <View style={{ marginVertical: 20 }}>
                     <Text style={[style.boldText, { marginBottom: 0, color: "black" }]}>Attendance Point</Text>
                     <Dropdown
-                        // searchable={true}
                         items={customerListDDL}
                         placeholder="Select"
                         containerStyle={[{ height: 50 }]}
@@ -131,7 +130,7 @@ const RegistrationAttendance = () => {
                         location={location}
                         lat={location.latitude}
                         long={location.longitude}
-                        userName={globalData ?.profileData ?.userName || ""}
+                        userName={globalData?.profileData?.userName || ""}
                     />
                     <Button
                         block
