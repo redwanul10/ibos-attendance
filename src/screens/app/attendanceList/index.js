@@ -20,7 +20,9 @@ const AttendanceList = () => {
     const [isLoading, setIsLoading] = useState([])
 
     useEffect(() => {
+
         getGlobalData(setGlobalData)
+        
         return () => {
             setGlobalData({})
         }
@@ -46,10 +48,6 @@ const AttendanceList = () => {
                 cancelToken
             )
         }
-        // return () => {
-        //     setAttdList([])
-        // }
-
     }, [globalData.profileData, currentDate])
 
     return (
@@ -64,15 +62,7 @@ const AttendanceList = () => {
                     onMonthChange={date => setCurrentDate(date)}
                 />
 
-                {/* <ListCard />
-            <ListCard />
-            <ListCard /> */}
-                {/* <View style={style.container}> */}
-
-
-
-
-                {/* {attdList.length > 0 && ( */}
+                {/* Daily History */}
                 <FlatList
                     ListHeaderComponent={() => (
                         <>
@@ -85,9 +75,6 @@ const AttendanceList = () => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => <ListCard data={item} />}
                 />
-                {/* } */}
-                {/* </View> */}
-
             </View>
         </>
     );

@@ -8,7 +8,7 @@ import colors from '../../../../common/theme/colors';
 const dayColors = ["green", "blue", "red", "purple", "green", "blue", "green", "blue"]
 
 const renderDayStatus = (item, index) => {
-    if (item ?.ysnPresent) {
+    if (item?.ysnPresent) {
         return (
             <View key={index} style={[style.col, style.calendar, { backgroundColor: '#33D449' }]}>
                 <View style={[style.contentWrapper]}>
@@ -18,7 +18,7 @@ const renderDayStatus = (item, index) => {
         )
     }
 
-    if (item ?.ysnAbsent) {
+    if (item?.ysnAbsent) {
         return (
             <View key={index} style={[style.col, style.calendar, { backgroundColor: '#F75A5A' }]}>
                 <View style={[style.contentWrapper]}>
@@ -28,7 +28,7 @@ const renderDayStatus = (item, index) => {
         )
     }
 
-    if (item ?.ysnLeave) {
+    if (item?.ysnLeave) {
         return (
             <View key={index} style={[style.col, style.calendar, { backgroundColor: '#AC88D5' }]}>
                 <View style={[style.contentWrapper]}>
@@ -38,7 +38,7 @@ const renderDayStatus = (item, index) => {
         )
     }
 
-    if (item ?.ysnLate) {
+    if (item?.ysnLate) {
         return (
             <View key={index} style={[style.col, style.calendar, { backgroundColor: '#F5A328' }]}>
                 <View style={[style.contentWrapper]}>
@@ -48,7 +48,7 @@ const renderDayStatus = (item, index) => {
         )
     }
 
-    if (item ?.ysnOffday) {
+    if (item?.ysnOffday) {
         return (
             <View key={index} style={[style.col, style.calendar, { backgroundColor: '#DCDCDC' }]}>
                 <View style={[style.contentWrapper]}>
@@ -58,7 +58,7 @@ const renderDayStatus = (item, index) => {
         )
     }
 
-    if (item ?.ysnHoliday) {
+    if (item?.ysnHoliday) {
         return (
             <View key={index} style={[style.col, style.calendar, { backgroundColor: '#6EC3F3' }]}>
                 <View style={[style.contentWrapper]}>
@@ -77,7 +77,9 @@ const renderDayStatus = (item, index) => {
     )
 
 }
+
 let timeout = null
+
 const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
 
     const [value, setValue] = useState(dayjs())
@@ -85,6 +87,7 @@ const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
 
     const [nullDay, setNullDay] = useState([])
     const [allDay, setAllDay] = useState([])
+
     useEffect(() => {
 
         const end = Number(value.endOf('month').format("D"))
@@ -115,56 +118,41 @@ const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
     }, [value])
 
 
+    const handleMonthChange = (date) => {
+
+        setIsLoading(false)
+        if (daysList.length > 0) setAttdList([])
+
+        if (timeout) {
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                console.log("fetching req")
+                onMonthChange(date)
+            }, 1000)
+        } else {
+            timeout = setTimeout(() => {
+                console.log("fetching req")
+                onMonthChange(date)
+            }, 1000)
+        }
+        // onMonthChange(date)
+        setValue(date)
+    }
     return (
         <>
-            <View style={{ alignItems: "center", marginTop: 20, flexDirection: "row", justifyContent: "space-around" }}>
+            <View style={style.calenderHeader}>
                 <TouchableOpacity style={{ padding: 5 }}
-                    onPress={e => {
-                        setIsLoading(false)
-                        if (daysList.length > 0) setAttdList([])
-                        if (timeout) {
-                            clearTimeout(timeout)
-                            timeout = setTimeout(() => {
-                                console.log("fetching req")
-                                onMonthChange(value.subtract(1, "month"))
-                            }, 1000)
-                        } else {
-                            timeout = setTimeout(() => {
-                                console.log("fetching req")
-                                onMonthChange(value.subtract(1, "month"))
-                            }, 1000)
-                        }
-                        // onMonthChange(value.subtract(1, "month"))
-                        setValue(value.subtract(1, "month"))
-
-                    }}>
+                    onPress={e => handleMonthChange(value.subtract(1, "month"))}>
                     <Text>{value.subtract(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
 
                 <Text style={[style.header, { textTransform: "capitalize", color: '#6EC3F3' }]}>{value.format("MMMM")}- {value.year()}</Text>
 
                 <TouchableOpacity style={{ padding: 5 }}
-                    onPress={e => {
-                        setIsLoading(false)
-                        if (daysList.length > 0) setAttdList([])
-
-                        if (timeout) {
-                            clearTimeout(timeout)
-                            timeout = setTimeout(() => {
-                                console.log("fetching req")
-                                onMonthChange(value.add(1, "month"))
-                            }, 1000)
-                        } else {
-                            timeout = setTimeout(() => {
-                                console.log("fetching req")
-                                onMonthChange(value.add(1, "month"))
-                            }, 1000)
-                        }
-
-                        setValue(value.add(1, "month"))
-                    }}>
+                    onPress={e => handleMonthChange(value.add(1, "month"))}>
                     <Text>{value.add(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
+
             </View>
             <View style={{
                 shadowColor: "#000",
@@ -256,5 +244,11 @@ const style = StyleSheet.create({
         width: "12%",
         height: 30,
         margin: "1%"
+    },
+    calenderHeader: {
+        alignItems: "center",
+        marginTop: 20,
+        flexDirection: "row",
+        justifyContent: "space-around"
     }
 })

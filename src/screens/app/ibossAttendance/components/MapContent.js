@@ -105,7 +105,7 @@ const mapHtml = `
         function showMarker({latitude, longitude,userName}){
                 var marker = L.marker([latitude, longitude]).addTo(map);
 
-            marker.bindPopup("<b>Hello</b> "+ userName).openPopup();
+                marker.bindPopup("<b style='margin-left:10px'>Hello</b> ").openPopup();
                 map.setView(new L.LatLng(latitude, longitude), 15);
                 // alert("done")
         }

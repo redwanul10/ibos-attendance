@@ -10,12 +10,12 @@ const AttendanceDashboard = ({ navigation }) => {
 
     return (
         <>
-            <IHeader
-                // hideBackBtn 
-                title="Dashboard" />
+            <IHeader title="Dashboard" />
+            
             <View style={[style.container]}>
                 <View>
                     <View style={style.row}>
+
                         <TouchableOpacity
                             onPress={e => navigation.navigate("Check in/out")}
                             style={style.col}>
@@ -44,23 +44,7 @@ const AttendanceDashboard = ({ navigation }) => {
                         </TouchableOpacity>
 
                     </View>
-
-                    {/* <View style={[style.row, { justifyContent: "center" }]}>
-                        <TouchableOpacity
-                            onPress={e => navigation.navigate("AttendanceList")}
-                            style={style.col}>
-                            <View style={style.singleItem}>
-                                <Image style={style.image} source={require('../../../assets/images/attendance/calender.png')} />
-                                <Text style={[globalStyle.sectionTitle, style.title,]}>Attendance List</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View> */}
                 </View>
-
-                {/* <View style={style.ibosLogo}>
-                    <Image style={{ alignSelf: "center" }} source={require('../../../assets/main2.png')} />
-                    <Text style={[{ marginTop: 20 }, globalStyle.sectionTitle,]}>Develop By iBos Limited</Text>
-                </View> */}
             </View>
 
 
@@ -101,8 +85,6 @@ const style = StyleSheet.create({
         alignSelf: "center"
     },
     image: {
-        // width: 45,
-        // height: 50
         width: 90,
         height: 80
     },
@@ -110,15 +92,6 @@ const style = StyleSheet.create({
         width: "46%",
         backgroundColor: "white",
         margin: "2%",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 1,
-        // },
-        // shadowOpacity: 0.20,
-        // shadowRadius: 1.41,
-        // borderRadius: 5,
-        // elevation: 2,
     },
     singleItem: {
         justifyContent: "center",

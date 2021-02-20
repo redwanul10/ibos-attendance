@@ -9,6 +9,10 @@ import Geolocation from '@react-native-community/geolocation';
 import { getGlobalData } from '../../../common/functions/localStorage';
 import { checkIn, checkOut, getCheckInCheckOutTime } from './helper';
 import { _todayDate } from '../../../common/functions/_todayDate';
+import { timeFormatter } from '../../../common/functions/timeFormatter';
+
+
+
 
 
 
@@ -66,9 +70,6 @@ const IbosAttendance = () => {
 
 
         })
-
-
-
     }, [])
 
     const saveHandler = (status) => {
@@ -79,14 +80,11 @@ const IbosAttendance = () => {
             intBusinessUnitId: globalData?.profileData?.defaultBusinessUnit || 0,
             intBusinessPartnerId: selectedCustomer?.value || 0,
             strBusinessPartnerCode: selectedCustomer?.code || "",
-            // numPartnerLatitude: selectedCustomer?.latitude || 0,
-            // numPartnerLongitude: selectedCustomer?.longitude || 0,
             intEmployeeId: globalData.profileData.userId || 0,
             numAttendanceLatitude: location.latitude || 0,
             numAttendanceLongitude: location.longitude || 0,
             intActionBy: globalData.profileData.userId,
         }
-        // console.log(JSON.stringify(payload,null,2));
 
 
         if (status === "checkIn") {
@@ -117,11 +115,8 @@ const IbosAttendance = () => {
             )
 
         }
-
-
-
-
     }
+
     return (
         <>
             <IHeader />
@@ -136,11 +131,6 @@ const IbosAttendance = () => {
                         <Text style={style.text}>{new Date().toDateString()}</Text>
                     </View>
                 </View>
-
-
-
-
-
 
 
 
@@ -161,20 +151,18 @@ const IbosAttendance = () => {
                                 style={{ backgroundColor: "#F75A5A", borderRadius: 20 }}
                                 onPress={e => saveHandler()}
                             >
-                                <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check Out</Text>
-                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                                <Text style={style.btnText}>Check Out</Text>
+                                {isLoading && <Spinner color='white' style={style.spinner} />}
 
                             </Button>
                         ) : (
-
-
-                            <Button
+                        <Button
                                 block
                                 style={{ backgroundColor: "#5DD44B", borderRadius: 20 }}
                                 onPress={e => saveHandler("checkIn")}
                             >
-                                <Text style={{ textTransform: "uppercase", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Check In</Text>
-                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                                <Text style={style.btnText}>Check In</Text>
+                                {isLoading && <Spinner color='white' style={style.spinner} />}
                             </Button>
                         )}
 
@@ -183,40 +171,40 @@ const IbosAttendance = () => {
                         <Text style={[style.boldText, { color: "#F75A5A" }]}>Check Out</Text>
                     </View>
 
+                    {/* Page Spinner */}
                     {initPageLoading && <Spinner color='black' />}
 
                     <View style={[style.spaceBetween]}>
                         <View style={{ flex: 1 }}>
+                            {/* List of CheckIN Time */}
+
                             {checkInOutTime?.checkInTime?.map(item => (
-                                <Text style={[style.greyColor, { padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>{item?.checkInTime}</Text>
+                                <Text style={[style.greyColor, { padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
+                                    { timeFormatter(item?.checkInTime) || item?.checkInTime}
+                                </Text>
                             ))}
                         </View>
 
                         <View style={{ flex: 1 }}>
+                            {/* Default/Emty Checkout Time */}
+
                             {checkInOutTime && checkInOutTime?.checkInTime?.length !== checkInOutTime?.checkOutTime?.length && (
-                                <View style={[{ alignItems: "flex-end", width: "100%", padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
+                                <View style={style.time}>
                                     <Text style={[style.greyColor,]}>*********</Text>
                                 </View>
                             )}
+                            {/* List of CheckOut Time */}
+
                             {checkInOutTime?.checkOutTime?.map(item => (
-                                <View style={[{ alignItems: "flex-end", width: "100%", padding: 5, backgroundColor: "#FAFAFA", marginBottom: 5, }]}>
-                                    <Text style={[style.greyColor,]}>{item?.checkOutTime}</Text>
+                                <View style={style.time}>
+                                    <Text style={[style.greyColor,]}>{timeFormatter(item?.checkOutTime) || item?.checkOutTime}</Text>
                                 </View>
 
                             ))}
                         </View>
                     </View>
-
-                    {/* <View style={[style.spaceBetween, { marginTop: 5 }]}>
-                        <Text>10.00</Text>
-                        <Text>12.30</Text>
-                    </View> */}
-
                 </View>
-
-
-            </ScrollView
-            >
+            </ScrollView>
 
         </>
     );
@@ -268,5 +256,19 @@ const style = StyleSheet.create({
     },
     greyColor: {
         color: "#989898"
+    },
+    btnText: {
+        textTransform: "uppercase",
+        color: "white",
+        fontFamily: fontsFamily.RUBIK_BOLD
+    },
+    spinner: {
+        transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }]
+    },
+    time: {
+        alignItems: "flex-end",
+        width: "100%", padding: 5,
+        backgroundColor: "#FAFAFA",
+        marginBottom: 5,
     }
 })
