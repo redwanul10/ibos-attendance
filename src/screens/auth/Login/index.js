@@ -45,27 +45,18 @@ const Login = ({ navigation }) => {
 
     return (
 
-        // <ImageBackground source={loginBgImg} style={{ flex: 1 }}>
-        <View style={{ backgroundColor: "white", flex: 1, justifyContent: "center", paddingHorizontal: 24 }}>
+        <View style={style.backgroundStyle}>
+
             <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
+
                 <>
                     <View style={{ marginBottom: "15%", alignItems: "center" }}>
+
                         <Image style={{ width: "80%", height: 200 }} source={logo} resizeMode="stretch" />
+
                     </View>
 
                     <View >
-
-
-                        {/* Form Header */}
-                        {/* <View style={style.formHeader}>
-                        <View>
-                            <Text style={style.formTitle}>Welcome</Text>
-                            <Text style={style.formSubTitle}>Please sign-in to continue</Text>
-                        </View>
-                        <Image source={logo} />
-                    </View> */}
-
-
 
 
                         <Formik
@@ -76,7 +67,7 @@ const Login = ({ navigation }) => {
                                 const { email, password } = values
                                 const customcb = () => {
                                     resetForm()
-                                    // navigation.navigate('Attendance')
+                                    
                                     navigation.navigate("Attendance Dashboard")
                                 }
                                 loginAction(email, password, setIsLoading, customcb)
@@ -106,12 +97,7 @@ const Login = ({ navigation }) => {
                                         onPress={e => {
                                             formikProps.handleSubmit()
                                         }}
-                                        style={{
-                                            backgroundColor: "#0080FF",
-                                            marginTop: 20,
-                                            height: 50,
-                                            borderRadius: 50
-                                        }}>
+                                        style={style.btnStyle}>
 
                                         <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
                                             Log In
@@ -135,12 +121,26 @@ const Login = ({ navigation }) => {
 
 
 const style = StyleSheet.create({
+
+    backgroundStyle: {
+        backgroundColor: "white",
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 24
+    },
     logo: {
         position: 'absolute',
         top: 0,
         right: 0,
         width: 234,
         height: 166
+    },
+    btnStyle: {
+        backgroundColor: "#0080FF",
+        marginTop: 20,
+        height: 50,
+        borderRadius: 50
+
     },
 
     removeBtnStyle: {
@@ -183,7 +183,6 @@ const style = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 24,
         backgroundColor: "white",
-        // marginTop: "35%",
         position: "relative",
     },
     innerContent: {

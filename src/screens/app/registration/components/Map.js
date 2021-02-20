@@ -7,13 +7,13 @@ import mapHtml from './MapContent';
 const Map = (props) => {
 
     const { lat, long, location, userName } = props
- 
+
     const mapRef = useRef()
-   
+
     useEffect(() => {
         if (location.latitude && location.latitude) {
             mapRef.current.postMessage(JSON.stringify({ latitude: location.latitude, longitude: location.longitude }));
-           
+
         }
 
     }, [lat, long])
@@ -26,14 +26,12 @@ const Map = (props) => {
                 source={{ html: mapHtml || "<h1>Hello</h1>" }}
                 style={{ height: "100%" }}
                 onLoad={() => mapRef.current.postMessage(JSON.stringify({ userName, latitude: location.latitude, longitude: location.longitude }))}
-                // style={{ width: "100%", height: 50, backgroundColor: "red" }}
                 scalesPageToFit={true}
                 scrollEnabled={false}
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-            // injectedJavaScript={'window.document.querySelector("body").style.backgroundColor = "transparent"'}
-            // containerStyle={{ backgroundColor: "red" }}
+
             />
         </View>
     );

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/white"/>
+
+    <!-- <item
+        
+        android:drawable="@drawable/splash"
+        android:gravity="center" /> -->
+        <item>
+         <bitmap
+            android:gravity="fill_horizontal|bottom"
+            android:src="@drawable/splash" />
+            </item>
+    <!-- <item
+       
+        android:drawable="@drawable/bottom"
+        android:gravity="bottom" />
+         -->
+
+</layer-list>
+
+
