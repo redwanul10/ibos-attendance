@@ -55,7 +55,7 @@ const getUserInformation = async (email, cb, token, setLoading) => {
 
         await storeGlobalData({
             isAuthenticate: true,
-            token,
+            // token,
             profileData: res[0],
             selectedBusinessUnit
         })

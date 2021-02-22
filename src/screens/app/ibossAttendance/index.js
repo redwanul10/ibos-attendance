@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View, Text, Linking, Alert } from "react-native"
+import { ScrollView, StyleSheet, View, Text, Linking, Alert,Image } from "react-native"
 import IHeader from '../../../common/components/IHeader';
 import { Col, Button, Spinner } from 'native-base'
 import fontsFamily from '../../../common/theme/fonts';
@@ -10,7 +10,7 @@ import { getGlobalData } from '../../../common/functions/localStorage';
 import { checkIn, checkOut, getCheckInCheckOutTime } from './helper';
 import { _todayDate } from '../../../common/functions/_todayDate';
 import { timeFormatter } from '../../../common/functions/timeFormatter';
-
+import imageFile from '../../../assets/images/check.png';
 
 
 
@@ -153,7 +153,7 @@ const IbosAttendance = () => {
                             >
                                 <Text style={style.btnText}>Check Out</Text>
                                 {isLoading && <Spinner color='white' style={style.spinner} />}
-
+                                <Image style={{width:20,height:20,position:"absolute",right:30}} source={imageFile}/>
                             </Button>
                         ) : (
                         <Button
@@ -163,6 +163,7 @@ const IbosAttendance = () => {
                             >
                                 <Text style={style.btnText}>Check In</Text>
                                 {isLoading && <Spinner color='white' style={style.spinner} />}
+                                <Image style={{width:20,height:20,position:"absolute",right:30}} source={imageFile}/>
                             </Button>
                         )}
 

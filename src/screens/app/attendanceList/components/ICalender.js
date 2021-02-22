@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native'
 import dayjs from 'dayjs'
 import fontsFamily from '../../../../common/theme/fonts';
 import colors from '../../../../common/theme/colors';
+
 
 
 const dayColors = ["green", "blue", "red", "purple", "green", "blue", "green", "blue"]
@@ -141,16 +142,22 @@ const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
     return (
         <>
             <View style={style.calenderHeader}>
-                <TouchableOpacity style={{ padding: 5 }}
-                    onPress={e => handleMonthChange(value.subtract(1, "month"))}>
-                    <Text>{value.subtract(1, "month").format("MMM")}</Text>
+                <TouchableOpacity 
+                style={{ padding: 5 ,flexDirection:"row",alignItems:"center"}}
+                onPress={e => handleMonthChange(value.subtract(1, "month"))}
+                >
+                    <Image  style={{marginTop:2,marginRight:5}} source={require('../../../../assets/images/left1.png')}/>
+                    <Text style={{color:"grey"}}>{value.subtract(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
 
                 <Text style={[style.header, { textTransform: "capitalize", color: '#6EC3F3' }]}>{value.format("MMMM")}- {value.year()}</Text>
 
-                <TouchableOpacity style={{ padding: 5 }}
-                    onPress={e => handleMonthChange(value.add(1, "month"))}>
-                    <Text>{value.add(1, "month").format("MMM")}</Text>
+                <TouchableOpacity 
+                style={{ padding: 5 ,flexDirection:"row",alignItems:"center"}}
+                onPress={e => handleMonthChange(value.add(1, "month"))}
+                >
+                    <Text style={{color:"grey"}}>{value.add(1, "month").format("MMM")}</Text>
+                    <Image  style={{marginTop:2,marginLeft:5}} source={require('../../../../assets/images/right.png')}/>
                 </TouchableOpacity>
 
             </View>
@@ -249,6 +256,7 @@ const style = StyleSheet.create({
         alignItems: "center",
         marginTop: 20,
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-between",
+        paddingHorizontal:15
     }
 })
