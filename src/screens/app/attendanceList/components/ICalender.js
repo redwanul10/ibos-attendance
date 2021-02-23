@@ -4,6 +4,8 @@ import dayjs from 'dayjs'
 import fontsFamily from '../../../../common/theme/fonts';
 import colors from '../../../../common/theme/colors';
 
+import IconEntypo from 'react-native-vector-icons/Entypo'
+
 
 
 const dayColors = ["green", "blue", "red", "purple", "green", "blue", "green", "blue"]
@@ -146,7 +148,8 @@ const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
                 style={{ padding: 5 ,flexDirection:"row",alignItems:"center"}}
                 onPress={e => handleMonthChange(value.subtract(1, "month"))}
                 >
-                    <Image  style={{marginTop:2,marginRight:5}} source={require('../../../../assets/images/left1.png')}/>
+                    <IconEntypo style={{marginTop:2,marginRight:5,color:"grey"}} name="arrow-long-left"/>
+                    {/* <Image  style={{marginTop:2,marginRight:5}} source={require('../../../../assets/images/left1.png')}/> */}
                     <Text style={{color:"grey"}}>{value.subtract(1, "month").format("MMM")}</Text>
                 </TouchableOpacity>
 
@@ -157,7 +160,8 @@ const ICalender = ({ daysList, onMonthChange, setAttdList, setIsLoading }) => {
                 onPress={e => handleMonthChange(value.add(1, "month"))}
                 >
                     <Text style={{color:"grey"}}>{value.add(1, "month").format("MMM")}</Text>
-                    <Image  style={{marginTop:2,marginLeft:5}} source={require('../../../../assets/images/right.png')}/>
+                    {/* <Image  style={{marginTop:2,marginLeft:5}} source={require('../../../../assets/images/right.png')}/> */}
+                    <IconEntypo style={{marginTop:2,marginLeft:5,color:"grey"}} name="arrow-long-right"/>
                 </TouchableOpacity>
 
             </View>
