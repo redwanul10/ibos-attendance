@@ -134,7 +134,7 @@ const RegistrationAttendance = () => {
                     />
                     <Button
                         block
-                        style={{ backgroundColor: "#0080FF", borderRadius: 20 }}
+                        style={{ backgroundColor: "#121E44", borderRadius: 20 }}
                         onPress={e => registerHandler()}
                     >
                         <Text style={{ textTransform: "capitalize", color: "white", fontFamily: fontsFamily.RUBIK_BOLD }}>Submit</Text>

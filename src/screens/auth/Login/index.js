@@ -39,16 +39,16 @@ const Login = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        StatusBar.setBackgroundColor("#0080FF")
+        StatusBar.setBackgroundColor("#121E44")
         StatusBar.setTranslucent(false)
 
     }, [])
 
     return (
         <>
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignItems: "center",backgroundColor: "white" }}>
 
-                <Image style={{ width: "100%", height: 100, backgroundColor: "white" }} source={logoBanner} resizeMode="stretch" />
+                <Image style={{ width: "100%", height: 100  }} source={logoBanner} resizeMode="stretch" />
 
             </View>
 
