@@ -7,7 +7,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
 
 import { Root } from 'native-base'
-import VersionCheck from 'react-native-version-check';
+
 // import { getGlobalData } from './src/common/functions/localStorage';
 
 
@@ -22,37 +22,17 @@ export default function App() {
 
 
   }, [])
-  useEffect(() => {
-    checkUpdateNeeded();
-  }, []);
+
+  
+  
+  
 
   const hideSplashScreen = async () => {
 
     await RNBootSplash.hide({ fade: true });
   }
 
-  const checkUpdateNeeded = async () =>{
-    try{
-      let updateNeeded = await VersionCheck.needUpdate();
-      if(updateNeeded && updateNeeded.isNeeded){
-        Alert.alert(
-          'Please update',
-          [
-            {
-              text: 'Update',
-              onPress:()=>{
-                BackHandler.exitApp();
-                Linking.openURL(updateNeeded.storeUrl);
-
-              },
-
-          },
-        ],
-        {cancelable:false},
-        );
-      }
-    }catch(error){}
-  }
+  
 
   return (
     <>

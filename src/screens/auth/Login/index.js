@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { StatusBar, Keyboard, Text, TouchableWithoutFeedback, ScrollView, ImageBackground, View, StyleSheet, TextInput, KeyboardAvoidingView, Image, SafeAreaView } from 'react-native'
+import {
+    StatusBar,
+    Keyboard,
+    Text,
+    TouchableWithoutFeedback,
+    ScrollView,
+    Modal,
+    View,
+    StyleSheet,
+    Linking,
+    KeyboardAvoidingView,
+    Image,
+    TouchableOpacity
+} from 'react-native'
 import { Formik } from "formik";
 import { Button, Spinner } from "native-base";
 import FormInput from '../../../common/components/TextInput';
@@ -9,6 +22,9 @@ import loginBgImg from '../../../assets/images/loginBg.png';
 import logoBanner from '../../../assets/images/loginBanner.png';
 import logo from '../../../assets/images/loginLogo.png'
 import { getGlobalData } from '../../../common/functions/localStorage';
+// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import checkVersion from 'react-native-store-version';
 
 
 const initValues = {
@@ -32,6 +48,43 @@ const Login = ({ navigation }) => {
 
     const [globalData, setGlobalData] = useState({})
     const [isLoading, setIsLoading] = useState(false)
+    const [isLatest, setLatest] = useState(false);
+
+    const onStoreButtonPress = () => {
+        // if (Platform.OS === 'ios') {
+        // Linking.openURL('https://itunes.apple.com/app/id1321198947?mt=8');
+        // } else {
+        Linking.openURL('https://play.google.com/store/apps/details?id=com.ibos');
+        // }
+    };
+
+    useEffect(() => {
+        const init = async () => {
+
+
+            try {
+                const check = await checkVersion({
+
+                    version: '1.3',
+                    // iosStoreURL: 'https://itunes.apple.com/jp/app/kokura-keirin/id1444261040',
+                    androidStoreURL: 'https://play.google.com/store/apps/details?id=com.ibos',
+                });
+
+                if (check.result === 'new') {
+
+                    setLatest(true);
+                }
+            } catch (e) {
+                console.log(e.message);
+            }
+        };
+
+        init();
+    }, []);
+
+
+
+
 
     useEffect(() => {
         getGlobalData(setGlobalData)
@@ -46,11 +99,36 @@ const Login = ({ navigation }) => {
 
     return (
         <>
-            <View style={{ alignItems: "center",backgroundColor: "white" }}>
 
-                <Image style={{ width: "100%", height: 100  }} source={logoBanner} resizeMode="stretch" />
+            <Modal animationType="fade" transparent visible={isLatest} onRequestClose={() => {}}>
+
+                <View style={style.centeredView}>
+
+                    <View style={style.modalStyle} >
+
+                        <Text style={{ margin: 30, fontSize: 20 }}>A new update is available</Text>
+                        <TouchableOpacity onPress={onStoreButtonPress}>
+
+                            <Text style={{ textAlign: 'center', alignSelf: 'flex-end', margin: 20, backgroundColor: 'green', padding: 5, color: 'white', borderRadius: 5 }}>Please Update</Text>
+
+
+                        </TouchableOpacity>
+                        <TouchableOpacity >
+                            <Text>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
+            {/* <KeyboardAwareScrollView style={{ backgroundColor: 'white' }}> */}
+
+            <View style={{ alignItems: "flex-start", backgroundColor: "white" }}>
+
+                <Image style={{ width: '100%', height: 100, position: 'relative' }} source={logoBanner} resizeMode="stretch" />
 
             </View>
+
+
 
             <View style={style.backgroundStyle}>
 
@@ -66,9 +144,9 @@ const Login = ({ navigation }) => {
                         </View> */}
                         <Image style={{ alignSelf: 'center', height: 100 }} source={logo} resizeMode="contain" />
 
-                        <View style={{alignItems:'center',margin:25}}>
-                            <Text style={{color:'#121E44',fontWeight:'bold',fontSize:20}}>Welcome to iBOS ERP!</Text>
-                            <Text style={{color:'#0C9EF2'}}>Sign in to continue</Text>
+                        <View style={{ alignItems: 'center', margin: 25 }}>
+                            <Text style={{ color: '#121E44', fontWeight: 'bold', fontSize: 20 }}>Welcome to iBOS ERP!</Text>
+                            <Text style={{ color: '#0C9EF2' }}>Sign in to continue</Text>
 
                         </View>
 
@@ -132,6 +210,7 @@ const Login = ({ navigation }) => {
                 </TouchableWithoutFeedback>
 
             </View>
+            {/* </KeyboardAwareScrollView> */}
         </>
     );
 }
@@ -143,7 +222,8 @@ const style = StyleSheet.create({
         backgroundColor: "white",
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: 24
+        paddingHorizontal: 24,
+        paddingTop: 50
     },
     logo: {
         position: 'absolute',
@@ -212,6 +292,18 @@ const style = StyleSheet.create({
     formSubTitle: {
         marginTop: 3,
         fontFamily: "Rubik-Light"
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#121E4499',
+    },
+    modalStyle: {
+        width: 340,
+        height: 183,
+        backgroundColor: '#fff',
+        borderRadius: 15,
     }
 })
 

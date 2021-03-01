@@ -78,8 +78,9 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
-     bundleInRelease        : true,
+    // enableHermes: false,  // clean and rebuild if changing
+     enableHermes: true,  // clean and rebuild if changing
+     bundleInRelease     : true,
     resourcesDirRelease   : "src/release/res",
 ]
 
@@ -87,7 +88,7 @@ apply from: "../../node_modules/react-native/react.gradle"
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = true
+def enableProguardInReleaseBuilds = false
 def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -138,7 +139,7 @@ android {
 
     defaultConfig {
         // targetSdkVersion 29
-        applicationId "com.ibos"
+        applicationId "com.iboss"
         minSdkVersion rootProject.ext.minSdkVersion
         multiDexEnabled true
         targetSdkVersion rootProject.ext.targetSdkVersion
