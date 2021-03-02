@@ -15,6 +15,7 @@ export default function App() {
 
   // RNBootSplash.hide()
 
+
   useEffect(() => {
     hideSplashScreen()
     // StatusBar.setTranslucent(true)
@@ -25,7 +26,7 @@ export default function App() {
 
   
   
-  
+  // -------------------Hiding splash screen------------- 
 
   const hideSplashScreen = async () => {
 

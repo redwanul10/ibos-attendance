@@ -18,7 +18,7 @@ import { Button, Spinner } from "native-base";
 import FormInput from '../../../common/components/TextInput';
 import * as Yup from 'yup'
 import { loginAction } from './helper';
-import loginBgImg from '../../../assets/images/loginBg.png';
+// import loginBgImg from '../../../assets/images/loginBg.png';
 import logoBanner from '../../../assets/images/loginBanner.png';
 import logo from '../../../assets/images/loginLogo.png'
 import { getGlobalData } from '../../../common/functions/localStorage';
@@ -51,6 +51,7 @@ const Login = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isLatest, setLatest] = useState(false);
 
+    // ---------------- Check update in play store --------------------
 
     const onStoreButtonPress = () => {
         // if (Platform.OS === 'ios') {
@@ -86,18 +87,22 @@ const Login = ({ navigation }) => {
 
 
 
-
+   //----------------------- Global data from local storage----------------------------
 
     useEffect(() => {
         getGlobalData(setGlobalData)
 
     }, [])
 
+    // ---------------------- Log in screen status bar color --------------------------
+
     useEffect(() => {
         StatusBar.setBackgroundColor("#121E44")
         StatusBar.setTranslucent(false)
 
     }, [])
+
+    // ---------------------- Modal box off method --------------
 
     const modalOff = () => {
         setLatest(false);
@@ -106,13 +111,16 @@ const Login = ({ navigation }) => {
     return (
         <>
 
-            <Modal animationType="fade" transparent visible={isLatest} onRequestClose={() => { }}>
+           {/* ------------------Modal for play store update------------------------------- */}
+           
+            <Modal animationType="fade" transparent visible={isLatest}>
 
                 <View style={style.centeredView}>
 
                     <View style={style.modalStyle} >
 
-                        <Text style={{ alignSelf: 'center', marginVertical: 30, fontSize: 20, color: 'gray' }}>A NEW UPDATE IS AVAILABLE</Text>
+                        <Text style={style.updateAvailable}>A NEW UPDATE IS AVAILABLE</Text>
+
                         <View
                             style={{
                                 borderBottomColor: 'gray',
@@ -120,23 +128,18 @@ const Login = ({ navigation }) => {
                             }}
                         />
 
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 20 }}>
+                        <View style={style.updateButtons}>
 
-                            <TouchableOpacity style={{ backgroundColor: 'red',width:100, margin: 2, padding: 10, borderRadius: 5, marginHorizontal: 15 }} onPress={modalOff} >
+                            <TouchableOpacity style={[style.updateButtonStyle,{backgroundColor: 'red', }]} onPress={modalOff} >
 
-                                <Text style={{ color: 'white', textAlign:'center' }} >CLOSE</Text>
+                                <Text style={{ color: 'white', textAlign: 'center' }} >CLOSE</Text>
 
                             </TouchableOpacity>
-                            <View
-                                style={{
-                                    borderRightColor: 'black',
-                                    borderRightWidth: 5,
-                                }}
-                            />
 
-                            <TouchableOpacity style={{ margin: 2, backgroundColor: 'green',width:100, padding: 10, borderRadius: 5, marginHorizontal: 15 }} onPress={onStoreButtonPress}>
+                           
+                            <TouchableOpacity style={[style.updateButtonStyle,{backgroundColor: 'green', }]} onPress={onStoreButtonPress}>
 
-                                <Text style={{ color: 'white',textAlign:'center' }} >UPDATE</Text>
+                                <Text style={{ color: 'white', textAlign: 'center' }} >UPDATE</Text>
 
 
                             </TouchableOpacity>
@@ -146,7 +149,9 @@ const Login = ({ navigation }) => {
                         </View>
 
                     </View>
+
                 </View>
+
             </Modal>
 
 
@@ -172,15 +177,13 @@ const Login = ({ navigation }) => {
                     <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
 
                         <>
-                            {/* <View style={{ marginBottom: "15%", alignItems: "stretch" }}>
 
-                            <Image style={{  height: 200,backgroundColor:"white" }} source={logo} resizeMode="stretch" />
-
-                        </View> */}
                             <Image style={{ alignSelf: 'center', height: 100 }} source={logo} resizeMode="contain" />
 
                             <View style={{ alignItems: 'center', margin: 25 }}>
+
                                 <Text style={{ color: '#121E44', fontWeight: 'bold', fontSize: 20 }}>Welcome to iBOS ERP!</Text>
+
                                 <Text style={{ color: '#0C9EF2' }}>Sign in to continue</Text>
 
                             </View>
@@ -230,7 +233,7 @@ const Login = ({ navigation }) => {
 
                                                 <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
                                                     Log In
-                                        </Text>
+                                                </Text>
 
                                                 {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
 
@@ -240,11 +243,15 @@ const Login = ({ navigation }) => {
                                         </View>
                                     )}
                                 </Formik>
+
                             </View >
+
                         </>
+
                     </TouchableWithoutFeedback>
 
                 </View>
+
             </KeyboardAwareScrollView>
         </>
     );
@@ -339,7 +346,31 @@ const style = StyleSheet.create({
         height: 183,
         backgroundColor: '#fff',
         borderRadius: 15,
+    },
+    updateAvailable:{ 
+        alignSelf: 'center', 
+        marginVertical: 30, 
+        fontSize: 20, 
+        color: 'gray' 
+    },
+    updateButtons:{ 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        marginVertical: 20 
+    },
+    updateButtonStyle:{ 
+        width: 100, 
+        margin: 2,
+        padding: 10, 
+        borderRadius: 5, 
+        marginHorizontal: 15 
     }
+
+    
+
+
+    
 })
 
 export default Login;
