@@ -22,7 +22,8 @@ import loginBgImg from '../../../assets/images/loginBg.png';
 import logoBanner from '../../../assets/images/loginBanner.png';
 import logo from '../../../assets/images/loginLogo.png'
 import { getGlobalData } from '../../../common/functions/localStorage';
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+
 
 import checkVersion from 'react-native-store-version';
 
@@ -50,6 +51,7 @@ const Login = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isLatest, setLatest] = useState(false);
 
+
     const onStoreButtonPress = () => {
         // if (Platform.OS === 'ios') {
         // Linking.openURL('https://itunes.apple.com/app/id1321198947?mt=8');
@@ -65,7 +67,7 @@ const Login = ({ navigation }) => {
             try {
                 const check = await checkVersion({
 
-                    version: '1.3',
+                    version: '1.5',
                     // iosStoreURL: 'https://itunes.apple.com/jp/app/kokura-keirin/id1444261040',
                     androidStoreURL: 'https://play.google.com/store/apps/details?id=com.ibos',
                 });
@@ -97,120 +99,153 @@ const Login = ({ navigation }) => {
 
     }, [])
 
+    const modalOff = () => {
+        setLatest(false);
+    };
+
     return (
         <>
 
-            <Modal animationType="fade" transparent visible={isLatest} onRequestClose={() => {}}>
+            <Modal animationType="fade" transparent visible={isLatest} onRequestClose={() => { }}>
 
                 <View style={style.centeredView}>
 
                     <View style={style.modalStyle} >
 
-                        <Text style={{ margin: 30, fontSize: 20 }}>A new update is available</Text>
-                        <TouchableOpacity onPress={onStoreButtonPress}>
+                        <Text style={{ alignSelf: 'center', marginVertical: 30, fontSize: 20, color: 'gray' }}>A NEW UPDATE IS AVAILABLE</Text>
+                        <View
+                            style={{
+                                borderBottomColor: 'gray',
+                                borderBottomWidth: 1,
+                            }}
+                        />
 
-                            <Text style={{ textAlign: 'center', alignSelf: 'flex-end', margin: 20, backgroundColor: 'green', padding: 5, color: 'white', borderRadius: 5 }}>Please Update</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 20 }}>
+
+                            <TouchableOpacity style={{ backgroundColor: 'red',width:100, margin: 2, padding: 10, borderRadius: 5, marginHorizontal: 15 }} onPress={modalOff} >
+
+                                <Text style={{ color: 'white', textAlign:'center' }} >CLOSE</Text>
+
+                            </TouchableOpacity>
+                            <View
+                                style={{
+                                    borderRightColor: 'black',
+                                    borderRightWidth: 5,
+                                }}
+                            />
+
+                            <TouchableOpacity style={{ margin: 2, backgroundColor: 'green',width:100, padding: 10, borderRadius: 5, marginHorizontal: 15 }} onPress={onStoreButtonPress}>
+
+                                <Text style={{ color: 'white',textAlign:'center' }} >UPDATE</Text>
 
 
-                        </TouchableOpacity>
-                        <TouchableOpacity >
-                            <Text>Close</Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+
+
+
+                        </View>
+
                     </View>
                 </View>
             </Modal>
 
-            {/* <KeyboardAwareScrollView style={{ backgroundColor: 'white' }}> */}
-
-            <View style={{ alignItems: "flex-start", backgroundColor: "white" }}>
-
-                <Image style={{ width: '100%', height: 100, position: 'relative' }} source={logoBanner} resizeMode="stretch" />
-
-            </View>
 
 
 
-            <View style={style.backgroundStyle}>
 
 
 
-                <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
+            <KeyboardAwareScrollView style={{ backgroundColor: 'white' }}>
 
-                    <>
-                        {/* <View style={{ marginBottom: "15%", alignItems: "stretch" }}>
+                <View style={{ alignItems: "flex-start", backgroundColor: "white" }}>
+
+                    <Image style={{ width: '100%', height: 100, position: 'relative' }} source={logoBanner} resizeMode="stretch" />
+
+                </View>
+
+
+
+                <View style={style.backgroundStyle}>
+
+
+
+                    <TouchableWithoutFeedback onPress={e => Keyboard.dismiss()}>
+
+                        <>
+                            {/* <View style={{ marginBottom: "15%", alignItems: "stretch" }}>
 
                             <Image style={{  height: 200,backgroundColor:"white" }} source={logo} resizeMode="stretch" />
 
                         </View> */}
-                        <Image style={{ alignSelf: 'center', height: 100 }} source={logo} resizeMode="contain" />
+                            <Image style={{ alignSelf: 'center', height: 100 }} source={logo} resizeMode="contain" />
 
-                        <View style={{ alignItems: 'center', margin: 25 }}>
-                            <Text style={{ color: '#121E44', fontWeight: 'bold', fontSize: 20 }}>Welcome to iBOS ERP!</Text>
-                            <Text style={{ color: '#0C9EF2' }}>Sign in to continue</Text>
+                            <View style={{ alignItems: 'center', margin: 25 }}>
+                                <Text style={{ color: '#121E44', fontWeight: 'bold', fontSize: 20 }}>Welcome to iBOS ERP!</Text>
+                                <Text style={{ color: '#0C9EF2' }}>Sign in to continue</Text>
 
-                        </View>
+                            </View>
 
-                        <View >
-
-
-                            <Formik
-                                enableReinitialize={true}
-                                initialValues={{ ...initValues, email: globalData?.profileData?.emailAddress || "" }}
-                                validationSchema={schemaValidation}
-                                onSubmit={(values, { resetForm }) => {
-                                    const { email, password } = values
-                                    const customcb = () => {
-                                        resetForm()
-
-                                        navigation.navigate("Attendance Dashboard")
-                                    }
-                                    loginAction(email, password, setIsLoading, customcb)
-                                }}
-                            >
-                                {(formikProps) => (
-                                    <View>
-
-                                        <FormInput
-                                            name="email"
-                                            label="Email"
-                                            formikProps={formikProps}
-                                        />
-
-                                        <FormInput
-                                            name="password"
-                                            label="Password"
-                                            formikProps={formikProps}
-                                            secureTextEntry={true}
-                                        />
+                            <View >
 
 
+                                <Formik
+                                    enableReinitialize={true}
+                                    initialValues={{ ...initValues, email: globalData?.profileData?.emailAddress || "" }}
+                                    validationSchema={schemaValidation}
+                                    onSubmit={(values, { resetForm }) => {
+                                        const { email, password } = values
+                                        const customcb = () => {
+                                            resetForm()
+
+                                            navigation.navigate("Attendance Dashboard")
+                                        }
+                                        loginAction(email, password, setIsLoading, customcb)
+                                    }}
+                                >
+                                    {(formikProps) => (
+                                        <View>
+
+                                            <FormInput
+                                                name="email"
+                                                label="Email"
+                                                formikProps={formikProps}
+                                            />
+
+                                            <FormInput
+                                                name="password"
+                                                label="Password"
+                                                formikProps={formikProps}
+                                                secureTextEntry={true}
+                                            />
 
 
-                                        <Button
-                                            block
-                                            onPress={e => {
-                                                formikProps.handleSubmit()
-                                            }}
-                                            style={style.btnStyle}>
 
-                                            <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-                                                Log In
+
+                                            <Button
+                                                block
+                                                onPress={e => {
+                                                    formikProps.handleSubmit()
+                                                }}
+                                                style={style.btnStyle}>
+
+                                                <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
+                                                    Log In
                                         </Text>
 
-                                            {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
+                                                {isLoading && <Spinner color='white' style={{ transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }} />}
 
 
-                                        </Button>
+                                            </Button>
 
-                                    </View>
-                                )}
-                            </Formik>
-                        </View >
-                    </>
-                </TouchableWithoutFeedback>
+                                        </View>
+                                    )}
+                                </Formik>
+                            </View >
+                        </>
+                    </TouchableWithoutFeedback>
 
-            </View>
-            {/* </KeyboardAwareScrollView> */}
+                </View>
+            </KeyboardAwareScrollView>
         </>
     );
 }
