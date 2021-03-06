@@ -68,7 +68,7 @@ const Login = ({ navigation }) => {
             try {
                 const check = await checkVersion({
 
-                    version: '1.5',
+                    version: '1.6',
                     // iosStoreURL: 'https://itunes.apple.com/jp/app/kokura-keirin/id1444261040',
                     androidStoreURL: 'https://play.google.com/store/apps/details?id=com.ibos',
                 });

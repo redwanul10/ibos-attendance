@@ -3,10 +3,11 @@ import { Toast } from 'native-base'
 import { storeGlobalData, getGlobalData } from '../../../common/functions/localStorage'
 
 
+
 export const loginAction = (email, password, setLoading, cb) => {
     setLoading(true)
     axios.post(
-        `https://erp.ibos.io/identity/TokenGenerate/IbosLogin`, { userName: email, password }
+        `/identity/TokenGenerate/IbosLogin`, { userName: email, password }
     )
         .then(res => {
 
@@ -42,7 +43,7 @@ const getUserInformation = async (email, cb, token, setLoading) => {
 
     try {
         const req = await axios.get(
-            `https://erp.ibos.io/domain/CreateUser/GetUserInformationByUserEmail?Email=${email}`
+            `/domain/CreateUser/GetUserInformationByUserEmail?Email=${email}`
         )
         setLoading(false)
         const res = req.data

@@ -5,7 +5,7 @@ export const getCustomerList = async (id, setter) => {
 
     try {
         const res = await axios.get(
-            `https://erp.ibos.io/partner/PManagementCommonDDL/GetCustomerListSalesForceDDL?EmployeeId=${id}`
+            `/partner/PManagementCommonDDL/GetCustomerListSalesForceDDL?EmployeeId=${id}`
         )
         setter(res ?.data)
     } catch (err) {
@@ -20,7 +20,7 @@ export const registerAttentance = async (payload, setIsLoading, setModal) => {
     setIsLoading(true)
     try {
         const res = await axios.post(
-            `https://erp.ibos.io/partner/PartnerLocationRegister/CreatPartnerLocationRegister`, payload
+            `/partner/PartnerLocationRegister/CreatPartnerLocationRegister`, payload
         )
         setIsLoading(false)
         setModal(true)

@@ -7,8 +7,7 @@ export const checkIn = async (payload, setLoading, cb) => {
 
     try {
         const res = await axios.post(
-            // `https://ibosapi.akij.net/hcm/EmployeeRemoteAttendance/CreateEmployeeRemoteAttendance`
-            `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/CreateEmployeeCheckIn`, payload
+             `/hcm/EmployeeRemoteAttendance/CreateEmployeeCheckIn`, payload
         )
         setLoading(false)
 
@@ -41,7 +40,7 @@ export const checkOut = async (payload, setLoading, cb) => {
     setLoading(true)
     try {
         const res = await axios.post(
-            `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/CreateEmployeeCheckOut`, payload
+            `/hcm/EmployeeRemoteAttendance/CreateEmployeeCheckOut`, payload
         )
 
         setLoading(false)
@@ -75,9 +74,7 @@ export const getCheckInCheckOutTime = async (empId, todayDate, setTime, setLoadi
     if (setLoading) setLoading(true)
     try {
         const res = await axios.get(
-            `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
-            // `https://erp.ibos.io/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
-
+            `/hcm/EmployeeRemoteAttendance/GetEmployeeCheckInCheckOutTime?EmployeeId=${empId}&date=${todayDate}`
         )
 
 

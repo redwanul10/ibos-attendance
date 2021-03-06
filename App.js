@@ -4,10 +4,11 @@ import RootNavigation from './src/navigation/RootNavigation';
 import RNBootSplash from "react-native-bootsplash";
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import Axios from "axios"
 dayjs.extend(localizedFormat)
 
 import { Root } from 'native-base'
-
+import {API_URL} from "@env"
 // import { getGlobalData } from './src/common/functions/localStorage';
 
 
@@ -18,6 +19,7 @@ export default function App() {
 
   useEffect(() => {
     hideSplashScreen()
+    Axios.defaults.baseURL = `${API_URL}`
     // StatusBar.setTranslucent(true)
     // StatusBar.setBackgroundColor("red")
 

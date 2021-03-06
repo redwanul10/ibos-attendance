@@ -4,7 +4,7 @@ export const getAttendanceList = async (empId, month, year, setLoading, setter, 
     setLoading(true)
     try {
         const res = await axios.get(
-            `https://erp.ibos.io/hcm/EmployeeAttendance/GetAttendanceEmployee?EmployeeId=${empId}&month=${month}&YearId=${year}`,
+            `/hcm/EmployeeAttendance/GetAttendanceEmployee?EmployeeId=${empId}&month=${month}&YearId=${year}`,
             { cancelToken: cancelToken.token }
         )
         setter(res?.data)
